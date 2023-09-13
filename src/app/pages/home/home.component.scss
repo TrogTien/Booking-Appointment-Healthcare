@@ -8,14 +8,27 @@
     font-size: 36px;
 }
 
-.icon {
+.icon-cus {
     height: 55px;
     width: 55px;
     font-size: 55px;
-    color: #198754;
+    color: #0dcaf0;
 }
 
 .some {
     background: #ccc;
     height: 500px;
+}
+
+.btn {
+    border-radius: 40px;
+    transition: 250ms all ease-in-out;
+
+    &:hover {
+        transform: scale(1.05, 1.05);
+    }
+}
+
+[appSliderItem] {
+    flex-shrink: 0;
 }
