@@ -2,12 +2,12 @@
     <div class="slides" #slides>
         <ng-content select="[appSliderItem]" #sliderItem></ng-content>
     </div>
-    <div class="controls">
-        <button class="btn btn-info" (click)="onClickLeft()">
-            left
+    <div class="controls d-flex justify-content-between">
+        <button mat-fab color="primary" (click)="onClickLeft()">
+            <mat-icon>keyboard_arrow_left</mat-icon>
         </button>
-        <button class="btn btn-info" (click)="onClickRight()">
-            right
+        <button mat-fab color="primary" (click)="onClickRight()">
+            <mat-icon>keyboard_arrow_right</mat-icon>
         </button>
     </div>
 </div>

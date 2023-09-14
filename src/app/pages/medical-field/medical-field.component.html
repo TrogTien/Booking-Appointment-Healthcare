@@ -1,1 +1,30 @@
-<p>medical-field works!</p>
+<mat-drawer-container class="">
+    <mat-drawer mode="side" opened>
+        
+        <mat-selection-list #shoes [multiple]="false">
+            <mat-list-option *ngFor="let shoe of typesOfShoes" [value]="shoe">
+            {{shoe}}
+            </mat-list-option>
+        </mat-selection-list>
+        
+    </mat-drawer>
+    <mat-drawer-content>
+
+        <ng-container *ngFor="let item of [1, 2, 3, 4, 5];">
+            <mat-card class="example-card">
+                <mat-card-header>
+                    <img mat-card-lg-image src="https://material.angular.io/assets/img/examples/shiba2.jpg"  alt="Image of a Shiba Inu">
+                    <mat-card-title-group class="ps-3">
+                        <mat-card-title>Tiến sĩ, Bác sĩ Phạm Thanh Phong</mat-card-title>
+                        <mat-card-subtitle>Hà Nội</mat-card-subtitle>
+                    </mat-card-title-group>
+                </mat-card-header>
+                <mat-card-content class="pt-3">
+                {{longText}}
+                </mat-card-content>
+            </mat-card>
+
+        </ng-container>
+
+    </mat-drawer-content>
+</mat-drawer-container>

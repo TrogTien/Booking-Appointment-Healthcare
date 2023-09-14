@@ -1,6 +1,7 @@
 .slider-container {
     display: flex;
-    flex-direction: column
+    flex-direction: column;
+    position: relative;
 }
 
 .slides {
@@ -18,6 +19,7 @@
 }
 
 .controls {
-    display: flex;
-    justify-content: space-between;
+    top: 90px;
+    position: absolute;
+    width: 100%;
 }

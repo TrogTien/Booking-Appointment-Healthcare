@@ -3,10 +3,11 @@
     font-size: 36px;
 }
 
-.procedure__header-tile {
-    font-weight: 500;
-    font-size: 36px;
+.title2 {
+    font-weight: 400;
+    font-size: 28px;
 }
+
 
 .icon-cus {
     height: 55px;
@@ -31,4 +32,9 @@
 
 [appSliderItem] {
     flex-shrink: 0;
+    padding: 0 10px;
+    
+    img.medical-field-item {
+        width: 100%;
+    }
 }
