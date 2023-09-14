@@ -1,1 +1,21 @@
-<p>doctors works!</p>
+<mat-form-field appearance="outline">
+    <mat-label>Tìm kiếm Bác Sĩ</mat-label>
+    <input matInput placeholder="Tên Bác Sĩ">
+    <mat-icon matSuffix>search</mat-icon>
+</mat-form-field>
+
+<ng-container *ngFor="let item of [1,2,3,4,5]">
+    <mat-card class="mb-3">
+        <mat-card-header class="justify-content-around">
+            
+            <div mat-card-avatar  class="example-header-image"></div>
+            <mat-card-title>Shiba Inu</mat-card-title>
+            <mat-card-subtitle>Tiêu hóa</mat-card-subtitle>
+            <div >
+                <p>Giá khám: 400k</p>
+                <p>Địa chỉ: Đại học Cần Thơ</p>
+            </div>
+        </mat-card-header>
+    </mat-card>
+
+</ng-container>
