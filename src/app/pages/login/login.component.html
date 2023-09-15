@@ -1,1 +1,39 @@
-<p>login works!</p>
+<div class="row justify-content-center">
+    <div class="col-md-6 col-lg-4">
+        <div class=" p-0">
+            <h1 class="mb-4 text-center fw-bold">Đăng nhập</h1>
+            <form action="#" class="signin-form">
+
+                <mat-form-field>
+                    <mat-label>Nhập Email</mat-label>
+                    <input matInput placeholder="pat@example.com" [formControl]="email" >
+                    <mat-error *ngIf="email.invalid">{{getErrorMessage(email)}}</mat-error>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Nhập mật khẩu</mat-label>
+                    <input matInput [formControl]="password" [type]="hide ? 'password' : 'text'">
+                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Ẩn mật khẩu'" [attr.aria-pressed]="hide">
+                      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                    <mat-error *ngIf="password.invalid">{{getErrorMessage(password)}}</mat-error>
+
+                </mat-form-field>
+
+                <div class="form-group">
+                    <button type="submit" class="form-control btn btn-info  px-3">Gửi</button>
+                </div>
+               
+                
+                
+            </form>
+            <div class="text-center">
+                <p>
+                    Bạn chưa có tài khoản? <a [routerLink]="'/signup'" style="text-decoration: none;" >Đăng ký</a>
+                </p>
+            </div>
+
+            
+        </div>
+    </div>
+</div>

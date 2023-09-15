@@ -5,6 +5,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+
+
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSidenavModule} from '@angular/material/sidenav';
@@ -12,6 +15,8 @@ import {MatListModule} from '@angular/material/list';
 import {MatCardModule} from '@angular/material/card';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
 
 
 
@@ -23,6 +28,8 @@ import { DoctorsComponent } from './pages/doctors/doctors.component';
 import { MedicalFieldComponent } from './pages/medical-field/medical-field.component';
 import { SliderComponent } from './components/slider/slider.component';
 import { SliderItemDirective } from './components/slider/slider-item.directive';
+import { SignUpComponent } from './pages/sign-up/sign-up.component';
+
 
 
 @NgModule({
@@ -35,7 +42,8 @@ import { SliderItemDirective } from './components/slider/slider-item.directive';
     DoctorsComponent,
     MedicalFieldComponent,
     SliderComponent,
-    SliderItemDirective
+    SliderItemDirective,
+    SignUpComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +55,11 @@ import { SliderItemDirective } from './components/slider/slider-item.directive';
     MatListModule,
     MatCardModule,
     MatInputModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [],
   bootstrap: [AppComponent]
