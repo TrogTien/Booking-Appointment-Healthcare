@@ -17,6 +17,8 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
+import {MatSelectModule} from '@angular/material/select';
+import {MatRadioModule} from '@angular/material/radio';
 
 
 
@@ -29,6 +31,8 @@ import { MedicalFieldComponent } from './pages/medical-field/medical-field.compo
 import { SliderComponent } from './components/slider/slider.component';
 import { SliderItemDirective } from './components/slider/slider-item.directive';
 import { SignUpComponent } from './pages/sign-up/sign-up.component';
+import { DoctorDetailComponent } from './pages/doctor-detail/doctor-detail.component';
+import { BookingComponent } from './pages/booking/booking.component';
 
 
 
@@ -43,7 +47,9 @@ import { SignUpComponent } from './pages/sign-up/sign-up.component';
     MedicalFieldComponent,
     SliderComponent,
     SliderItemDirective,
-    SignUpComponent
+    SignUpComponent,
+    DoctorDetailComponent,
+    BookingComponent
   ],
   imports: [
     BrowserModule,
@@ -59,7 +65,9 @@ import { SignUpComponent } from './pages/sign-up/sign-up.component';
     FormsModule,
     ReactiveFormsModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatSelectModule,
+    MatRadioModule
   ],
   providers: [],
   bootstrap: [AppComponent]

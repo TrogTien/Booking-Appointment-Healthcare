@@ -1,0 +1,79 @@
+
+<div class="row justify-content-center">
+    <div class="col-8">
+        
+        <mat-card >
+        
+            <mat-card-header >
+                    
+                <div mat-card-avatar  class="example-header-image"></div>
+                <mat-card-title>Phó Giáo sư, Tiến sĩ, Bác sĩ Lê Quang Quốc Ánh</mat-card-title>
+                <mat-card-subtitle>Tiêu hóa</mat-card-subtitle>
+                <mat-card-subtitle>7:30 - 8:00, Thứ 2 - ngày 16/9/2023</mat-card-subtitle>
+                
+            </mat-card-header>
+    
+        </mat-card>
+
+
+        <form [formGroup]="signupForm" >
+            
+
+            
+
+            <mat-form-field class="mat-50">
+                <mat-icon matPrefix>account_circle</mat-icon>
+                <mat-label>Họ tên</mat-label>
+                <input matInput formControlName="name" placeholder="Nguyễn Văn A">
+                <mat-error *ngIf="signupForm.controls.name.invalid">{{getErrorMessage(signupForm.controls.name)}}</mat-error>
+                
+            </mat-form-field>
+
+
+            <mat-radio-group aria-label="Select an option">
+                <mat-radio-button value="1">Nam</mat-radio-button>
+                <mat-radio-button value="2">Nữ</mat-radio-button>
+            </mat-radio-group>
+
+            <mat-form-field class="mat-50">
+                <mat-label>Ngày sinh</mat-label>
+                <input matInput formControlName="birthday" [matDatepicker]="picker" placeholder="1/31/2001">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconPrefix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-error *ngIf="signupForm.controls.birthday.invalid">{{getErrorMessage(signupForm.controls.birthday)}}</mat-error>
+
+            </mat-form-field>
+
+            <mat-form-field class="mat-50">
+                <mat-icon matPrefix>phone</mat-icon>
+                <mat-label>Số điện thoại</mat-label>
+                <input matInput formControlName="phone" type="tel" >
+                <mat-error *ngIf="signupForm.controls.phone.invalid">{{getErrorMessage(signupForm.controls.phone)}}</mat-error>
+
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-icon matPrefix>home</mat-icon>
+                <mat-label>Địa chỉ</mat-label>
+                <input matInput formControlName="address" placeholder="Ấp 8, xã Tân An Luông, Vũng Liêm, Vĩnh Long">
+                <mat-error *ngIf="signupForm.controls.address.invalid">{{getErrorMessage(signupForm.controls.address)}}</mat-error>
+
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-icon matPrefix>add_circle</mat-icon>
+                <mat-label>Lý do khám</mat-label>
+                <textarea matInput formControlName="reason" ></textarea>
+
+            </mat-form-field>
+
+            <button mat-raised-button type="submit"  color="primary" 
+                class="float-end btn-signup" 
+                (click)="logger()"
+            >
+                Gửi
+            </button>
+        </form>
+    </div>
+</div>
