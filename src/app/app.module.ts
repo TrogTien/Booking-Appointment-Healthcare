@@ -33,6 +33,7 @@ import { SliderItemDirective } from './components/slider/slider-item.directive';
 import { SignUpComponent } from './pages/sign-up/sign-up.component';
 import { DoctorDetailComponent } from './pages/doctor-detail/doctor-detail.component';
 import { BookingComponent } from './pages/booking/booking.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 
 
@@ -49,7 +50,8 @@ import { BookingComponent } from './pages/booking/booking.component';
     SliderItemDirective,
     SignUpComponent,
     DoctorDetailComponent,
-    BookingComponent
+    BookingComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,

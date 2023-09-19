@@ -1,63 +1,62 @@
-<div class="row justify-content-center">
-    <div class="col-md-8 col-lg-6 bg-info bg-opacity-75 py-3">
-        <div class=" p-0">
-            <h1 class="mb-4 text-center text-light fw-bold">Đăng ký</h1>
-            
-            <form [formGroup]="signupForm" >
-                <mat-form-field class="mat-50">
-                    <mat-label>Email</mat-label>
-                    <input matInput formControlName="email" placeholder="abc@gmai.com">
-                    <mat-error *ngIf="signupForm.controls.email.invalid">{{getErrorMessage(signupForm.controls.email)}}</mat-error>
-
-                </mat-form-field>
-
-                <mat-form-field class="mat-50">
-                    <mat-label>Enter your password</mat-label>
-                    <input matInput formControlName="password" [type]="hide ? 'password' : 'text'">
-                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+<div class="container">
+    <app-header></app-header>
+    <div class="row justify-content-center align-items-center">
+        <div class="col-md-8 col-lg-6 bg-info bg-opacity-75 py-3">
+            <div class=" p-0">
+                <h1 class="mb-4 text-center text-light fw-bold">Đăng ký</h1>
+                
+                <form [formGroup]="signupForm" >
+                    <mat-form-field class="mat-50">
+                        <mat-label>Email</mat-label>
+                        <input matInput formControlName="email" placeholder="abc@gmai.com">
+                        <mat-error *ngIf="signupForm.controls.email.invalid">{{getErrorMessage(signupForm.controls.email)}}</mat-error>
+    
+                    </mat-form-field>
+    
+                    <mat-form-field class="mat-50">
+                        <mat-label>Enter your password</mat-label>
+                        <input matInput formControlName="password" [type]="hide ? 'password' : 'text'">
+                        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </button>
+                        <mat-error *ngIf="signupForm.controls.password.invalid">{{getErrorMessage(signupForm.controls.password)}}</mat-error>
+    
+                    </mat-form-field>
+    
+                    <mat-form-field class="mat-50">
+                        <mat-label>Họ tên</mat-label>
+                        <input matInput formControlName="name" placeholder="Nguyễn Văn A">
+                        <mat-error *ngIf="signupForm.controls.name.invalid">{{getErrorMessage(signupForm.controls.name)}}</mat-error>
+                        
+                    </mat-form-field>
+    
+                    <mat-form-field class="mat-50">
+                        <mat-label>Ngày sinh</mat-label>
+                        <input matInput formControlName="birthday" [matDatepicker]="picker" placeholder="1/31/2001">
+                        <mat-hint>MM/DD/YYYY</mat-hint>
+                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                        <mat-error *ngIf="signupForm.controls.birthday.invalid">{{getErrorMessage(signupForm.controls.birthday)}}</mat-error>
+    
+                    </mat-form-field>
+    
+                    <mat-form-field>
+                        <mat-label>Địa chỉ</mat-label>
+                        <textarea matInput formControlName="address" placeholder="Ấp 8, xã Tân An Luông, Vũng Liêm, Vĩnh Long"></textarea>
+                        <mat-error *ngIf="signupForm.controls.address.invalid">{{getErrorMessage(signupForm.controls.address)}}</mat-error>
+    
+                    </mat-form-field>
+    
+                    <button mat-raised-button type="submit"  color="primary" 
+                        class="float-end btn-signup" 
+                        (click)="logger()"
+                    >
+                        Gửi
                     </button>
-                    <mat-error *ngIf="signupForm.controls.password.invalid">{{getErrorMessage(signupForm.controls.password)}}</mat-error>
-
-                </mat-form-field>
-
-                <mat-form-field class="mat-50">
-                    <mat-label>Họ tên</mat-label>
-                    <input matInput formControlName="name" placeholder="Nguyễn Văn A">
-                    <mat-error *ngIf="signupForm.controls.name.invalid">{{getErrorMessage(signupForm.controls.name)}}</mat-error>
-                    
-                </mat-form-field>
-
-                <mat-form-field class="mat-50">
-                    <mat-label>Ngày sinh</mat-label>
-                    <input matInput formControlName="birthday" [matDatepicker]="picker" placeholder="1/31/2001">
-                    <mat-hint>MM/DD/YYYY</mat-hint>
-                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-                    <mat-datepicker #picker></mat-datepicker>
-                    <mat-error *ngIf="signupForm.controls.birthday.invalid">{{getErrorMessage(signupForm.controls.birthday)}}</mat-error>
-
-                </mat-form-field>
-
-                <mat-form-field>
-                    <mat-label>Địa chỉ</mat-label>
-                    <textarea matInput formControlName="address" placeholder="Ấp 8, xã Tân An Luông, Vũng Liêm, Vĩnh Long"></textarea>
-                    <mat-error *ngIf="signupForm.controls.address.invalid">{{getErrorMessage(signupForm.controls.address)}}</mat-error>
-
-                </mat-form-field>
-
-                <button mat-raised-button type="submit"  color="primary" 
-                    class="float-end btn-signup" 
-                    (click)="logger()"
-                >
-                    Gửi
-                </button>
-            </form>
-            
-            
-
-            
-
-            
+                </form>
+     
+            </div>
         </div>
     </div>
+    
 </div>

@@ -7,6 +7,7 @@ import { MedicalFieldComponent } from './pages/medical-field/medical-field.compo
 import { SignUpComponent } from './pages/sign-up/sign-up.component';
 import { DoctorDetailComponent } from './pages/doctor-detail/doctor-detail.component';
 import { BookingComponent } from './pages/booking/booking.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -17,6 +18,13 @@ const routes: Routes = [
   { path: 'doctors', component: DoctorsComponent},
   { path: 'doctor-detail', component: DoctorDetailComponent},
   { path: 'medical-field', component: MedicalFieldComponent},
+  {
+    path: 'admin',
+    loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
+  },
+  {
+    path: '**', component: PageNotFoundComponent
+  }
 
 ];
 
