@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const doctorsController = require('../app/controllers/DoctorsController');
+const doctorsController = require('../app/controllers/doctors.controller');
 
 router.get('/:doctorId', doctorsController.readDoctor);
 router.patch('/:doctorId', doctorsController.updateDoctor);
