@@ -1,4 +1,4 @@
-import { Component, AfterContentInit, ContentChildren, ViewChild, QueryList, ElementRef } from '@angular/core';
+import { Component, ContentChildren, ViewChild, QueryList, ElementRef } from '@angular/core';
 import { SliderItemDirective } from './slider-item.directive';
 
 @Component({
@@ -6,7 +6,7 @@ import { SliderItemDirective } from './slider-item.directive';
   templateUrl: './slider.component.html',
   styleUrls: ['./slider.component.scss']
 })
-export class SliderComponent implements AfterContentInit {
+export class SliderComponent   {
 
   @ContentChildren(SliderItemDirective, { read: ElementRef }) items!: QueryList<ElementRef<HTMLDivElement>>;
   @ViewChild('slides') slidesContainer!: ElementRef<HTMLDivElement>;
@@ -17,14 +17,8 @@ export class SliderComponent implements AfterContentInit {
     return this.items.find((item, index) => index === this.slidesIndex)!;
   }
 
-  ngAfterContentInit() {
-    console.log('items', this.items);
-  }
-
-  ngAfterViewInit() {
-    console.log('slides', this.slidesContainer);
-  }
-
+  
+  
   onClickLeft() {
     this.slidesContainer.nativeElement.scrollLeft -= (this.currentItem.nativeElement.offsetWidth * 3);
     

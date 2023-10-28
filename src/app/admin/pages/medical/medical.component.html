@@ -1,0 +1,17 @@
+
+
+<button (click)="openDialog()" mat-fab matTooltip="Primary" color="primary" aria-label="Example fab with a heart icon" >
+    <mat-icon>add</mat-icon>
+</button>
+
+
+<mat-card *ngFor="let item of medicals$ | async" class="my-3">
+    <mat-card-header>
+    <mat-card-title>{{ item.name }}</mat-card-title>
+    <mat-card-subtitle>{{ item.description }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-actions align="end">
+    <button mat-button (click)="openDialogData(item)">Sửa</button>
+    <button mat-button (click)="onDeleteMedical(item._id)">Xóa</button>
+    </mat-card-actions>
+</mat-card>

@@ -6,8 +6,20 @@ const AppointmentSchema = new mongoose.Schema({
         required: true,
         maxLength: 50,
     },
-    appointmentDate: {
+    phone: {
+        type: String,
+        required: true
+    },
+    gender: {
+        type: String,
+        required: true
+    },
+    day: {
         type: Date,
+        required: true
+    },
+    appointmentTime: {
+        type: String,
         required: true
     },
     symptoms: {

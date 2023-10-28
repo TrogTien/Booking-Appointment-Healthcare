@@ -11,14 +11,14 @@
                     <div mat-card-avatar  class="example-header-image"></div>
                     <mat-card-title>Phó Giáo sư, Tiến sĩ, Bác sĩ Lê Quang Quốc Ánh</mat-card-title>
                     <mat-card-subtitle>Tiêu hóa</mat-card-subtitle>
-                    <mat-card-subtitle>7:30 - 8:00, Thứ 2 - ngày 16/9/2023</mat-card-subtitle>
+                    <mat-card-subtitle>{{ hour }}, ngày {{ day | date: 'dd/MM/yyyy'}}</mat-card-subtitle>
                     
                 </mat-card-header>
         
             </mat-card>
 
 
-            <form [formGroup]="signupForm" >
+            <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" >
                 
 
                 
@@ -26,15 +26,15 @@
                 <mat-form-field class="mat-50">
                     <mat-icon matPrefix>account_circle</mat-icon>
                     <mat-label>Họ tên</mat-label>
-                    <input matInput formControlName="name" placeholder="Nguyễn Văn A">
-                    <mat-error *ngIf="signupForm.controls.name.invalid">{{getErrorMessage(signupForm.controls.name)}}</mat-error>
+                    <input matInput formControlName="patientName" placeholder="Nguyễn Văn A">
+                    <mat-error *ngIf="signupForm.controls.patientName.invalid">{{getErrorMessage(signupForm.controls.patientName)}}</mat-error>
                     
                 </mat-form-field>
 
 
-                <mat-radio-group aria-label="Select an option">
-                    <mat-radio-button value="1" checked>Nam</mat-radio-button>
-                    <mat-radio-button value="2">Nữ</mat-radio-button>
+                <mat-radio-group aria-label="Select an option" formControlName="gender">
+                    <mat-radio-button value="male" checked>Nam</mat-radio-button>
+                    <mat-radio-button value="female">Nữ</mat-radio-button>
                 </mat-radio-group>
 
                 <mat-form-field class="mat-50">
@@ -66,13 +66,12 @@
                 <mat-form-field>
                     <mat-icon matPrefix>add_circle</mat-icon>
                     <mat-label>Lý do khám</mat-label>
-                    <textarea matInput formControlName="reason" ></textarea>
+                    <textarea matInput formControlName="symptoms" ></textarea>
 
                 </mat-form-field>
 
                 <button mat-raised-button type="submit"  color="primary" 
                     class="float-end btn-signup" 
-                    (click)="logger()"
                 >
                     Gửi
                 </button>

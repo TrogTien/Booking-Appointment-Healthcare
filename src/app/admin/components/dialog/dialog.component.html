@@ -1,0 +1,24 @@
+<h1 mat-dialog-title>Thêm Chuyên Khoa</h1>
+
+<div mat-dialog-content>
+    <form [formGroup]="medicalForm" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="outline">
+            <mat-label>Tên Chuyên Khoa</mat-label>
+            <input matInput formControlName="name" placeholder="Placeholder">
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Mô tả</mat-label>
+            <textarea formControlName="description" matInput rows="5" ></textarea>
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+
+        </mat-form-field>
+
+        <button mat-raised-button type="submit"  color="primary" 
+            class="btn-submit"
+        >
+            Thêm
+        </button>
+    </form>
+</div>

@@ -9,14 +9,15 @@ import { DoctorDetailComponent } from './pages/doctor-detail/doctor-detail.compo
 import { BookingComponent } from './pages/booking/booking.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
+
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent},
   { path: 'login', component: LoginComponent},
   { path: 'signup', component: SignUpComponent},
-  { path: 'booking', component: BookingComponent},
+  { path: 'booking/:doctorId', component: BookingComponent},
   { path: 'doctors', component: DoctorsComponent},
-  { path: 'doctor-detail', component: DoctorDetailComponent},
+  { path: 'doctors/:doctorId', component: DoctorDetailComponent},
   { path: 'medical-field', component: MedicalFieldComponent},
   {
     path: 'admin',

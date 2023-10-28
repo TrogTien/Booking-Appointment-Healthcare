@@ -1,40 +1,45 @@
-<div class="container">
+<div class="container" *ngIf="doctor$ | async as doctor">
     <app-header></app-header>
 
-    <mat-card class="mb-3" [routerLink]="'/doctor-detail'">
+    <mat-card class="mb-3"  >
         <mat-card-header >
             
             <div mat-card-avatar  class="example-header-image"></div>
-            <mat-card-title>Phó Giáo sư, Tiến sĩ, Bác sĩ Lê Quang Quốc Ánh</mat-card-title>
-            <mat-card-subtitle>Tiêu hóa</mat-card-subtitle>
+            <mat-card-title>{{ doctor.name }}</mat-card-title>
+            <mat-card-subtitle>{{ doctor.medicalSpecialty }}</mat-card-subtitle>
             
         </mat-card-header>
-        <mat-card-content>
-            {{longText}}
+        <mat-card-content >
+            {{ longText }}
         </mat-card-content>
     </mat-card>
 
     <mat-form-field>
         <mat-label>Chọn ngày</mat-label>
         <mat-select [(value)]="selected">
-        <mat-option value="option1">Option 1</mat-option>
-        <mat-option value="option2">Thứ 7 - 16/9</mat-option>
-        <mat-option value="option3">Option 3</mat-option>
+            <ng-container *ngFor="let item of doctor.availableTimes; index as i">
+
+                <mat-option 
+                    [value]="i"
+                    (click)="OnChangeDay(item.day)"
+                >{{ item.day | date: 'dd/MM/yyyy' }}</mat-option>
+            </ng-container>
         </mat-select>
     </mat-form-field>
 
     <p class="h3">Lịch khám</p>
     <div class="row">
         <div class="col-8">
-            <a class="time-booking">07:30 - 08:00</a>
-            <a class="time-booking">07:30 - 08:00</a>
-            <a class="time-booking">07:30 - 08:00</a>
-            <a class="time-booking">07:30 - 08:00</a>
-            <a class="time-booking">07:30 - 08:00</a>
-            <a class="time-booking">07:30 - 08:00</a>
-            <a class="time-booking">07:30 - 08:00</a>
-            <a class="time-booking">07:30 - 08:00</a>
-            <a class="time-booking">07:30 - 08:00</a>
+            <ng-container *ngIf="availableTimes$ | async as availableTimes">
+                <a class="time-booking" 
+                    *ngFor="let hour of availableTimes[0].hours"
+                    [routerLink]="['/booking', doctor._id]"
+                    [queryParams]="{ day: availableTimes[0].day , hour: hour }"
+                >
+                    {{ hour }}
+                </a>
+            </ng-container>
+         
             
         </div>
         <div class="col-4">

@@ -33,7 +33,7 @@ class DoctorsController {
                 res.send(doc);
             })
             .catch(err => {
-                console.log(err)
+                res.send(err)
             })
     }
 
