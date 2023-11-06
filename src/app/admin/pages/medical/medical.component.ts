@@ -4,12 +4,25 @@ import { MedicalField } from 'src/app/model/medical_field.model';
 import { MedicalFieldService } from 'src/app/services/medical-field.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../../components/dialog/dialog.component';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 
 @Component({
   selector: 'app-medical',
   templateUrl: './medical.component.html',
-  styleUrls: ['./medical.component.scss']
+  styleUrls: ['./medical.component.scss'],
+  animations: [
+    trigger('hideAndShow', [
+      transition(':leave', [
+        animate(300, style({opacity: 0, height: 0}))
+      ]),
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate(300, style({opacity: 1}))
+      ])
+    ]),
+    
+  ]
 })
 export class MedicalComponent implements OnInit {
   medicals$: Observable<MedicalField[]> | undefined;
@@ -21,7 +34,7 @@ export class MedicalComponent implements OnInit {
 
   ngOnInit(): void {
     this.medicalService.getAllMedical();
-    this.medicals$ = this.medicalService.medical$
+    this.medicals$ = this.medicalService.medicals$
   }
 
   openDialog() {
@@ -41,6 +54,9 @@ export class MedicalComponent implements OnInit {
     })
   }
 
+  trackByFn(index: number, medical: MedicalField) {
+    return medical._id;
+  }
 
 
 }

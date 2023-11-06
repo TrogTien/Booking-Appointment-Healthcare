@@ -15,6 +15,7 @@ import {MatListModule} from '@angular/material/list';
 import {MatCardModule} from '@angular/material/card';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatInputModule} from '@angular/material/input';
+import {MatChipsModule} from '@angular/material/chips';
 
 
 
@@ -25,6 +26,10 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { DoctorsComponent } from './pages/doctors/doctors.component';
 import { DialogComponent } from './components/dialog/dialog.component';
 import { AppointmentsComponent } from './pages/appointments/appointments.component';
+import { DialogAppointmentComponent } from './pages/appointments/dialog-appointment/dialog-appointment.component';
+import { AppointmentItemComponent } from './pages/appointments/appointment-item/appointment-item.component';
+import { DoctorItemComponent } from './pages/doctors/doctor-item/doctor-item.component';
+import { DialogDoctorComponent } from './pages/doctors/dialog-doctor/dialog-doctor.component';
 
 
 @NgModule({
@@ -34,7 +39,11 @@ import { AppointmentsComponent } from './pages/appointments/appointments.compone
     DashboardComponent,
     DoctorsComponent,
     DialogComponent,
-    AppointmentsComponent
+    AppointmentsComponent,
+    DialogAppointmentComponent,
+    AppointmentItemComponent,
+    DoctorItemComponent,
+    DialogDoctorComponent
   ],
   imports: [
     CommonModule,
@@ -50,7 +59,8 @@ import { AppointmentsComponent } from './pages/appointments/appointments.compone
     MatListModule,
     MatCardModule,
     MatDialogModule,
-    MatInputModule
+    MatInputModule,
+    MatChipsModule
   ],
 })
 export class AdminModule { }

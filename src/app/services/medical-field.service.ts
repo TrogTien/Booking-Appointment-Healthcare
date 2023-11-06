@@ -8,43 +8,43 @@ import { MedicalField } from '../model/medical_field.model';
 })
 export class MedicalFieldService {
 
-  private readonly _medical = new BehaviorSubject<MedicalField[]>([]);
+  private readonly _medicals = new BehaviorSubject<MedicalField[]>([]);
 
-  medical$ = this._medical.asObservable();
+  medicals$ = this._medicals.asObservable();
 
   constructor(private api: ApiService) { }
 
-  get medical(): MedicalField[] {
-    return this._medical.getValue();
+  get medicals(): MedicalField[] {
+    return this._medicals.getValue();
   }
 
-  set medical(val: MedicalField[]) {
-    this._medical.next(val);
+  set medicals(val: MedicalField[]) {
+    this._medicals.next(val);
   }
 
   getAllMedical() {
     this.api.get('medical_fields').subscribe(data => {
-      this.medical = data
+      this.medicals = data
     })
   }
 
   addMedical(data: any) {
     this.api.post('medical_fields', data).subscribe((_data: MedicalField) => {
-      this.medical.push(_data);
+      this.medicals.push(_data);
     })
   }
 
   removeMedical(id: string) {
     this.api.delete(`medical_fields/${id}`).subscribe(() => {
-      const index = this.medical.findIndex(item => item._id == id);
-      this.medical.splice(index, 1);
+      const index = this.medicals.findIndex(item => item._id == id);
+      this.medicals.splice(index, 1);
     })
   }
 
   updateMedical(id: string, data: any) {
     this.api.patch(`medical_fields/${id}`, data).subscribe(() => {
-      const index = this.medical.findIndex(item => item._id == id);
-      this.medical.splice(index, 1, data);
+      const index = this.medicals.findIndex(item => item._id == id);
+      this.medicals.splice(index, 1, data);
     })
   }
 }

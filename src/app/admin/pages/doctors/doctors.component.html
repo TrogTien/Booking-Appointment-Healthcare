@@ -1,1 +1,8 @@
-<p>doctors works!</p>
+<div *ngFor="let item of doctors$ | async; trackBy: trackByFn">
+
+    <app-doctor-item @hideAndShow
+        [doctor]="item"
+        (deleteDoctor)="onDeleteDoctor($event)"
+    >
+    </app-doctor-item>
+</div>
