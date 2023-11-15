@@ -1,11 +1,14 @@
 const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
+const dotenv = require('dotenv');
 
 const db = require('./config/db/mongoose');
 const route = require('./routes');
 
 const app = express();
+
+dotenv.config();
 
 // Connect MongoDB
 db.connect();

@@ -26,5 +26,29 @@ export class ApiService {
     return this.http.delete(`${this.ROOT_URL}/${endpoint}`);
   }
 
+  login(email: string, password: string) {
+    return this.http.post(
+      `${this.ROOT_URL}/auth/login`,
+      {
+        email,
+        password
+      },
+      {
+        observe: 'response'
+      }
+    )
+  }
 
+  register(email: string, password: string) {
+    return this.http.post(
+      `${this.ROOT_URL}/auth/register`,
+      {
+        email,
+        password
+      },
+      {
+        observe: 'response'
+      }
+    )
+  }
 }
