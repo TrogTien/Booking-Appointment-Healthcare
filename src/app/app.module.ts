@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -36,6 +36,8 @@ import { SignUpComponent } from './pages/sign-up/sign-up.component';
 import { DoctorDetailComponent } from './pages/doctor-detail/doctor-detail.component';
 import { BookingComponent } from './pages/booking/booking.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+
+import { WebReqInterceptor } from './services/web-req-interceptor';
 
 
 
@@ -74,7 +76,9 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     MatSelectModule,
     MatRadioModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: WebReqInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { AppointmentService } from 'src/app/services/appointment.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-booking',
@@ -16,16 +17,22 @@ export class BookingComponent implements OnInit {
   constructor(
     private builder: FormBuilder,
     private route: ActivatedRoute,
-    private appointmentService: AppointmentService
+    private appointmentService: AppointmentService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
+    // check login
+    // this.authService.checkLogin().subscribe(() => {
+    //   console.log("Check Login")
+    // })
+
     this.doctorId = this.route.snapshot.paramMap.get('doctorId')!;
     this.day = this.route.snapshot.queryParamMap.get('day')!;
     this.hour = this.route.snapshot.queryParamMap.get('hour')!;
   }
 
-  signupForm = this.builder.group({
+  bookingForm = this.builder.group({
     patientName: ['', Validators.required],
     gender: ['male', Validators.required],
     birthday: [new Date(), Validators.required],
@@ -41,10 +48,10 @@ export class BookingComponent implements OnInit {
   }
 
   onSubmit() {
-    if(this.signupForm.valid) {
+    if(this.bookingForm.valid) {
       const data = {
-        ... this.signupForm.value,
-        birthday: this.signupForm.value.birthday?.toISOString(),
+        ... this.bookingForm.value,
+        birthday: this.bookingForm.value.birthday?.toISOString(),
         day: this.day,
         appointmentTime: this.hour,
         doctorId: this.doctorId,

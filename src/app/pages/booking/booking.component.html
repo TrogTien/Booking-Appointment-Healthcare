@@ -18,7 +18,7 @@
             </mat-card>
 
 
-            <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" >
+            <form [formGroup]="bookingForm" (ngSubmit)="onSubmit()" >
                 
 
                 
@@ -27,7 +27,7 @@
                     <mat-icon matPrefix>account_circle</mat-icon>
                     <mat-label>Họ tên</mat-label>
                     <input matInput formControlName="patientName" placeholder="Nguyễn Văn A">
-                    <mat-error *ngIf="signupForm.controls.patientName.invalid">{{getErrorMessage(signupForm.controls.patientName)}}</mat-error>
+                    <mat-error *ngIf="bookingForm.controls.patientName.invalid">{{getErrorMessage(bookingForm.controls.patientName)}}</mat-error>
                     
                 </mat-form-field>
 
@@ -43,7 +43,7 @@
                     <mat-hint>MM/DD/YYYY</mat-hint>
                     <mat-datepicker-toggle matIconPrefix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
-                    <mat-error *ngIf="signupForm.controls.birthday.invalid">{{getErrorMessage(signupForm.controls.birthday)}}</mat-error>
+                    <mat-error *ngIf="bookingForm.controls.birthday.invalid">{{getErrorMessage(bookingForm.controls.birthday)}}</mat-error>
 
                 </mat-form-field>
 
@@ -51,7 +51,7 @@
                     <mat-icon matPrefix>phone</mat-icon>
                     <mat-label>Số điện thoại</mat-label>
                     <input matInput formControlName="phone" type="tel" >
-                    <mat-error *ngIf="signupForm.controls.phone.invalid">{{getErrorMessage(signupForm.controls.phone)}}</mat-error>
+                    <mat-error *ngIf="bookingForm.controls.phone.invalid">{{getErrorMessage(bookingForm.controls.phone)}}</mat-error>
 
                 </mat-form-field>
 
@@ -59,7 +59,7 @@
                     <mat-icon matPrefix>home</mat-icon>
                     <mat-label>Địa chỉ</mat-label>
                     <input matInput formControlName="address" placeholder="Ấp 8, xã Tân An Luông, Vũng Liêm, Vĩnh Long">
-                    <mat-error *ngIf="signupForm.controls.address.invalid">{{getErrorMessage(signupForm.controls.address)}}</mat-error>
+                    <mat-error *ngIf="bookingForm.controls.address.invalid">{{getErrorMessage(bookingForm.controls.address)}}</mat-error>
 
                 </mat-form-field>
 

@@ -13,10 +13,20 @@ dotenv.config();
 // Connect MongoDB
 db.connect();
 // Init Route
+app.use(morgan('combined'));                            // HTTP logger
 
 app.use(express.json());                                // phân tích dữ liệu gửi đến dưới dạng JSON lưu trong req.body
 app.use(cors({ origin: true, credentials: true }));
-app.use(morgan('combined'));                            // HTTP logger
+
+app.use((req, res, next) => {
+    res.header(
+        'Access-Control-Expose-Headers',
+        'x-access-token, x-refresh-token'
+    )
+
+    next();
+})
+
 
 route(app);
 

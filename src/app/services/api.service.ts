@@ -39,16 +39,15 @@ export class ApiService {
     )
   }
 
-  register(email: string, password: string) {
+  register(data: Object) {
     return this.http.post(
       `${this.ROOT_URL}/auth/register`,
-      {
-        email,
-        password
-      },
+      data,
       {
         observe: 'response'
       }
     )
   }
+
+  
 }

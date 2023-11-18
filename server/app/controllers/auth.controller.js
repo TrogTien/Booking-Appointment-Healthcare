@@ -9,9 +9,9 @@ class AuthController {
     
 
     // [POST] /api/auth/register
-    async registerUser(req, res) {
+    registerUser = async (req, res) => {
         try {
-            const { username, password, email } = req.body
+            const { username, password, email, birthday } = req.body
 
             const salt = await bcrypt.genSalt(10);
             const hashedPassword = await bcrypt.hash(password, salt);
@@ -20,10 +20,22 @@ class AuthController {
                 username: username,
                 password: hashedPassword,
                 email: email,
+                birthday: birthday
             })
 
             const user = await newUser.save();
-            res.status(200).json(user)
+
+            if (user) {
+                const accessToken = this.generateToken(user);
+                const refreshToken = this.generateRefreshToken(user);
+                await new UserToken({ _userId: user._id, refreshToken: refreshToken }).save();
+
+                res.header('x-refresh-token', refreshToken)
+                   .header('x-access-token', accessToken)
+                   .send(user);
+
+
+            }
 
         } catch(err) {
             res.status(500).json(err)
@@ -33,11 +45,11 @@ class AuthController {
     // [POST] /api/auth/login
     loginUser = async (req, res) => {
         try {
-            const { username, password } = req.body
-            const user = await User.findOne({ username: username});
+            const { email, password } = req.body
+            const user = await User.findOne({ email: email});
 
             if (!user) {
-                return res.status(404).json("Incorrect username")
+                return res.status(404).json("Incorrect email")
             }
 
             const isValidPassword = await bcrypt.compare(password, user.password);
@@ -60,7 +72,7 @@ class AuthController {
 
                 res.header('x-refresh-token', refreshToken)
                    .header('x-access-token', accessToken)
-                   .send("Login Success");
+                   .send(user);
 
             }
         } catch(err) {
@@ -76,6 +88,12 @@ class AuthController {
         const newAccessToken = this.generateToken(payload);
 
         res.header('x-access-token', newAccessToken).send({ newAccessToken });
+    }
+
+    // [GET] /api/auth/checkLogin
+
+    checkLogin = (req, res) => {
+        res.status(200).json({ message: "User is logged in" })
     }
 
     // Function Helper

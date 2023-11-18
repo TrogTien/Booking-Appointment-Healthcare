@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 
 const appointmentsController = require('../app/controllers/appointments.controller')
+
 const authMiddleware = require('../app/middleware/auth.middleware')
 
 

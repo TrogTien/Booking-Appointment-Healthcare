@@ -1,5 +1,8 @@
+import { HttpResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -9,19 +12,27 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
 export class SignUpComponent {
   hide = true;
 
-  constructor(private builder: FormBuilder) {}
+  constructor(
+    private builder: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   signupForm = this.builder.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', Validators.required],
-    name: ['', Validators.required],
+    username: ['', Validators.required],
     birthday: ['', Validators.required],
-    address: ['', Validators.required],
   })
 
-  logger() {
+  onSignUp() {
     if (this.signupForm.valid) {
-      console.log(this.signupForm.value)
+      this.authService.register(this.signupForm.value).subscribe((res: HttpResponse<any>) => {
+        if (res.status === 200) {
+          this.router.navigate(['/home'])
+        }
+        console.log(res)
+      })
     } else {
       console.warn('Invalid')
     }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, map, switchMap } from 'rxjs';
 import { AvailableTime, Doctor } from 'src/app/model/doctor.model';
+import { AuthService } from 'src/app/services/auth.service';
 import { DoctorService } from 'src/app/services/doctor.service';
 import { TimeService } from 'src/app/services/time.service';
 
@@ -26,7 +27,8 @@ export class DoctorDetailComponent implements OnInit {
   constructor(
     private doctorService: DoctorService,
     private _route: ActivatedRoute,
-    private timeService: TimeService
+    private timeService: TimeService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -53,6 +55,12 @@ export class DoctorDetailComponent implements OnInit {
   OnChangeDay(day: Date) {
     this.timeService.changeDay(day);
     console.log("change: ", this.timeService.availableTimes);
+  }
+
+  onCheckLoggedIn() {
+    this.authService.checkLogin().subscribe(() => {
+      console.log("Check Login")
+    })
   }
 
 
