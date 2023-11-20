@@ -14,6 +14,14 @@ const DoctorSchema = new mongoose.Schema({
 
         }
     ],
+    address: {
+        type: String,
+        required: true
+    },
+    price: {
+        type: Number,
+        required: true
+    }
 
 })
 

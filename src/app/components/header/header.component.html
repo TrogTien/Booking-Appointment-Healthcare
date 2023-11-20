@@ -12,7 +12,7 @@
     </ul>
 
     <div  class="col-md-3 text-end p-3">
-      <button *ngIf="authService.isLoggedIn; else loginBtn" (click)="onLogout()" type="button" class="btn btn-secondary">Đăng xuất</button>
+      <button *ngIf=" isLoggedIn$ | async ; else loginBtn" (click)="onLogout()" type="button" class="btn btn-secondary">Đăng xuất</button>
       <ng-template #loginBtn>
         <button  [routerLink]="'/login'" type="button" class="btn btn-info">Đăng nhập</button>
       </ng-template>

@@ -28,14 +28,21 @@ export class DoctorService {
     })
   }
 
-  getAllDoctor(): Observable<Doctor[]> {
-    return this.api.get('doctors');
+  getAllDoctor(query?: string ): Observable<any> {
+    if (!query) {
+      query = '';
+    }
+    return this.api.get(`doctors?search=${query}`);
   }
 
   getDoctor(doctorId: string): Observable<Doctor> {
     return this.api.get(`doctors/${doctorId}`);
   }
 
+  getDoctorMedical(query: string): Observable<any> {
+    return this.api.get(`doctors/medical?medical=${query}`)
+  }
+ 
   deleteDoctor(doctorId: string) {
     return this.api.delete(`doctors/${doctorId}`);
   }

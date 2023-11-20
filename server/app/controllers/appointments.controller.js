@@ -1,4 +1,8 @@
 const { Appointment } = require('../models/Appointment.model');
+const { Doctor } = require('../models/Doctor.model');
+const { User } = require('../models/User.model');
+
+const nodemailer = require('nodemailer');
 
 class AppointmentsController {
 
@@ -26,15 +30,47 @@ class AppointmentsController {
     
 
     // [POST] /api/appointments
-    createAppointment(req, res) {
-        const appointment = new Appointment( req.body );
-        appointment.save()
-            .then(doc => {
-                res.send(doc);
+    createAppointment = async (req, res) => {
+        try {
+            
+            const newAppointment = new Appointment( req.body );
+            
+            const appointment = await newAppointment.save();
+
+
+            const doctor = await Doctor.findById(appointment.doctorId);
+            const user = await User.findById(appointment.userId);
+            
+            const transporter = nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                    user: 'trongtien372001@gmail.com',
+                    pass: process.env.GMAIL_PASSWORD
+                }
             })
-            .catch(err => {
-                res.send(err)
+
+            const options = {
+                from: 'trongtien372001@gmail.com',
+                to: `${user.email}`,
+                subject: `Phản hồi đặt lịch khám bệnh`,
+                text: `Lịch khám của bạn và Bác sĩ ${doctor.name} đã được gửi và đang chờ xác nhận.`
+            }
+
+            transporter.sendMail(options, (err, info) => {
+                if (err) {
+                    console.log(err);
+                    res.status(500).send("Internal Server Error");
+                } else {
+                    console.log("Email sent " + info );
+                    res.status(200).send(appointment);
+                }
             })
+
+        } catch (err) {
+            res.status(500).json(err)
+        }
+        
+          
     }
 
     // [PATCH] /api/appointments/:appointmentId

@@ -10,6 +10,7 @@ import { BookingComponent } from './pages/booking/booking.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { authGuard } from './guards/auth.guard';
 import { loginGuard } from './guards/login.guard';
+import { adminGuard } from './guards/admin.guard';
 
 
 const routes: Routes = [
@@ -32,7 +33,9 @@ const routes: Routes = [
   { path: 'medical-field', component: MedicalFieldComponent},
   {
     path: 'admin',
-    loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
+    loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule),
+    canActivate: [adminGuard],
+    data: { expectedRole: "admin"}
   },
   {
     path: '**', component: PageNotFoundComponent

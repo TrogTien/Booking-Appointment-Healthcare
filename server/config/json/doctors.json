@@ -1,0 +1,102 @@
+[
+  {
+    "name": "Bác sĩ John Doe",
+    "medicalSpecialty": ["Nội khoa", "Tiêu hóa"],
+    "availableTimes": [
+      { "day": "2023-11-20T08:00:00Z", "hours": ["08:00", "10:00"] },
+      { "day": "2023-11-21T09:00:00Z", "hours": ["09:00", "14:00"] }
+    ],
+    "address": "123 Đường ABC, Quận XYZ, Thành phố Hồ Chí Minh",
+    "price": 1000000
+  },
+  {
+    "name": "Bác sĩ Jane Smith",
+    "medicalSpecialty": ["Ngoại khoa", "Phẫu thuật"],
+    "availableTimes": [
+      { "day": "2023-11-20T11:00:00Z", "hours": ["11:00", "15:00"] },
+      { "day": "2023-11-22T10:00:00Z", "hours": ["10:00", "12:00"] }
+    ],
+    "address": "456 Đường XYZ, Quận ABC, Thành phố Hà Nội",
+    "price": 1200000
+  },
+  {
+    "name": "Bác sĩ Nguyễn Văn A",
+    "medicalSpecialty": ["Nhi khoa", "Sản khoa"],
+    "availableTimes": [
+      { "day": "2023-11-25T14:00:00Z", "hours": ["14:00", "16:00"] },
+      { "day": "2023-11-26T10:00:00Z", "hours": ["10:00", "12:00"] }
+    ],
+    "address": "789 Đường XYZ, Quận ABC, Thành phố Đà Nẵng",
+    "price": 800000
+  },
+  {
+    "name": "Bác sĩ Trần Thị B",
+    "medicalSpecialty": ["Ngoại khoa", "Phục hồi chức năng"],
+    "availableTimes": [
+      { "day": "2023-11-25T08:00:00Z", "hours": ["08:00", "11:00"] },
+      { "day": "2023-11-27T13:00:00Z", "hours": ["13:00", "15:00"] }
+    ],
+    "address": "987 Đường ABC, Quận XYZ, Thành phố Hồ Chí Minh",
+    "price": 1500000
+  },
+  {
+    "name": "Bác sĩ Maria Garcia",
+    "medicalSpecialty": ["Nội khoa", "Hô hấp"],
+    "availableTimes": [
+      { "day": "2023-11-22T09:00:00Z", "hours": ["09:00", "12:00"] },
+      { "day": "2023-11-24T14:00:00Z", "hours": ["14:00", "16:00"] }
+    ],
+    "address": "567 Đường XYZ, Quận ABC, Thành phố Hà Nội",
+    "price": 900000
+  },
+  {
+    "name": "Bác sĩ Ngô Văn C",
+    "medicalSpecialty": ["Nhi khoa", "Sản khoa"],
+    "availableTimes": [
+      { "day": "2023-11-26T08:00:00Z", "hours": ["08:00", "11:00"] },
+      { "day": "2023-11-28T13:00:00Z", "hours": ["13:00", "15:00"] }
+    ],
+    "address": "789 Đường ABC, Quận XYZ, Thành phố Đà Nẵng",
+    "price": 800000
+  },
+  {
+    "name": "Bác sĩ Kim Young",
+    "medicalSpecialty": ["Ngoại khoa", "Mắt"],
+    "availableTimes": [
+      { "day": "2023-11-23T11:00:00Z", "hours": ["11:00", "15:00"] },
+      { "day": "2023-11-25T10:00:00Z", "hours": ["10:00", "12:00"] }
+    ],
+    "address": "321 Đường XYZ, Quận ABC, Thành phố Hồ Chí Minh",
+    "price": 1300000
+  },
+  {
+    "name": "Bác sĩ Nguyễn Thị D",
+    "medicalSpecialty": ["Ngoại khoa", "Phẫu thuật"],
+    "availableTimes": [
+      { "day": "2023-11-23T08:00:00Z", "hours": ["08:00", "11:00"] },
+      { "day": "2023-11-25T13:00:00Z", "hours": ["13:00", "15:00"] }
+    ],
+    "address": "654 Đường ABC, Quận XYZ, Thành phố Đà Nẵng",
+    "price": 1100000
+  },
+  {
+    "name": "Bác sĩ Lee Min Ho",
+    "medicalSpecialty": ["Nhi khoa", "Da liễu"],
+    "availableTimes": [
+      { "day": "2023-11-24T09:00:00Z", "hours": ["09:00", "12:00"] },
+      { "day": "2023-11-26T14:00:00Z", "hours": ["14:00", "16:00"] }
+    ],
+    "address": "987 Đường XYZ, Quận ABC, Thành phố Hà Nội",
+    "price": 950000
+  },
+  {
+    "name": "Bác sĩ Kim Tae Hee",
+    "medicalSpecialty": ["Ngoại khoa", "Sản khoa"],
+    "availableTimes": [
+      { "day": "2023-11-24T08:00:00Z", "hours": ["08:00", "11:00"] },
+      { "day": "2023-11-26T13:00:00Z", "hours": ["13:00", "15:00"] }
+    ],
+    "address": "111 Đường ABC, Quận XYZ, Thành phố Hồ Chí Minh",
+    "price": 1400000
+  }
+]

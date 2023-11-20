@@ -12,6 +12,7 @@ class AuthMiddleware {
                     res.status(401).json("Token is not valid!")
                 } else {
                     req.user_id = decode._id;
+                    req.role = decode.role;
                     next();
                 }
             })
@@ -58,6 +59,14 @@ class AuthMiddleware {
                 res.status(401).send(err)
             })
 
+    }
+
+    isAdmin = (req, res, next) => {
+        if (req.role === "admin") {
+            next()
+        } else {
+            res.status(403).json("You are not allowed to do that!");
+        }
     }
 }
 

@@ -20,7 +20,7 @@ export class AuthService {
     private api: ApiService,
     private router: Router,
     private http: HttpClient,
-    private loginService: LoginService
+    private loginService: LoginService,
   ) {}
 
   get isLoggedIn(): boolean {
@@ -39,7 +39,6 @@ export class AuthService {
         this.setLocalStorage(res.body._id, res.headers.get('x-access-token')!, res.headers.get('x-refresh-token')!)
         console.log('Login Successful')
         this.isLoggedIn = true; //Next()
-        // this.loginService.isLoggedIn = true;
       })
     )
   }
@@ -105,6 +104,8 @@ export class AuthService {
     )
   }
 
+  
+
   private setLocalStorage(userId: string, accessToken: string, refreshToken: string) {
     localStorage.setItem('user-id', userId)
     localStorage.setItem('x-access-token', accessToken)
@@ -114,4 +115,6 @@ export class AuthService {
   private clearLocalStorage() {
     localStorage.clear()
   }
+
+
 }

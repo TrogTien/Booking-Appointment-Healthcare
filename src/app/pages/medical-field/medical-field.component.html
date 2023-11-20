@@ -5,7 +5,7 @@
         <mat-drawer mode="side" opened>
             
             <mat-selection-list #shoes [multiple]="false">
-                <mat-list-option *ngFor="let shoe of typesOfShoes" [value]="shoe">
+                <mat-list-option *ngFor="let shoe of typesOfShoes" [value]="shoe" (click)="onChangeMedical(shoe)" >
                 {{shoe}}
                 </mat-list-option>
             </mat-selection-list>
@@ -13,20 +13,21 @@
         </mat-drawer>
         <mat-drawer-content>
     
-            <ng-container *ngFor="let item of [1, 2, 3, 4, 5];">
+            <ng-container *ngFor="let item of doctors;">
                 <mat-card class="example-card">
                     <mat-card-header>
                         <img mat-card-lg-image src="https://material.angular.io/assets/img/examples/shiba2.jpg"  alt="Image of a Shiba Inu">
                         <mat-card-title-group class="ps-3 justify-content-between">
                             <div class="col-6">
     
-                                <mat-card-title>Tiến sĩ, Bác sĩ Phạm Thanh Phong</mat-card-title>
+                                <mat-card-title>Bác sĩ {{item.name}}</mat-card-title>
                                 <mat-card-subtitle>Hà Nội</mat-card-subtitle>
+                                <br>
+                                <mat-card-subtitle *ngFor="let specialty of item.medicalSpecialty">{{specialty}}</mat-card-subtitle>
                             </div>
                             <div class="col-6">
-                                <p>Lịch khám</p>
-                                <p>Giá</p>
-                                <p>Địa chỉ</p>
+                                <p>Giá: {{item.price}}</p>
+                                <p>Địa chỉ: {{item.address}}</p>
                             </div>
                         </mat-card-title-group>
                     </mat-card-header>
@@ -36,6 +37,8 @@
                 </mat-card>
     
             </ng-container>
+
+            
     
         </mat-drawer-content>
     </mat-drawer-container>

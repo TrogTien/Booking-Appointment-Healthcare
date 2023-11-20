@@ -1,8 +1,9 @@
 <div class="container">
     <app-header></app-header>
-    <mat-form-field appearance="outline">
+    <p >{{ role$ | async }}</p>
+    <mat-form-field appearance="outline" >
         <mat-label>Tìm kiếm Bác Sĩ</mat-label>
-        <input matInput placeholder="Tên Bác Sĩ">
+        <input matInput placeholder="Tên Bác Sĩ" [(ngModel)]="searchTerm" (input)="onSearch()">
         <mat-icon matSuffix>search</mat-icon>
     </mat-form-field>
 
@@ -14,8 +15,8 @@
                 <mat-card-title>{{ doctor.name }}</mat-card-title>
                 <mat-card-subtitle>{{ doctor.medicalSpecialty[0] }}</mat-card-subtitle>
                 <div >
-                    <p>Giá khám: 400k</p>
-                    <p>Địa chỉ: Đại học Cần Thơ</p>
+                    <p>Giá khám: {{doctor.price | currency:"VND"}}</p>
+                    <p>Địa chỉ: {{doctor.address}}</p>
                 </div>
             </mat-card-header>
         </mat-card>

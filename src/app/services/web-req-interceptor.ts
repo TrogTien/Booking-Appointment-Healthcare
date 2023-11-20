@@ -2,6 +2,7 @@ import { HttpErrorResponse, HttpHandler, HttpInterceptor, HttpRequest } from '@a
 import { Injectable } from '@angular/core';
 import { Observable, catchError, of, switchMap, tap, throwError } from 'rxjs';
 import { AuthService } from './auth.service';
+import { RoleService } from './role.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,8 @@ export class WebReqInterceptor implements HttpInterceptor {
 
 
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
+    private roleService: RoleService
   ) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<any> {
@@ -37,11 +39,10 @@ export class WebReqInterceptor implements HttpInterceptor {
 
             }),
             catchError(err => {
-              console.log('Test1')
 
               this.refreshingAccessToken = false;
-
               this.authService.logout()
+              this.roleService.setRole()
               return of({});
             })
           )
@@ -69,7 +70,6 @@ export class WebReqInterceptor implements HttpInterceptor {
   addAuthHeader(request: HttpRequest<any>) {
     // get the access token
     const token = this.authService.getAccessToken();
-    console.log('addHeader: ',token)
     if (token) {
       // append the access token to the request header
       return request.clone({

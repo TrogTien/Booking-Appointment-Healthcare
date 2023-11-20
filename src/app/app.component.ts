@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './services/auth.service';
+import { RoleService } from './services/role.service';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +10,11 @@ import { AuthService } from './services/auth.service';
 export class AppComponent implements OnInit {
   title = 'bookingcare';
 
-  constructor(private authService: AuthService) {
+  constructor(
+    private authService: AuthService,
+    private roleService: RoleService
+  
+  ) {
     
   }
 
@@ -17,7 +22,9 @@ export class AppComponent implements OnInit {
     this.authService.checkLogin().subscribe(() => {
       console.log("isLoggedIn");
       this.authService.isLoggedIn = true;
+      this.roleService.setRole()
     })
+
 
   }
 }
