@@ -24,6 +24,13 @@
                 </mat-list-item>
                 <mat-divider></mat-divider>
 
+                <mat-list-item [routerLink]="'/admin/my-clinic'">
+                    <mat-icon matListItemIcon>folder</mat-icon>
+                    <div matListItemTitle>Phòng khám của tôi</div>
+
+                </mat-list-item>
+                <mat-divider></mat-divider>
+
                 <mat-list-item [routerLink]="'/admin/doctors'">
                     <mat-icon matListItemIcon>recent_actors</mat-icon>
                     <div matListItemTitle>Doctors</div>
@@ -41,6 +48,12 @@
                 <mat-list-item [routerLink]="'/admin/medical'">
                     <mat-icon matListItemIcon>create</mat-icon>
                     <div matListItemTitle>Medical Field</div>
+                </mat-list-item>
+                <mat-divider></mat-divider>
+
+                <mat-list-item [routerLink]="'/admin/request-doctor'">
+                    <mat-icon matListItemIcon>create</mat-icon>
+                    <div matListItemTitle>Request Doctor</div>
                 </mat-list-item>
                 <mat-divider></mat-divider>
 

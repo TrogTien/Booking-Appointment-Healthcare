@@ -5,6 +5,7 @@ const doctorsController = require('../app/controllers/doctors.controller');
 
 const authMiddleware = require('../app/middleware/auth.middleware')
 
+router.get('/by-user/:userId', doctorsController.readDoctorByUserId);
 router.get('/medical', doctorsController.readDoctorsMedical);
 
 router.get('/:doctorId', doctorsController.readDoctor);

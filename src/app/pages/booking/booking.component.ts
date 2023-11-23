@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AppointmentService } from 'src/app/services/appointment.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { DoctorService } from 'src/app/services/doctor.service';
@@ -22,6 +22,7 @@ export class BookingComponent implements OnInit {
     private appointmentService: AppointmentService,
     private authService: AuthService,
     private doctorService: DoctorService,
+    private router: Router
 
   ) {}
 
@@ -71,7 +72,8 @@ export class BookingComponent implements OnInit {
       }
 
       this.appointmentService.postAppointment(data).subscribe( data => {
-        alert('Đã gửi thông tin, chờ xác nhận')
+        alert('Đã gửi thông tin, chờ xác nhận');
+        this.router.navigate(['/home']);
       });
       
     } else {

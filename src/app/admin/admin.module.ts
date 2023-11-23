@@ -16,6 +16,8 @@ import {MatCardModule} from '@angular/material/card';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatInputModule} from '@angular/material/input';
 import {MatChipsModule} from '@angular/material/chips';
+import {MatSelectModule} from '@angular/material/select';
+
 
 
 
@@ -30,6 +32,10 @@ import { DialogAppointmentComponent } from './pages/appointments/dialog-appointm
 import { AppointmentItemComponent } from './pages/appointments/appointment-item/appointment-item.component';
 import { DoctorItemComponent } from './pages/doctors/doctor-item/doctor-item.component';
 import { DialogDoctorComponent } from './pages/doctors/dialog-doctor/dialog-doctor.component';
+import { RequestDoctorComponent } from './pages/request-doctor/request-doctor.component';
+import { RequestItemComponent } from './pages/request-doctor/request-item/request-item.component';
+import { DialogRequestComponent } from './pages/request-doctor/dialog-request/dialog-request.component';
+import { MyClinicComponent } from './pages/my-clinic/my-clinic.component';
 
 
 @NgModule({
@@ -43,7 +49,11 @@ import { DialogDoctorComponent } from './pages/doctors/dialog-doctor/dialog-doct
     DialogAppointmentComponent,
     AppointmentItemComponent,
     DoctorItemComponent,
-    DialogDoctorComponent
+    DialogDoctorComponent,
+    RequestDoctorComponent,
+    RequestItemComponent,
+    DialogRequestComponent,
+    MyClinicComponent
   ],
   imports: [
     CommonModule,
@@ -60,7 +70,8 @@ import { DialogDoctorComponent } from './pages/doctors/dialog-doctor/dialog-doct
     MatCardModule,
     MatDialogModule,
     MatInputModule,
-    MatChipsModule
+    MatChipsModule,
+    MatSelectModule
   ],
 })
 export class AdminModule { }

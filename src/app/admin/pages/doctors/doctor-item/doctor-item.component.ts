@@ -21,7 +21,8 @@ export class DoctorItemComponent {
     })
   }
 
-  removeDoctor() {
+  removeDoctor(event: Event) {
+    event.stopPropagation();
     this.deleteDoctor.emit(this.doctor?._id);
   }
 

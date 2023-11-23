@@ -1,8 +1,8 @@
-<div *ngFor="let item of doctors$ | async; trackBy: trackByFn">
+<div *ngFor="let item of doctors$ | async; trackBy: trackByFn" @hideAndShow>
 
-    <app-doctor-item @hideAndShow
-        [doctor]="item"
-        (deleteDoctor)="onDeleteDoctor($event)"
-    >
-    </app-doctor-item>
+        <app-doctor-item
+            [doctor]="item"
+            (deleteDoctor)="onDeleteDoctor($event)"
+        >
+        </app-doctor-item>
 </div>

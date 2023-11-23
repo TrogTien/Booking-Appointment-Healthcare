@@ -1,0 +1,13 @@
+<ng-container  *ngFor="let item of requestDoctors; trackBy: trackByFn " >
+    <div @hideAndShow>
+
+        <app-request-item  
+            [requestDoctor]="item"
+            (deleteRequest)="onDeleteRequest($event)"
+            (conformRequest)="onCreateDoctor($event)"
+        ></app-request-item>
+        <mat-divider ></mat-divider>
+    </div>
+
+</ng-container>
+

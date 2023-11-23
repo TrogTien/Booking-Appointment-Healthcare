@@ -11,6 +11,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { authGuard } from './guards/auth.guard';
 import { loginGuard } from './guards/login.guard';
 import { adminGuard } from './guards/admin.guard';
+import { RequestDoctorComponent } from './pages/request-doctor/request-doctor.component';
 
 
 const routes: Routes = [
@@ -31,6 +32,7 @@ const routes: Routes = [
   { path: 'doctors', component: DoctorsComponent},
   { path: 'doctors/:doctorId', component: DoctorDetailComponent},
   { path: 'medical-field', component: MedicalFieldComponent},
+  { path: 'request-doctor', component: RequestDoctorComponent},
   {
     path: 'admin',
     loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule),

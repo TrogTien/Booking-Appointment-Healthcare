@@ -28,9 +28,14 @@ export class DoctorService {
     })
   }
 
+  postDoctor(data: any) {
+    return this.api.post('doctors', data);
+  }
+
   getAllDoctor(query?: string ): Observable<any> {
     if (!query) {
-      query = '';
+      return this.api.get(`doctors`);
+
     }
     return this.api.get(`doctors?search=${query}`);
   }

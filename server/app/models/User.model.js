@@ -18,10 +18,6 @@ const UserSchema = new mongoose.Schema({
         required: true,
         minLength: 6
     },
-    birthday: {
-        type: Date,
-        required: true
-    },
     role: {
         type: String,
         required: true,

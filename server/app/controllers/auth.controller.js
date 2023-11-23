@@ -106,7 +106,7 @@ class AuthController {
             },
             process.env.JWT_ACCESS_TOKEN_KEY,
             {
-                expiresIn: "10s"
+                expiresIn: "20m"
             }
         )
     }

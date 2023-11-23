@@ -14,6 +14,10 @@ const AppointmentSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    birthday: {
+        type: Date,
+        required: true
+    },
     day: {
         type: Date,
         required: true

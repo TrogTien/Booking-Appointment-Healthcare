@@ -5,6 +5,7 @@ export class Appointment {
         public appointmentTime: Date,
         public phone: string,
         public gender: string,
+        public birthday: Date,
         public day: string,
         public symptoms: string,
         public status: string = 'chua xac nhan',

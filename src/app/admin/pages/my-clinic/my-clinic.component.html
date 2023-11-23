@@ -1,0 +1,95 @@
+<ng-container >
+    <form >
+
+        <mat-card class="mb-3"  >
+            <mat-card-header >
+                
+                <div mat-card-avatar  class="example-header-image"></div>
+                <mat-card-title>
+                    <mat-form-field>
+                        <input matInput formControlName="name" placeholder="Trọng Tiến">
+        
+                    </mat-form-field>
+                </mat-card-title>
+                <mat-card-subtitle>
+                    <mat-form-field>
+                        <mat-label>Chuyên khoa</mat-label>
+                        <mat-select [(value)]="selectedDate">
+                            <!-- <ng-container *ngFor="let item of doctor.availableTimes; index as i">
+                
+                                <mat-option 
+                                    [value]="i"
+                                    (click)="OnChangeDay(item.day)"
+                                >{{ item.day | date: 'dd/MM/yyyy' }}</mat-option>
+                            </ng-container> -->
+                        </mat-select>
+                    </mat-form-field>
+                </mat-card-subtitle>
+                
+            </mat-card-header>
+        </mat-card>
+        
+    
+        
+    
+        <div class="row">
+            <div class="col-6">
+                <p class="h6">Nội dung phòng khám</p>
+                
+                <mat-form-field>
+                    <mat-label>Textarea</mat-label>
+                    <textarea matInput style="height: 300px;">{{longText}}</textarea>
+                </mat-form-field>
+    
+                <p class="h6">Địa chỉ khám</p>
+                <mat-form-field>
+                    <mat-icon matPrefix>home</mat-icon>
+                    <mat-label>Địa chỉ phòng khám</mat-label>
+                    <input matInput formControlName="address" placeholder="Bệnh viện Chợ rẫy, Sài Gòn">
+    
+                </mat-form-field>
+    
+                <p class="h6 mt-3">Giá khám: 500.000d</p>
+                <mat-form-field floatLabel="always" style="width: 50%;">
+                    <input matInput type="number" class="example-right-align" placeholder="0">
+                    <span matTextPrefix>VND&nbsp;</span>
+                    <span matTextSuffix>đ</span>
+                </mat-form-field>
+                  
+            </div>
+            
+            <div class="col-6">
+                <mat-form-field class="select-time">
+                    <mat-label>Chọn ngày</mat-label>
+                    <mat-select [(value)]="selectedDate">
+                        <ng-container *ngFor="let day of weekDays; index as i">
+            
+                            <mat-option 
+                                [value]="i"
+                            >{{ day | date: 'dd/MM/yyyy' }}</mat-option>
+                        </ng-container>
+                    </mat-select>
+                </mat-form-field>
+    
+                <p class="h3">Lịch khám</p>
+    
+                <ng-container >
+                    <a class="time-booking" 
+                        *ngFor="let hour of [1,2,3,4,5,6,7]"
+                    >
+                        13:00
+                    </a>
+                </ng-container>
+             
+                
+            </div>
+            
+        </div>
+    
+        
+    
+        <button mat-raised-button>Cập nhật</button>
+    </form>
+
+
+</ng-container>

@@ -1,5 +1,9 @@
 const { Doctor } = require('../models/Doctor.model');
-const doctorJson = require('../../config/json/doctors.json')
+const { User } = require('../models/User.model');
+const { RequestDoctor } = require('../models/RequestDoctor.model');
+
+
+// const doctorJson = require('../../config/json/doctors.json')
 
 class DoctorsController {
 
@@ -22,6 +26,7 @@ class DoctorsController {
         }
     }
 
+    // [GET] /api/doctors/medical?medical=Tim
     readDoctorsMedical = async (req, res) => {
         try {
             const  medical  = req.query.medical;
@@ -49,18 +54,46 @@ class DoctorsController {
             res.status(404).send(err)
         })
     }
+
+    // [GET] /api/doctors/by-user/:userId
+    readDoctorByUserId(req, res) {
+        Doctor.findOne({
+            userId: req.params.userId
+        }).then(doc => {
+            res.send(doc)
+        }).catch(err => {
+            res.status(404).send(err)
+        })
+    }
     
 
     // [POST] /api/doctors
-    createDoctor(req, res) {
-        const doctor = new Doctor( req.body );
-        doctor.save()
-            .then(doc => {
-                res.send(doc);
-            })
-            .catch(err => {
-                res.send(err)
-            })
+    createDoctor = async (req, res) => {
+        try {
+            const userId = req.body.userId;
+            const doctor = new Doctor( req.body );
+            await doctor.save();
+            // đổi role user => doctor
+            const user = await User.findById(userId);
+
+            if (!user) {
+                return res.status(404).send("User not found");
+            }
+
+            user.role = "doctor";
+            await user.save();
+
+            // xóa requestDoctor
+            await RequestDoctor.deleteMany({ userId });
+
+
+            res.status(200).json("Doctor has been created")
+
+        }
+        catch (err) {
+            res.status(500).send(err);
+        }
+       
     }
 
     // [PATCH] /api/doctors/:doctorId
@@ -88,18 +121,6 @@ class DoctorsController {
 
 }
 
-const insertMovies = async () => {
-    try {
-        const docs = await Doctor.insertMany(doctorJson);
-        return Promise.resolve(docs);
-    } catch (err) {
-        return Promise.reject(err)
-    }
-};
-
-insertMovies()
-    .then((docs) => console.log(docs))
-    .catch((err) => console.log(err))
 
 
 module.exports = new DoctorsController();
