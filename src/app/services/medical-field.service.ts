@@ -22,10 +22,14 @@ export class MedicalFieldService {
     this._medicals.next(val);
   }
 
-  getAllMedical() {
-    this.api.get('medical_fields').subscribe(data => {
+  initState(): void {
+    this.getAllMedical().subscribe(data => {
       this.medicals = data
     })
+  }
+
+  getAllMedical() {
+    return this.api.get('medical_fields')
   }
 
   addMedical(data: any) {

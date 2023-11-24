@@ -40,12 +40,20 @@ export class DoctorService {
     return this.api.get(`doctors?search=${query}`);
   }
 
+  getDoctorByUserId(userId: string): Observable<Doctor> {
+    return this.api.get(`doctors/by-user/${userId}`);
+  }
+
   getDoctor(doctorId: string): Observable<Doctor> {
     return this.api.get(`doctors/${doctorId}`);
   }
 
   getDoctorMedical(query: string): Observable<any> {
     return this.api.get(`doctors/medical?medical=${query}`)
+  }
+
+  patchDoctor(doctorId: string, data: any) {
+    return this.api.patch(`doctors/${doctorId}`, data);
   }
  
   deleteDoctor(doctorId: string) {

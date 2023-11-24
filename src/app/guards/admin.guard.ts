@@ -8,12 +8,12 @@ export const adminGuard: CanActivateFn = (route, state) => {
   const roleService = inject(RoleService);
   const router = inject(Router)
 
-  const expectedRole = route.data['expectedRole'];
-
+  const expectedRoles = route.data['expectedRoles'] as string[];
+  
 
   return roleService.role$.pipe(
     map(role => {
-      if (role === expectedRole) {
+      if (expectedRoles.includes(role)) {
         return true;
       }
       return false;

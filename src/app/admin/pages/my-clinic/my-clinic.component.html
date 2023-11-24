@@ -1,5 +1,5 @@
 <ng-container >
-    <form >
+    <form [formGroup]="clinicForm" (ngSubmit)="onSubmit()">
 
         <mat-card class="mb-3"  >
             <mat-card-header >
@@ -14,14 +14,13 @@
                 <mat-card-subtitle>
                     <mat-form-field>
                         <mat-label>Chuyên khoa</mat-label>
-                        <mat-select [(value)]="selectedDate">
-                            <!-- <ng-container *ngFor="let item of doctor.availableTimes; index as i">
+                        <mat-select formControlName="medicalSpecialty" multiple>
+                            <ng-container *ngFor="let item of medicals; index as i">
                 
                                 <mat-option 
-                                    [value]="i"
-                                    (click)="OnChangeDay(item.day)"
-                                >{{ item.day | date: 'dd/MM/yyyy' }}</mat-option>
-                            </ng-container> -->
+                                    [value]="item"
+                                >{{ item }}</mat-option>
+                            </ng-container>
                         </mat-select>
                     </mat-form-field>
                 </mat-card-subtitle>
@@ -37,21 +36,19 @@
                 <p class="h6">Nội dung phòng khám</p>
                 
                 <mat-form-field>
-                    <mat-label>Textarea</mat-label>
-                    <textarea matInput style="height: 300px;">{{longText}}</textarea>
+                    <textarea matInput formControlName="content" style="height: 300px;"></textarea>
                 </mat-form-field>
     
                 <p class="h6">Địa chỉ khám</p>
                 <mat-form-field>
                     <mat-icon matPrefix>home</mat-icon>
-                    <mat-label>Địa chỉ phòng khám</mat-label>
                     <input matInput formControlName="address" placeholder="Bệnh viện Chợ rẫy, Sài Gòn">
     
                 </mat-form-field>
     
                 <p class="h6 mt-3">Giá khám: 500.000d</p>
                 <mat-form-field floatLabel="always" style="width: 50%;">
-                    <input matInput type="number" class="example-right-align" placeholder="0">
+                    <input matInput type="number" formControlName="price" class="example-right-align" placeholder="0">
                     <span matTextPrefix>VND&nbsp;</span>
                     <span matTextSuffix>đ</span>
                 </mat-form-field>
@@ -88,7 +85,7 @@
     
         
     
-        <button mat-raised-button>Cập nhật</button>
+        <button type="submit" mat-raised-button>Cập nhật</button>
     </form>
 
 

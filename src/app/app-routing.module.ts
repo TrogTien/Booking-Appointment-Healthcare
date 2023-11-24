@@ -37,7 +37,7 @@ const routes: Routes = [
     path: 'admin',
     loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule),
     canActivate: [adminGuard],
-    data: { expectedRole: "admin"}
+    data: { expectedRoles: ["admin", "doctor"] }
   },
   {
     path: '**', component: PageNotFoundComponent

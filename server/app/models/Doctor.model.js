@@ -19,6 +19,9 @@ const DoctorSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    content: {
+        type: String,
+    },
     price: {
         type: Number,
         required: true,

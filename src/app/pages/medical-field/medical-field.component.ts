@@ -10,7 +10,7 @@ import { RoleService } from 'src/app/services/role.service';
 })
 export class MedicalFieldComponent implements OnInit {
   doctors: Doctor[] = [];
-  medical: string = "Cardiology";
+  medical: string = "Nhi khoa";
 
   typesOfShoes: string[] = ['Nhi khoa', 'Thần kinh học', 'Tim mạch', 'Nha khoa', 'Da liễu'];
   longText = `Trưởng khoa Khám bệnh, Bệnh viện Đa khoa Quốc tế Thu Cúc

@@ -33,7 +33,7 @@ export class MedicalComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.medicalService.getAllMedical();
+    this.medicalService.initState();
     this.medicals$ = this.medicalService.medicals$
   }
 

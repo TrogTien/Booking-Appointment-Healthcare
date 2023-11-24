@@ -5,7 +5,9 @@ export class Doctor {
         public medicalSpecialty: string[],
         public availableTimes: AvailableTime[],
         public address: string,
-        public price: number
+        public content: string,
+        public price: number,
+        public userId: string
     ) {}
 }
 
