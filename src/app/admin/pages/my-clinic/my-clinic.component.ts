@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Doctor } from 'src/app/model/doctor.model';
+import { Observable } from 'rxjs';
+import { AvailableTime, Doctor } from 'src/app/model/doctor.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { DoctorService } from 'src/app/services/doctor.service';
 import { MedicalFieldService } from 'src/app/services/medical-field.service';
+import { TimeService } from 'src/app/services/time.service';
 
 @Component({
   selector: 'app-my-clinic',
@@ -12,6 +14,8 @@ import { MedicalFieldService } from 'src/app/services/medical-field.service';
 })
 export class MyClinicComponent implements OnInit {
   doctor: Doctor | undefined;
+  availableTimes$: Observable<AvailableTime[]> | undefined;
+
   doctorId: string = '';
   
   weekDays: Date[] | undefined;
@@ -26,20 +30,26 @@ export class MyClinicComponent implements OnInit {
     private builder: FormBuilder,
     private doctorService: DoctorService,
     private authService: AuthService,
-    private medicalService: MedicalFieldService
+    private medicalService: MedicalFieldService,
+    private timeService: TimeService
 
   ) {}
 
   ngOnInit(): void {
-    this.weekDays = this.getWeekDaysFromNow();
-    const userId = this.authService.getUserId();
-    this.medicalService.getAllMedical().subscribe((data: any[] )=> {
+    this.weekDays = this.getWeekDaysFromNow();  // Create 7 day from now to select
+    const userId = this.authService.getUserId();  
+
+    this.availableTimes$ = this.timeService.availableTimes$;
+
+    this.medicalService.getAllMedical().subscribe((data: any[] )=> {  // Get medical to select
       this.medicals = data.map(item => item.name);
     })
-    this.doctorService.getDoctorByUserId(userId!).subscribe(_doctor => {
+    
+    this.doctorService.getDoctorByUserId(userId!).subscribe(_doctor => {  // Get Doctor
       this.doctor = _doctor;
       this.doctorId = _doctor._id;
-      // console.log(this.doctor)
+      
+      this.timeService.fetchDayTime(this.doctor.availableTimes);      // Time Service
       
       this.clinicForm.controls['name'].setValue(this.doctor?.name!);
       this.clinicForm.controls['medicalSpecialty'].setValue(this.doctor?.medicalSpecialty); //call get medical từ doctor
@@ -48,6 +58,8 @@ export class MyClinicComponent implements OnInit {
       this.clinicForm.controls['content'].setValue(this.doctor?.content!);
 
     })
+
+    const now = new Date();
 
 
 
@@ -62,11 +74,16 @@ export class MyClinicComponent implements OnInit {
     content: [this.longText]
   })
 
+  timeForm = this.builder.group({
+    inputTime: ['']
+  })
+
 
   getWeekDaysFromNow(): Date[] {
     const weekDays = [];
     for (let i = 0 ; i < 7; i++) {
       const date = new Date();
+      date.setHours(0, 0, 0, 0);
       date.setDate(date.getDate() + i);
       weekDays.push(date);
     }
@@ -83,6 +100,33 @@ export class MyClinicComponent implements OnInit {
     } else {
       console.warn("Invalid")
     }
+  }
+
+  clearInput() {
+    this.timeForm.controls['inputTime'].setValue('');
+  }
+
+  addHourDoctor(event: Event) {
+    event.preventDefault();
+    if (this.weekDays && this.timeForm.controls.inputTime.value) {
+      const day = this.weekDays[this.selectedDate].toISOString();
+      const hour = this.timeForm.controls.inputTime.value;
+      const data = {
+        day: day,
+        hour: hour
+      }
+
+      this.doctorService.patchHourDoctor(this.doctorId, data).subscribe(() => {
+        console.log("Thêm giờ thành công")
+        this.timeService.addHour(day, hour);
+      })
+
+    }
+  }
+
+  OnChangeDay(day: Date) {
+    this.timeService.changeDay(day.toISOString());
+    console.log("change: ", day.toISOString());
   }
 
 

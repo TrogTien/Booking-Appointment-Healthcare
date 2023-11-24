@@ -32,6 +32,10 @@ export class DoctorService {
     return this.api.post('doctors', data);
   }
 
+  patchHourDoctor(doctorId: string, data: any) {
+    return this.api.patch(`doctors/addHour/${doctorId}`, data);
+  }
+
   getAllDoctor(query?: string ): Observable<any> {
     if (!query) {
       return this.api.get(`doctors`);

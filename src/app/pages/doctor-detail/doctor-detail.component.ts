@@ -54,7 +54,7 @@ export class DoctorDetailComponent implements OnInit {
 
   OnChangeDay(day: Date) {
     this.timeService.changeDay(day);
-    console.log("change: ", this.timeService.availableTimes);
+    console.log("change: ", day);
   }
 
   onCheckLoggedIn() {

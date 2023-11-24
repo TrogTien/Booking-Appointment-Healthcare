@@ -116,6 +116,42 @@ class DoctorsController {
             }) 
     }
 
+    // [PATCH] /api/doctors/addHour/:doctorId
+    addHourDoctor = async (req, res) => {
+        try {
+
+            const doctorId = req.params.doctorId;
+            const { day, hour } = req.body;
+
+            const doctor = await Doctor.findById(doctorId);
+            
+
+            if (!doctor) {
+                return res.status(404).json({ message: "Doctor not found"});
+            }
+
+            const existingDay = doctor.availableTimes.find(item => item.day.toISOString() == day);
+            if (existingDay) {
+                existingDay.hours.push(hour);
+            } else {
+                // Nếu không tồn tại ngày tạo đối tượng ngày giờ mới
+                doctor.availableTimes.push({
+                    day: new Date(day),
+                    hours: [hour]
+                })
+            }
+
+            await doctor.save();
+
+            res.status(200).json({ message: "Hours added successfully"})
+
+        }
+        catch (err) {
+            res.status(500).send(err);
+        }
+    }
+
+
     
     
 
