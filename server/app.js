@@ -14,6 +14,8 @@ dotenv.config();
 db.connect();
 // Init Route
 app.use(morgan('combined'));                            // HTTP logger
+app.use('/uploads', express.static('uploads'));
+
 
 app.use(express.json());                                // phân tích dữ liệu gửi đến dưới dạng JSON lưu trong req.body
 app.use(cors({ origin: true, credentials: true }));

@@ -36,6 +36,10 @@ export class DoctorService {
     return this.api.patch(`doctors/addHour/${doctorId}`, data);
   }
 
+  removeHourDoctor(doctorId: string, data: any) {
+    return this.api.patch(`doctors/deleteHour/${doctorId}`, data);
+  }
+
   getAllDoctor(query?: string ): Observable<any> {
     if (!query) {
       return this.api.get(`doctors`);
@@ -62,5 +66,12 @@ export class DoctorService {
  
   deleteDoctor(doctorId: string) {
     return this.api.delete(`doctors/${doctorId}`);
+  }
+  // this.api.post("upload", formData).subscribe((res) => {
+  //   console.log(res)
+  // })
+
+  uploadImage(formData: FormData) {
+    return this.api.post("doctors/upload", formData);
   }
 }

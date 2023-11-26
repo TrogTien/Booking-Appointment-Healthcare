@@ -28,8 +28,16 @@
             </mat-card-header>
         </mat-card>
         
-    
+
+        <p class="h6">Chọn ảnh</p>
+        <input type="file" id="image" formControlName="image" (change)="onFileSelect($event)" />
         
+        <div *ngIf="selectImage">
+            <img [src]="selectImage" alt="" width="300px">
+        </div>
+
+        <button mat-raised-button color="primary" (click)="onSubmitImage($event)">Upload</button>
+
     
         <div class="row">
             <div class="col-6">
@@ -76,7 +84,7 @@
                         <form [formGroup]="timeForm">
 
                             <mat-form-field class="">
-                                <mat-label>Clearable input</mat-label>
+                                <mat-label>Nhập giờ khám</mat-label>
                                 <input matInput type="text" formControlName="inputTime">
                                 <button  matSuffix mat-icon-button aria-label="Clear" (click)="clearInput()">
                                     <mat-icon>close</mat-icon>
@@ -85,21 +93,28 @@
                             </mat-form-field>
                         </form>
                     </div>
-                    <button class="add-button" mat-mini-fab color="accent" aria-label="Example icon button with a plus one icon" (click)="addHourDoctor($event)" >
+                    <button class="add-button" mat-mini-fab color="accent" aria-label="Example icon button with a plus one icon" 
+                        (click)="addHourDoctor($event)" 
+                    >
                         <mat-icon>add</mat-icon>
                     </button>
                 </div>
                 <ng-container *ngIf="availableTimes$ | async as availableTimes">
-                    <div class="d-inline-block " *ngFor="let hour of availableTimes[0]?.hours">
+                    <div class="d-inline-flex align-items-center me-3" *ngFor="let hour of availableTimes[0]?.hours">
 
                         <a class="time-booking" 
                             
                         >
                             {{hour}}
                         </a>
-                        <button mat-mini-fab matTooltip="Warn" class="me-3" color="warn" aria-label="Example mini fab with a heart icon" >
+                        
+
+                        <button mat-mini-fab matTooltip="Warn" color="warn" aria-label="Example mini fab with a heart icon" 
+                            (click)="removeHourDoctor($event, hour)"
+                        >
                             <mat-icon>close</mat-icon>
                         </button>
+                        
                     </div>
                     
                 </ng-container>

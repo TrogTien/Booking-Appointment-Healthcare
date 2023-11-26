@@ -27,13 +27,16 @@ const DoctorSchema = new mongoose.Schema({
         required: true,
         default: 100000
     },
+    image: {
+        type: String
+    },
     isActive: {
         type: Boolean,
         default: false
     },
     userId: {
         type: mongoose.Types.ObjectId,
-        required: true
+        // required: true
     }
 
 })

@@ -16,6 +16,12 @@ export class MyClinicComponent implements OnInit {
   doctor: Doctor | undefined;
   availableTimes$: Observable<AvailableTime[]> | undefined;
 
+  imageFile: File | undefined;
+  selectImage: string = '';
+
+
+  dateNow: Date = new Date();
+
   doctorId: string = '';
   
   weekDays: Date[] | undefined;
@@ -40,6 +46,9 @@ export class MyClinicComponent implements OnInit {
     const userId = this.authService.getUserId();  
 
     this.availableTimes$ = this.timeService.availableTimes$;
+    
+    this.dateNow.setHours(0, 0, 0, 0);
+    console.log("Date; ",this.dateNow.toISOString())
 
     this.medicalService.getAllMedical().subscribe((data: any[] )=> {  // Get medical to select
       this.medicals = data.map(item => item.name);
@@ -50,6 +59,10 @@ export class MyClinicComponent implements OnInit {
       this.doctorId = _doctor._id;
       
       this.timeService.fetchDayTime(this.doctor.availableTimes);      // Time Service
+      this.OnChangeDay(this.dateNow);
+                      
+      this.selectImage = "http://localhost:3000/" + this.doctor.image;
+
       
       this.clinicForm.controls['name'].setValue(this.doctor?.name!);
       this.clinicForm.controls['medicalSpecialty'].setValue(this.doctor?.medicalSpecialty); //call get medical từ doctor
@@ -71,7 +84,8 @@ export class MyClinicComponent implements OnInit {
     medicalSpecialty: [ [''], Validators.required],
     address: ['', Validators.required],
     price: [100000, Validators.required],
-    content: [this.longText]
+    content: [this.longText],
+    image: [null]
   })
 
   timeForm = this.builder.group({
@@ -102,6 +116,24 @@ export class MyClinicComponent implements OnInit {
     }
   }
 
+  onSubmitImage(event: Event) {
+    event.preventDefault();
+
+    if (this.imageFile) {
+      const formData = new FormData();
+      formData.append("image", this.imageFile);
+      formData.append("doctorId", this.doctorId);
+  
+      this.doctorService.uploadImage(formData).subscribe((res) => {
+        console.log(res)
+      })
+
+    } else {
+      console.log("No file selected")
+    }
+
+  }
+
   clearInput() {
     this.timeForm.controls['inputTime'].setValue('');
   }
@@ -124,10 +156,42 @@ export class MyClinicComponent implements OnInit {
     }
   }
 
+  removeHourDoctor(event: Event, hour: string) {
+    event.preventDefault();
+    if (this.weekDays) {
+      const day = this.weekDays[this.selectedDate].toISOString();
+      const data = {
+        day,
+        hour
+      }
+
+      this.doctorService.removeHourDoctor(this.doctorId, data).subscribe(() => {
+        console.log("Xóa giờ thành công");
+        this.timeService.removeHour(day, hour);
+      })
+    }
+  }
+
   OnChangeDay(day: Date) {
     this.timeService.changeDay(day.toISOString());
-    console.log("change: ", day.toISOString());
+    // console.log("change: ", day.toISOString());
   }
+  
+  onFileSelect(event: any) {
+    if (event.target.files.length > 0) {
+      this.imageFile = event.target.files[0];
+    }
+    const allowedTypeImage = ["image/png", "image/jpeg", "image/jpg"];
+
+    if (this.imageFile && allowedTypeImage.includes(this.imageFile.type)) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.selectImage = reader.result as string;
+      };
+      reader.readAsDataURL(this.imageFile);
+    }
+  }
+
 
 
 

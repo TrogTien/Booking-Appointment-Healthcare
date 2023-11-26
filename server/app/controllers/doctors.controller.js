@@ -151,6 +151,73 @@ class DoctorsController {
         }
     }
 
+    // [PATCH] /api/doctors/deleteHour/:doctorId
+    removeHourDoctor = async (req, res) => {
+        try {
+            const doctorId = req.params.doctorId;
+            const { day, hour } = req.body;
+
+            const doctor = await Doctor.findById(doctorId);
+
+            if (!doctor) {
+                return res.status(404).json({ message: "Doctor not found"});
+            }
+
+            const availableTimeIndex = doctor.availableTimes.findIndex(item => item.day.toISOString() == day);
+            if (availableTimeIndex === -1) {
+                return res.status(404).json({ message: "Doctor's available time not found for the given day"});
+            }
+
+            const availableTime = doctor.availableTimes[availableTimeIndex];
+
+            if (availableTime.hours.length === 1) {
+                // Nễu chỉ có 1 hour thì xóa cả Object ngày giờ
+                doctor.availableTimes.splice(availableTimeIndex, 1);
+
+            } else if (availableTime.hours.length > 1) {
+                // Chỉ xóa hour đó trong mảng hours
+                const hourIndex = availableTime.hours.findIndex( item => item === hour);
+                if (hourIndex !== -1) {
+                    availableTime.hours.splice(hourIndex, 1);
+                }
+
+            }
+
+            await doctor.save();
+            res.status(200).json({ message: "Hours removed successfully"})
+        }
+        catch (err) {
+            console.log("Err: ", err )
+            res.status(500).send(err)
+        }
+    }
+
+    // [POST] /api/doctors/upload
+    uploadImage = async (req, res) => {
+        if (!req.file) {
+            return res.status(400).send("No file.");
+        }
+
+        const imagePath = 'uploads/' + req.file.filename;
+
+        try {
+            const doctorId = req.body.doctorId;
+            const doctor = await Doctor.findByIdAndUpdate(
+                doctorId,
+                { image: imagePath},
+                { new: true}
+            )
+
+            if (!doctor) {
+                return res.status(404).send("Doctor not found");
+            }
+
+            res.status(200).json("Image uploaded and doctor updated");
+        }
+        catch (err) {
+            res.status(500).send(err);
+        }
+    }
 
     
     

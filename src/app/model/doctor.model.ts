@@ -7,7 +7,8 @@ export class Doctor {
         public address: string,
         public content: string,
         public price: number,
-        public userId: string
+        public userId: string,
+        public image: string
     ) {}
 }
 

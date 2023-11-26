@@ -38,7 +38,6 @@ export class TimeService {
 
   addHour(day: any, hour: string) {
     const indexTime = this.filterAvailableTime.findIndex(time => time.day === day);
-    console.log("index ", this.filterAvailableTime[0].day)
     if (indexTime !== -1) {
       this.filterAvailableTime[indexTime].hours.push(hour);
     } else {
@@ -51,6 +50,23 @@ export class TimeService {
     }
 
     this.availableTimes = this.filterAvailableTime.filter( times => times.day === day);
+  }
+
+  removeHour(day: any, hour: string) {
+    const indexTime = this.filterAvailableTime.findIndex(time => time.day === day);
+    if (indexTime !== -1) {
+      const availableTime = this.filterAvailableTime[indexTime];
+
+      if (availableTime.hours.length === 1) {
+        this.filterAvailableTime = this.filterAvailableTime.filter( time => time.day !== day)
+      } else if (availableTime.hours.length > 1) {
+        
+        const indexHour = availableTime.hours.findIndex(_hour => _hour === hour);
+        availableTime.hours.splice(indexHour, 1);
+      }
+    }
+
+    this.availableTimes = this.filterAvailableTime.filter(times => times.day === day)
   }
 
   
