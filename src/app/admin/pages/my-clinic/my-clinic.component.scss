@@ -1,8 +1,10 @@
 .example-header-image {
-    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    // background-image: url('http://localhost:3000/uploads/1701070333236-OQ6UTW0.jpg');
     background-size: cover;
-    width: 100px;
-    height: 100px;
+    width: 300px;
+    height: 300px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
 }
 
 .time-booking {
@@ -53,4 +55,9 @@ input.example-right-align::-webkit-inner-spin-button {
 
 .add-button {
     margin-top: 10px ;
+}
+
+.button-update {
+    padding: 20px 30px;
+    margin-bottom: 10px;
 }

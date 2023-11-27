@@ -4,9 +4,15 @@
         <mat-card class="mb-3"  >
             <mat-card-header >
                 
-                <div mat-card-avatar  class="example-header-image"></div>
+                <input type="file" (change)="onFileSelect($event)" style="display: none;" #imageInput />
+                <div mat-card-avatar  class="example-header-image"
+                    [ngStyle]="{'background-image': 'url(' + testImage + ')'}"
+                    (click)="openImageInput()"
+                ></div>
+
                 <mat-card-title>
                     <mat-form-field>
+                        <mat-label>Họ tên</mat-label>
                         <input matInput formControlName="name" placeholder="Trọng Tiến">
         
                     </mat-form-field>
@@ -28,15 +34,7 @@
             </mat-card-header>
         </mat-card>
         
-
-        <p class="h6">Chọn ảnh</p>
-        <input type="file" id="image" formControlName="image" (change)="onFileSelect($event)" />
         
-        <div *ngIf="selectImage">
-            <img [src]="selectImage" alt="" width="300px">
-        </div>
-
-        <button mat-raised-button color="primary" (click)="onSubmitImage($event)">Upload</button>
 
     
         <div class="row">
@@ -54,13 +52,18 @@
     
                 </mat-form-field>
     
-                <p class="h6 mt-3">Giá khám: 500.000d</p>
+                <p class="h6 mt-3">Giá khám</p>
                 <mat-form-field floatLabel="always" style="width: 50%;">
                     <input matInput type="number" formControlName="price" class="example-right-align" placeholder="0">
                     <span matTextPrefix>VND&nbsp;</span>
                     <span matTextSuffix>đ</span>
                 </mat-form-field>
-                  
+                <mat-chip-option class="ms-5" [selected]="isActive"
+                    (click)="toggleIsActive()"
+                >
+                    {{ isActive ? "Đang Hiển Thị" : "Đang Ẩn"}}
+                </mat-chip-option>
+  
             </div>
             
             <div class="col-6">
@@ -80,7 +83,7 @@
                 <div class="d-flex">
 
                     <p class="h4 align-self-center">Lịch khám</p>
-                    <div class="mx-3">
+                    <div class="ms-5 me-3">
                         <form [formGroup]="timeForm">
 
                             <mat-form-field class="">
@@ -126,7 +129,7 @@
     
         
     
-        <button type="submit" mat-raised-button>Cập nhật</button>
+        <button type="submit" mat-raised-button class="button-update">Cập nhật</button>
     </form>
 
 

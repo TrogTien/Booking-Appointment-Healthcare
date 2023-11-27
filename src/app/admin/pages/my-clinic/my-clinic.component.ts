@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { AvailableTime, Doctor } from 'src/app/model/doctor.model';
@@ -13,16 +13,20 @@ import { TimeService } from 'src/app/services/time.service';
   styleUrls: ['./my-clinic.component.scss']
 })
 export class MyClinicComponent implements OnInit {
+  @ViewChild('imageInput') imageInput: any;
+
   doctor: Doctor | undefined;
   availableTimes$: Observable<AvailableTime[]> | undefined;
 
   imageFile: File | undefined;
-  selectImage: string = '';
 
+  testImage: string = ''
 
   dateNow: Date = new Date();
 
   doctorId: string = '';
+
+  isActive: boolean = false;
   
   weekDays: Date[] | undefined;
   selectedDate = 0;
@@ -60,8 +64,15 @@ export class MyClinicComponent implements OnInit {
       
       this.timeService.fetchDayTime(this.doctor.availableTimes);      // Time Service
       this.OnChangeDay(this.dateNow);
+      
+      if (this.doctor.image) {
+        this.testImage = "http://localhost:3000/" + this.doctor.image;
+      } else {
+        this.testImage = "http://localhost:3000/uploads/avatarDoctor.jpg"
+      }
+
+      this.isActive = this.doctor.isActive;
                       
-      this.selectImage = "http://localhost:3000/" + this.doctor.image;
 
       
       this.clinicForm.controls['name'].setValue(this.doctor?.name!);
@@ -85,7 +96,6 @@ export class MyClinicComponent implements OnInit {
     address: ['', Validators.required],
     price: [100000, Validators.required],
     content: [this.longText],
-    image: [null]
   })
 
   timeForm = this.builder.group({
@@ -107,17 +117,20 @@ export class MyClinicComponent implements OnInit {
 
   onSubmit() {
     if (this.clinicForm.valid) {
-      this.doctorService.patchDoctor(this.doctorId, this.clinicForm.value).subscribe(() => {
+      const data = {
+        ... this.clinicForm.value,
+        isActive: this.isActive
+      }
+      this.doctorService.patchDoctor(this.doctorId, data).subscribe(() => {
         console.log("Update Successfully");
       })
-      // console.log(this.clinicForm.value)
+      this.onSubmitImage();         //Upload Image
     } else {
       console.warn("Invalid")
     }
   }
 
-  onSubmitImage(event: Event) {
-    event.preventDefault();
+  onSubmitImage() {
 
     if (this.imageFile) {
       const formData = new FormData();
@@ -186,13 +199,20 @@ export class MyClinicComponent implements OnInit {
     if (this.imageFile && allowedTypeImage.includes(this.imageFile.type)) {
       const reader = new FileReader();
       reader.onload = () => {
-        this.selectImage = reader.result as string;
+        this.testImage = reader.result as string;
       };
       reader.readAsDataURL(this.imageFile);
+    } else {
+      console.log("File không hợp lệ")
     }
   }
 
+  openImageInput() {
+    this.imageInput.nativeElement.click();
+  }
 
-
+  toggleIsActive() {
+    this.isActive = !this.isActive
+  }
 
 }

@@ -8,7 +8,8 @@ export class Doctor {
         public content: string,
         public price: number,
         public userId: string,
-        public image: string
+        public image: string,
+        public isActive: boolean = false
     ) {}
 }
 
