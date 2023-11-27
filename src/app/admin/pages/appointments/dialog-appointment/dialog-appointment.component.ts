@@ -18,7 +18,7 @@ export class DialogAppointmentComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     this.doctorService.getDoctor(this.data.doctorId).subscribe(doctor => {
-      this.doctorName = doctor.name;
+      this.doctorName = doctor?.name;
     })
   }
 

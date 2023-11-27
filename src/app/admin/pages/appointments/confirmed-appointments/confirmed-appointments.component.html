@@ -1,0 +1,13 @@
+<ng-container  *ngFor="let item of appointments$ | async; trackBy: trackByFn " >
+    <div @hideAndShow>
+
+        <app-confirmed-item  
+            [appointment]="item"
+            (deleteAppointment)="onDeleteAppointment($event)"
+
+        ></app-confirmed-item>
+        <mat-divider ></mat-divider>
+    </div>
+
+</ng-container>
+

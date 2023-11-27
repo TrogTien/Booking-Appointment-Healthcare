@@ -1,8 +1,19 @@
-<ng-container  *ngFor="let item of appointments$ | async; trackBy: trackByFn " >
-    <div @hideAndShow>
 
-        <app-appointment-item  [appointment]="item"></app-appointment-item>
-        <mat-divider ></mat-divider>
-    </div>
+<nav mat-tab-nav-bar
+color="warn" 
+    [tabPanel]="tabPanel"
+>
+    <a mat-tab-link
+    *ngFor="let link of navLinks"
+    [routerLink]="link.link"
+    routerLinkActive #rla="routerLinkActive"
+    [active]="rla.isActive">
+        {{ link.label }}
+    </a>
+</nav>
+<mat-tab-nav-panel #tabPanel >
+    <router-outlet></router-outlet>
+</mat-tab-nav-panel>
 
-</ng-container>
+
+

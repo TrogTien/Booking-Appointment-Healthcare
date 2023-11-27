@@ -1,0 +1,24 @@
+<mat-card  class="my-3 appointment-card " (click)="openDialog()" >
+    <mat-card-header >
+        <mat-card-title>{{ appointment?.patientName }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-actions class="justify-content-between">
+        <mat-card-subtitle class="ms-2">{{ appointment?.appointmentTime }}, {{ appointment?.day | date: 'dd/MM/YYYY'}}</mat-card-subtitle>
+       
+        
+    </mat-card-actions>
+    
+</mat-card>
+
+<div class="action d-flex flex-row-reverse mb-3">
+    <button mat-raised-button color="warn" class="mx-3" (click)="removeAppointment()">Hủy Lịch Hẹn</button>
+    <button mat-raised-button color="primary"
+        (click)="changeStatus()"
+    >
+        Xác nhận
+    </button>
+
+   
+    
+
+</div>

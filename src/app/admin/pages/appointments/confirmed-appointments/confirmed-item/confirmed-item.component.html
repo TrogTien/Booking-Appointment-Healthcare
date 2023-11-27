@@ -10,13 +10,14 @@
     
 </mat-card>
 
-<div class="action d-flex flex-row-reverse">
-    <button mat-raised-button color="warn" class="btn-delete" (click)="removeAppointment()">Hủy Lịch Hẹn</button>
-    <mat-chip-option class="m-3 chip-status" [selected]="isConfirmed"
-        (click)=" !isConfirmed ? changeStatus( 'đã xác nhận') : changeStatus( 'chưa xác nhận') " 
+<div class="action d-flex flex-row-reverse mb-3">
+    <button mat-raised-button color="warn" class="mx-3" (click)="removeAppointment()">Hủy Lịch Hẹn</button>
+    <button mat-raised-button color="primary"
+        (click)="changeStatus()"
     >
-        {{ isConfirmed ? "Đã Xác Nhận" : "Chưa Xác Nhận"}}
-    </mat-chip-option>
+        Xác nhận đã khám
+    </button>
+    
     
 
 </div>
