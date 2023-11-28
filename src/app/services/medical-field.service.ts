@@ -51,4 +51,8 @@ export class MedicalFieldService {
       this.medicals.splice(index, 1, data);
     })
   }
+
+  uploadImage(formData: FormData) {
+    return this.api.post("medical_fields/upload", formData);
+  }
 }

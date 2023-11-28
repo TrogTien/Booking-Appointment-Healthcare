@@ -14,7 +14,6 @@ export class DialogDoctorComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    
   }
 
   

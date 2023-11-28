@@ -9,17 +9,13 @@ import { DoctorService } from 'src/app/services/doctor.service';
   styleUrls: ['./dialog-appointment.component.scss']
 })
 export class DialogAppointmentComponent implements OnInit {
-  doctorName: string = '';
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: Appointment,
-    private doctorService: DoctorService,
     
   ) {}
   ngOnInit(): void {
-    this.doctorService.getDoctor(this.data.doctorId).subscribe(doctor => {
-      this.doctorName = doctor?.name;
-    })
+   
   }
 
 }

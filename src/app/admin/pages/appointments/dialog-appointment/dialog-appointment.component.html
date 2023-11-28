@@ -2,13 +2,18 @@
 
 <mat-dialog-content>
     <p class="h5">Tên người khám: <span class="van-ban">{{ data.patientName }}</span> </p>
-    <p class="h5">Giới tính: <span class="van-ban">{{ data.gender === 'male' ? 'Nam' : 'Nữ' }}</span> </p>
-    <p class="h5">Điện thoại: <span class="van-ban">{{ data.phone }}</span> </p>
+    <ng-container *ngIf="data.gender">
+    
+        <p class="h5">Giới tính: <span class="van-ban">{{ data.gender === 'male' ? 'Nam' : 'Nữ' }}</span> </p>
+        <p class="h5">Điện thoại: <span class="van-ban">{{ data.phone }}</span> </p>
+    </ng-container>
     <p class="h5">Giờ khám: <span class="van-ban">{{ data.appointmentTime}}, ngày {{ data.day | date: "dd/MM/YYYY" }}</span></p>
     <p class="h5">Nguyên nhân khám: <span class="van-ban">{{ data.symptoms }}</span></p>
-    <p class="h5">Bác sĩ: <span class="van-ban">{{ doctorName }}</span></p>
     <p class="h5">Giá: <span class="van-ban">{{ data.price}}</span></p>
-    <p class="h5">Trạng thái: <span class="van-ban">{{ data.status}}</span></p>
+    <ng-container *ngIf="data.gender">
+    
+        <p class="h5">Trạng thái: <span class="van-ban">{{ data.status}}</span></p>
+    </ng-container>
 
 </mat-dialog-content>
 

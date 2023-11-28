@@ -49,7 +49,7 @@ export class MedicalComponent implements OnInit {
 
   openDialogData(medical: MedicalField) {
     this.dialog.open(DialogComponent, {
-      width: '30%',
+      width: '40%',
       data: medical
     })
   }

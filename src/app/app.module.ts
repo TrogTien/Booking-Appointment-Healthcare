@@ -41,6 +41,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 
 import { WebReqInterceptor } from './services/web-req-interceptor';
 import { RequestDoctorComponent } from './pages/request-doctor/request-doctor.component';
+import { DoctorItemComponent } from './pages/doctors/doctor-item/doctor-item.component';
 
 
 
@@ -59,7 +60,8 @@ import { RequestDoctorComponent } from './pages/request-doctor/request-doctor.co
     DoctorDetailComponent,
     BookingComponent,
     PageNotFoundComponent,
-    RequestDoctorComponent
+    RequestDoctorComponent,
+    DoctorItemComponent
   ],
   imports: [
     BrowserModule,

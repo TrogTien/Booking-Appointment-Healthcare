@@ -16,6 +16,10 @@ export class DoctorDetailComponent implements OnInit {
   availableTimes$: Observable<AvailableTime[]> | undefined;
   selected = 0;
 
+  imageUrl: string = '';
+
+  sortTime: AvailableTime[] = [];
+
   longText = `The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog
   from Japan. A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was
   originally bred for hunting.The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog
@@ -45,7 +49,12 @@ export class DoctorDetailComponent implements OnInit {
 
   passDataToTimeService(): void {
     this.doctor$?.subscribe( doctor => {
-
+      if (doctor.image) {
+        this.imageUrl = "http://localhost:3000/" + doctor.image;
+      } else {
+        this.imageUrl = "http://localhost:3000/uploads/avatarDoctor.jpg"
+      }
+      this.sortTime = this.sortAvailableTimes(doctor.availableTimes); // Sort
       this.timeService.fetchDayTime(doctor.availableTimes) ;
       console.log("OnInit: ",this.timeService.availableTimes)
 
@@ -61,6 +70,17 @@ export class DoctorDetailComponent implements OnInit {
     this.authService.checkLogin().subscribe(() => {
       console.log("Check Login")
     })
+  }
+
+  sortAvailableTimes(availableTimes: AvailableTime[]): AvailableTime[] {
+    return availableTimes.sort((a, b) => {
+      // Chuyển đổi ngày thành đối tượng Date
+      const dateA = new Date(a.day);
+      const dateB = new Date(b.day);
+
+      // So sánh ngày và trả về kết quả tăng dần
+      return dateA.getTime() - dateB.getTime();
+    });
   }
 
 

@@ -28,7 +28,6 @@ const AppointmentSchema = new mongoose.Schema({
     },
     symptoms: {
         type: String,
-        required: true
     },
     status: {
         type: String,

@@ -2,6 +2,9 @@
 
 <mat-dialog-content>
     <p class="h5">Tên Bác sĩ: <span class="van-ban">{{ dataDoctor.name }}</span> </p>
+    <p class="h5">Chuyên Khoa: <span class="van-ban">{{ dataDoctor.medicalSpecialty }}</span> </p>
+    <p class="h5">Địa chỉ: <span class="van-ban">{{ dataDoctor.address }}</span> </p>
+    <p class="h5">Giá khám: <span class="van-ban">{{ dataDoctor.price | currency:"VND" }}</span> </p>
   
 
 </mat-dialog-content>

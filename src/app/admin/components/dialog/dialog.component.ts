@@ -13,6 +13,8 @@ import { MedicalField } from 'src/app/model/medical_field.model';
 })
 export class DialogComponent implements OnInit {
   medicalId: string = '';
+  imageUrl: string = '';
+  imageFile: File | undefined;
 
   constructor(
     private builder: FormBuilder,
@@ -28,6 +30,9 @@ export class DialogComponent implements OnInit {
       this.medicalForm.controls['name'].setValue(this.editData.name);
       this.medicalForm.controls['description'].setValue(this.editData.description);
     
+      if (this.editData.image) {
+        this.imageUrl = "http://localhost:3000/" + this.editData.image;
+      }
     }
   }
   
@@ -38,15 +43,37 @@ export class DialogComponent implements OnInit {
 
   onSubmit() {
     if (this.editData) {
-      this.updateMedical()
+      this.updateMedical();
+      this.onSubmitImage();
     } else {
       this.addMedical()
     }
   }
 
+  onSubmitImage() {
+
+    if (this.imageFile) {
+      const formData = new FormData();
+      formData.append("image", this.imageFile);
+      formData.append("medicalId", this.medicalId);
+  
+      this.medicalService.uploadImage(formData).subscribe((res) => {
+        console.log(res)
+      })
+
+    } else {
+      console.log("No file selected")
+    }
+
+  }
+
   addMedical() {
-    if (this.medicalForm.valid) {
-      this.medicalService.addMedical(this.medicalForm.value)
+    if (this.medicalForm.valid && this.imageFile) {
+      const formData = new FormData();
+      formData.append("name", this.medicalForm.controls.name.value!);
+      formData.append("description", this.medicalForm.controls.description.value!);
+      formData.append("image", this.imageFile);
+      this.medicalService.addMedical(formData)
       this.dialogRef.close()
     } else {
       alert('Invalid');
@@ -66,4 +93,22 @@ export class DialogComponent implements OnInit {
       alert('Invalid')
     }
   }
+
+  onFileSelect(event: any) {
+    if (event.target.files.length > 0) {
+      this.imageFile = event.target.files[0];
+    }
+    const allowedTypeImage = ["image/png", "image/jpeg", "image/jpg"];
+
+    if (this.imageFile && allowedTypeImage.includes(this.imageFile.type)) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.imageUrl = reader.result as string;
+      };
+      reader.readAsDataURL(this.imageFile);
+    } else {
+      console.log("File không hợp lệ")
+    }
+  }
+
 }

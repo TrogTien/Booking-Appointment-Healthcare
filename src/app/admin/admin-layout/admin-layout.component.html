@@ -8,9 +8,7 @@
         <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
         <mat-icon>favorite</mat-icon>
         </button>
-        <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-        <mat-icon>share</mat-icon>
-        </button>
+        
     </mat-toolbar>
 
     <mat-sidenav-container class="example-container">
@@ -24,38 +22,50 @@
                 </mat-list-item>
                 <mat-divider></mat-divider>
 
-                <mat-list-item [routerLink]="'/admin/my-clinic'">
-                    <mat-icon matListItemIcon>folder</mat-icon>
-                    <div matListItemTitle>Phòng khám của tôi</div>
+                
+                <ng-container *ngIf="(role$ | async) === 'doctor'">
+                    
+                    <mat-list-item [routerLink]="'/admin/my-clinic'">
+                        <mat-icon matListItemIcon>folder</mat-icon>
+                        <div matListItemTitle>Phòng khám của tôi</div>
+    
+                    </mat-list-item>
+                    <mat-divider></mat-divider>
 
-                </mat-list-item>
-                <mat-divider></mat-divider>
+                    <mat-list-item [routerLink]="'/admin/appointments'">
+                        <mat-icon matListItemIcon>access_time</mat-icon>
+                        <div matListItemTitle>Appointments</div>
+    
+                    </mat-list-item>
+                    <mat-divider></mat-divider>
 
-                <mat-list-item [routerLink]="'/admin/doctors'">
-                    <mat-icon matListItemIcon>recent_actors</mat-icon>
-                    <div matListItemTitle>Doctors</div>
 
-                </mat-list-item>
-                <mat-divider></mat-divider>
+                </ng-container>
 
-                <mat-list-item [routerLink]="'/admin/appointments'">
-                    <mat-icon matListItemIcon>access_time</mat-icon>
-                    <div matListItemTitle>Appointments</div>
+                
+                <ng-container *ngIf="(role$ | async) === 'admin'">
+                    <mat-list-item [routerLink]="'/admin/doctors'">
+                        <mat-icon matListItemIcon>recent_actors</mat-icon>
+                        <div matListItemTitle>Doctors</div>
+    
+                    </mat-list-item>
+                    <mat-divider></mat-divider>
 
-                </mat-list-item>
-                <mat-divider></mat-divider>
+                    <mat-list-item [routerLink]="'/admin/medical'">
+                        <mat-icon matListItemIcon>create</mat-icon>
+                        <div matListItemTitle>Medical Field</div>
+                    </mat-list-item>
+                    <mat-divider></mat-divider>
+                    
+                    <mat-list-item [routerLink]="'/admin/request-doctor'">
+                        <mat-icon matListItemIcon>create</mat-icon>
+                        <div matListItemTitle>Request Doctor</div>
+                    </mat-list-item>
+                    <mat-divider></mat-divider>
 
-                <mat-list-item [routerLink]="'/admin/medical'">
-                    <mat-icon matListItemIcon>create</mat-icon>
-                    <div matListItemTitle>Medical Field</div>
-                </mat-list-item>
-                <mat-divider></mat-divider>
+                </ng-container>
 
-                <mat-list-item [routerLink]="'/admin/request-doctor'">
-                    <mat-icon matListItemIcon>create</mat-icon>
-                    <div matListItemTitle>Request Doctor</div>
-                </mat-list-item>
-                <mat-divider></mat-divider>
+
 
               </mat-list>
 

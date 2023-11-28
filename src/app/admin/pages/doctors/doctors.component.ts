@@ -37,7 +37,7 @@ export class DoctorsComponent implements OnInit {
   }
 
   trackByFn(index: number, doctor: Doctor) {
-    return doctor._id;
+    return doctor._id + doctor.image;
   }
 
 }

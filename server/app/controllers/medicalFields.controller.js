@@ -26,16 +26,37 @@ class MedicalFieldsController {
     
 
     // [POST] /api/medical_fields
-    createMedicalField(req, res) {
-        const medicalField = new MedicalField( req.body );
-        medicalField.save()
-            .then(doc => {
-                res.send(doc);
+    createMedicalField = async (req, res) => {
+        try {
+            const { name, description } = req.body;
+            const imagePath = 'uploads/' + req.file.filename;
+
+            const newMedical = new MedicalField({
+                name,
+                description,
+                image: imagePath
             })
-            .catch(err => {
-                res.send(err)
-            })
+
+            await newMedical.save();
+
+            res.status(200).send(newMedical);
+        }
+        catch (err) {
+            res.status(500).send(err)
+        }
+
     }
+
+    // createMedicalField(req, res) {
+    //     const medicalField = new MedicalField( req.body );
+    //     medicalField.save()
+    //         .then(doc => {
+    //             res.send(doc);
+    //         })
+    //         .catch(err => {
+    //             res.send(err)
+    //         })
+    // }
 
     // [PATCH] /api/medical_fields/:medicalFieldId
     updateMedicalField(req, res) {
@@ -56,6 +77,34 @@ class MedicalFieldsController {
                 res.send(removedDoc)
             }) 
     }
+
+    // [POST] /api/medical_fields/upload
+    uploadImage = async (req, res) => {
+        if (!req.file) {
+            return res.status(400).send("No file.");
+        }
+
+        const imagePath = 'uploads/' + req.file.filename;
+
+        try {
+            const medicalId = req.body.medicalId;
+            const medical = await MedicalField.findByIdAndUpdate(
+                medicalId,
+                { image: imagePath},
+                { new: true}
+            )
+
+            if (!medical) {
+                return res.status(404).send("Medical not found");
+            }
+
+            res.status(200).json("Image uploaded and medical field updated");
+        }
+        catch (err) {
+            res.status(500).send(err);
+        }
+    }
+
 
     
 

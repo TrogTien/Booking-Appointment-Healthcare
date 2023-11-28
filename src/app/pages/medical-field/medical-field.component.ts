@@ -12,7 +12,7 @@ export class MedicalFieldComponent implements OnInit {
   doctors: Doctor[] = [];
   medical: string = "Nhi khoa";
 
-  typesOfShoes: string[] = ['Nhi khoa', 'Thần kinh học', 'Tim mạch', 'Nha khoa', 'Da liễu'];
+  typesOfShoes: string[] = ['Nhi khoa', 'Thần kinh học', 'Tim mạch', 'Da liễu'];
   longText = `Trưởng khoa Khám bệnh, Bệnh viện Đa khoa Quốc tế Thu Cúc
   Nguyên chủ nhiệm khoa thần kinh, Bệnh viện Hữu Nghị Việt Xô
   Bác sĩ có 40 năm kinh nghiệm làm việc chuyên khoa Nội Thần kinh

@@ -6,7 +6,10 @@
         <mat-card class="mb-3"  >
             <mat-card-header >
                 
-                <div mat-card-avatar  class="example-header-image"></div>
+                <div mat-card-avatar  class="example-header-image"
+                    [ngStyle]="{'background-image': 'url(' + imageUrl + ')'}"
+                    
+                ></div>
                 <mat-card-title>{{ doctor.name }}</mat-card-title>
                 <mat-card-subtitle>{{ doctor.medicalSpecialty }}</mat-card-subtitle>
                 
@@ -19,7 +22,7 @@
         <mat-form-field>
             <mat-label>Chọn ngày</mat-label>
             <mat-select [(value)]="selected">
-                <ng-container *ngFor="let item of doctor.availableTimes; index as i">
+                <ng-container *ngFor="let item of sortTime; index as i">
     
                     <mat-option 
                         [value]="i"

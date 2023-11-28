@@ -7,21 +7,10 @@
         <mat-icon matSuffix>search</mat-icon>
     </mat-form-field>
 
-    <ng-container *ngFor="let doctor of doctors">
-        <mat-card class="mb-3" [routerLink]="['/doctors', doctor._id]">
-            <mat-card-header class="justify-content-between">
-                
-                <div mat-card-avatar  class="example-header-image"></div>
-                <mat-card-title>{{ doctor.name }}</mat-card-title>
-                <mat-card-subtitle>{{ doctor.medicalSpecialty[0] }}</mat-card-subtitle>
-                <div >
-                    <p>Giá khám: {{doctor.price | currency:"VND"}}</p>
-                    <p>Địa chỉ: {{doctor.address}}</p>
-                </div>
-            </mat-card-header>
-        </mat-card>
+    <div *ngFor="let doctor of doctors" @hideAndShow>
+        <app-doctor-item [doctorItem]="doctor"></app-doctor-item>
 
-    </ng-container>
+    </div>
 
     <app-footer></app-footer>
 

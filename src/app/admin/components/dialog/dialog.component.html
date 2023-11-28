@@ -14,6 +14,16 @@
             <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
 
         </mat-form-field>
+        <div class="mb-3">
+            <p class="h6">Chọn ảnh</p>
+
+            <input type="file" (change)="onFileSelect($event)"  #imageInput />
+            <ng-container *ngIf="imageUrl">
+
+                <img [src]="imageUrl" alt="" width="250px" class="mt-2">
+            </ng-container>
+        </div>
+
 
         <button mat-raised-button type="submit"  color="primary" 
             class="btn-submit"
