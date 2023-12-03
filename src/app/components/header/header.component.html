@@ -1,11 +1,11 @@
 <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
     <div class="col-md-3 mb-2 mb-md-0">
-      <a  class="d-inline-flex link-body-emphasis text-decoration-none p-3  ">
-        Logo
+      <a [routerLink]="'/home'" class="d-inline-flex link-body-emphasis text-decoration-none p-3  ">
+        <img class="logo" src="assets/images/booking.png" alt="" >
       </a>
     </div>
 
-    <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+    <ul class="nav col-6  mb-2 justify-content-center mb-md-0">
       <li><a [routerLink]="'/home'" class="nav-link px-2" routerLinkActive="link-info">Trang chủ</a></li>
       <li><a [routerLink]="'/doctors'" class="nav-link px-2" routerLinkActive="link-info">Bác Sĩ</a></li>
       <li><a [routerLink]="'/medical-field'" class="nav-link px-2" routerLinkActive="link-info">Chuyên khoa</a></li>

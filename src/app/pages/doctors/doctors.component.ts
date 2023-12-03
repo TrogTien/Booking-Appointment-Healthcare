@@ -56,6 +56,9 @@ export class DoctorsComponent implements OnInit {
     this.searchTerm$.next(this.searchTerm);
   }
 
+  trackByFn(index: number, doctor: Doctor) {
+    return doctor._id;
+  }
   
 
 }

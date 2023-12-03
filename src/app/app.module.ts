@@ -42,6 +42,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { WebReqInterceptor } from './services/web-req-interceptor';
 import { RequestDoctorComponent } from './pages/request-doctor/request-doctor.component';
 import { DoctorItemComponent } from './pages/doctors/doctor-item/doctor-item.component';
+import { MedicalItemComponent } from './pages/medical-field/medical-item/medical-item.component';
 
 
 
@@ -61,7 +62,8 @@ import { DoctorItemComponent } from './pages/doctors/doctor-item/doctor-item.com
     BookingComponent,
     PageNotFoundComponent,
     RequestDoctorComponent,
-    DoctorItemComponent
+    DoctorItemComponent,
+    MedicalItemComponent
   ],
   imports: [
     BrowserModule,

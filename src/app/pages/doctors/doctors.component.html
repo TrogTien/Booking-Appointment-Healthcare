@@ -1,13 +1,12 @@
 <div class="container">
     <app-header></app-header>
-    <p >{{ role$ | async }}</p>
     <mat-form-field appearance="outline" >
         <mat-label>Tìm kiếm Bác Sĩ</mat-label>
         <input matInput placeholder="Tên Bác Sĩ" [(ngModel)]="searchTerm" (input)="onSearch()">
         <mat-icon matSuffix>search</mat-icon>
     </mat-form-field>
 
-    <div *ngFor="let doctor of doctors" @hideAndShow>
+    <div *ngFor="let doctor of doctors; trackBy: trackByFn" @hideAndShow>
         <app-doctor-item [doctorItem]="doctor"></app-doctor-item>
 
     </div>

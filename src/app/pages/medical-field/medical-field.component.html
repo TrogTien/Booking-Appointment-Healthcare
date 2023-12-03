@@ -5,38 +5,39 @@
         <mat-drawer mode="side" opened>
             
             <mat-selection-list #shoes [multiple]="false">
-                <mat-list-option *ngFor="let shoe of typesOfShoes" [value]="shoe" (click)="onChangeMedical(shoe)" >
-                {{shoe}}
+                <mat-list-option *ngFor="let shoe of medicals" [value]="shoe" (click)="onChangeMedical(shoe._id)" >
+                {{shoe.name}}
                 </mat-list-option>
             </mat-selection-list>
-            
         </mat-drawer>
         <mat-drawer-content>
-    
-            <ng-container *ngFor="let item of doctors;">
-                <mat-card class="example-card">
-                    <mat-card-header>
-                        <img mat-card-lg-image src="https://material.angular.io/assets/img/examples/shiba2.jpg"  alt="Image of a Shiba Inu">
-                        <mat-card-title-group class="ps-3 justify-content-between">
-                            <div class="col-6">
-    
-                                <mat-card-title>Bác sĩ {{item.name}}</mat-card-title>
-                                <mat-card-subtitle>Hà Nội</mat-card-subtitle>
-                                <br>
-                                <mat-card-subtitle *ngFor="let specialty of item.medicalSpecialty">{{specialty}}</mat-card-subtitle>
-                            </div>
-                            <div class="col-6">
-                                <p>Giá: {{item.price}}</p>
-                                <p>Địa chỉ: {{item.address}}</p>
-                            </div>
-                        </mat-card-title-group>
-                    </mat-card-header>
-                    <mat-card-content class="pt-3">
-                    {{longText}}
-                    </mat-card-content>
-                </mat-card>
-    
+            <ng-container *ngIf="medical">
+
+                <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                  <div class="col-6 p-4 d-flex flex-column position-static">
+                    <strong class="d-inline-block mb-2 text-primary-emphasis">{{medical.name}}</strong>
+                    <p class="card-text mb-auto">
+                        {{medical.description}}
+                    </p>
+                    
+                  </div>
+                  <div class="col-6  ">
+                    <img class="img-medical" [src]="medicalImage" alt="">
+                  </div>
+                </div>
             </ng-container>
+              
+            <div *ngIf="doctors.length > 0; else noDoctors" >
+
+                <ng-container *ngFor="let item of doctors;">
+                    <app-medical-item [doctorItem]="item"></app-medical-item>
+        
+                </ng-container>
+            </div>
+            <ng-template #noDoctors>
+                <!-- Hiển thị thông báo nếu mảng doctors rỗng -->
+                <p>Không có thông tin bác sĩ để hiển thị</p>
+            </ng-template>
 
             
     

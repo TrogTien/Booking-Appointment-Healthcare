@@ -26,7 +26,7 @@
                 <ng-container *ngIf="(role$ | async) === 'doctor'">
                     
                     <mat-list-item [routerLink]="'/admin/my-clinic'">
-                        <mat-icon matListItemIcon>folder</mat-icon>
+                        <mat-icon matListItemIcon>person_outline</mat-icon>
                         <div matListItemTitle>Phòng khám của tôi</div>
     
                     </mat-list-item>
@@ -58,7 +58,7 @@
                     <mat-divider></mat-divider>
                     
                     <mat-list-item [routerLink]="'/admin/request-doctor'">
-                        <mat-icon matListItemIcon>create</mat-icon>
+                        <mat-icon matListItemIcon>message</mat-icon>
                         <div matListItemTitle>Request Doctor</div>
                     </mat-list-item>
                     <mat-divider></mat-divider>

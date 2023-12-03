@@ -1,6 +1,7 @@
 const { Doctor } = require('../models/Doctor.model');
 const { User } = require('../models/User.model');
 const { RequestDoctor } = require('../models/RequestDoctor.model');
+const { MedicalField } = require('../models/MedicalField.model');
 
 
 // const doctorJson = require('../../config/json/doctors.json')
@@ -26,16 +27,18 @@ class DoctorsController {
         }
     }
 
-    // [GET] /api/doctors/medical?medical=Tim
+    // [GET] /api/doctors/medical/:medicalId
     readDoctorsMedical = async (req, res) => {
         try {
-            const  medical  = req.query.medical;
+            const  medicalId  = req.params.medicalId;
 
-            if (!medical) {
-                return res.status(400).json({err: "Missing medicalSpecialty parameter"})
+            const medicalField = await MedicalField.findById(medicalId);
+
+            if (!medicalField) {
+                return res.status(404).json({err: "Medical field is not found"})
             }
 
-            const doctors = await Doctor.find({ medicalSpecialty: { $in: medical } });
+            const doctors = await Doctor.find({ medicalSpecialty: medicalField.name });
 
             res.status(200).json(doctors)
         }

@@ -1,11 +1,14 @@
 <mat-card class="mb-3" [routerLink]="['/doctors', doctorItem?._id]">
-    <mat-card-header class="justify-content-between">
+    <mat-card-header class="">
         
         <div mat-card-avatar  class="example-header-image"
             [ngStyle]="{'background-image': 'url(' + imageUrl + ')'}"
         ></div>
-        <mat-card-title>{{ doctorItem?.name }}</mat-card-title>
-        <mat-card-subtitle>{{ doctorItem?.medicalSpecialty }}</mat-card-subtitle>
+        <div class="doctor-name">
+            <mat-card-title>{{ doctorItem?.name }}</mat-card-title>
+            <mat-card-subtitle>{{ doctorItem?.medicalSpecialty }}</mat-card-subtitle>
+
+        </div>
         <div >
             <p>Giá khám: {{doctorItem?.price | currency:"VND"}}</p>
             <p>Địa chỉ: {{doctorItem?.address}}</p>

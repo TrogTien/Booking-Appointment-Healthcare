@@ -26,7 +26,7 @@ router.patch('/deleteHour/:doctorId', doctorsController.removeHourDoctor);
 router.patch('/addHour/:doctorId', doctorsController.addHourDoctor);
 
 router.get('/by-user/:userId', doctorsController.readDoctorByUserId);
-router.get('/medical', doctorsController.readDoctorsMedical);
+router.get('/medical/:medicalId', doctorsController.readDoctorsMedical);
 
 router.post('/upload/', upload.single("image"), doctorsController.uploadImage);
 

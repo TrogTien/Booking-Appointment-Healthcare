@@ -55,7 +55,7 @@ export class MedicalComponent implements OnInit {
   }
 
   trackByFn(index: number, medical: MedicalField) {
-    return medical._id;
+    return medical._id + medical.image;
   }
 
 

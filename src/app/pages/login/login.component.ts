@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
           this.roleService.setRole();
           this.router.navigate(['/home']);
         }
-        console.log(res);
+        console.log(res); // Them neu sai thì cảnh báo
       })
     } else {
       console.warn('INVALID')

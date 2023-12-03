@@ -1,19 +1,11 @@
 .example-header-image {
+    background-image: url('http://localhost:3000/uploads/avatarDoctor.jpg');
     background-size: cover;
     width: 100px;
     height: 100px;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
-
 }
 
-
-
-.mat-mdc-card {
-    cursor: pointer;
-}
-
-.doctor-name {
-    margin-left: 30px;
-    margin-right: 100px;
-    min-width: 500px;
+.example-card {
+    margin-bottom: 10px;
 }

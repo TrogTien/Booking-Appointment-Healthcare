@@ -51,54 +51,16 @@
             <p class="title2">Chuyên khoa phổ biến</p>
         
             <app-slider>
-                <div appSliderItem class="col-4">
-                    <img class="rounded medical-field-item " src="assets/images/112457-co-xuong-khop.jpg" alt="" >
-                    <h2 class="text-center">Nha khoa</h2>
-                </div>
-            
-                <div appSliderItem class="col-4">
-                    <img class="rounded medical-field-item " src="assets/images/112457-co-xuong-khop.jpg" alt="" >
-                    <h2 class="text-center">Nha khoa</h2>
-                </div>
-            
-                <div appSliderItem class="col-4">
-                    <img class="rounded medical-field-item " src="assets/images/112457-co-xuong-khop.jpg" alt="" >
-                    <h2 class="text-center">Nha khoa</h2>
+                <ng-container *ngFor="let item of medicals">
                 
-                </div>
-            
-                <div appSliderItem class="col-4">
-                    <img class="rounded medical-field-item " src="assets/images/112457-co-xuong-khop.jpg" alt="" >
-                    <h2 class="text-center">Nha khoa</h2>
+                    <div appSliderItem class="col-4">
+                        <img *ngIf="item.image;" class="rounded medical-field-item " [src]="'http://localhost:3000/' + item.image " alt="" >
+                        <img *ngIf="!item.image;" class="rounded medical-field-item " src="http://localhost:3000/uploads/medical.jpg" alt="" >
+                        <h2 class="text-center">{{item.name}}</h2>
+                    </div>
                 
-                </div>
-            
-                <div appSliderItem class="col-4">
-                    <img class="rounded medical-field-item " src="assets/images/112457-co-xuong-khop.jpg" alt="">
-                    <h2 class="text-center">Nha khoa</h2>
+                </ng-container>
                 
-                </div>
-            
-                <div appSliderItem class="col-4">
-                    <img class="rounded medical-field-item " src="assets/images/112457-co-xuong-khop.jpg" alt="">
-                    <h2 class="text-center">Nha khoa</h2>
-                
-                </div>
-                <div appSliderItem class="col-4">
-                    <img class="rounded medical-field-item " src="assets/images/112457-co-xuong-khop.jpg" alt="">
-                    <h2 class="text-center">Nha khoa</h2>
-                
-                </div>
-                <div appSliderItem class="col-4">
-                    <img class="rounded medical-field-item " src="assets/images/112457-co-xuong-khop.jpg" alt="">
-                    <h2 class="text-center">Nha khoa</h2>
-                
-                </div>
-                <div appSliderItem class="col-4">
-                    <img class="rounded medical-field-item " src="assets/images/112457-co-xuong-khop.jpg" alt="">
-                    <h2 class="text-center">Nha khoa</h2>
-                
-                </div>
             </app-slider>
         </div>
     

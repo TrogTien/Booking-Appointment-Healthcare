@@ -56,8 +56,8 @@ export class DoctorService {
     return this.api.get(`doctors/${doctorId}`);
   }
 
-  getDoctorMedical(query: string): Observable<any> {
-    return this.api.get(`doctors/medical?medical=${query}`)
+  getDoctorMedical(medicalId: string): Observable<any> {
+    return this.api.get(`doctors/medical/${medicalId}`)
   }
 
   patchDoctor(doctorId: string, data: any) {

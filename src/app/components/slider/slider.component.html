@@ -1,6 +1,6 @@
 <div class="slider-container">
     <div class="slides" #slides>
-        <ng-content select="[appSliderItem]" #sliderItem></ng-content>
+        <ng-content  #sliderItem></ng-content>
     </div>
     <div class="controls d-flex justify-content-between">
         <button mat-fab color="primary" (click)="onClickLeft()">

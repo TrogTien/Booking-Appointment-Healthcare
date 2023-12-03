@@ -32,6 +32,10 @@ export class MedicalFieldService {
     return this.api.get('medical_fields')
   }
 
+  getMedical(medicalId: string) {
+    return this.api.get(`medical_fields/${medicalId}`)
+  }
+
   addMedical(data: any) {
     this.api.post('medical_fields', data).subscribe((_data: MedicalField) => {
       this.medicals.push(_data);
