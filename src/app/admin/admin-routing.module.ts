@@ -10,6 +10,7 @@ import { MyClinicComponent } from './pages/my-clinic/my-clinic.component';
 import { UnconfirmedAppointmentsComponent } from './pages/appointments/unconfirmed-appointments/unconfirmed-appointments.component';
 import { ConfirmedAppointmentsComponent } from './pages/appointments/confirmed-appointments/confirmed-appointments.component';
 import { CompletedAppointmentsComponent } from './pages/appointments/completed-appointments/completed-appointments.component';
+import { adminGuard } from '../guards/admin.guard';
 
 const routes: Routes = [
   { 
@@ -17,7 +18,10 @@ const routes: Routes = [
     component: AdminLayoutComponent,
     children: [
       { path: '', component: DashboardComponent},
-      { path: 'doctors', component: DoctorsComponent},
+      { path: 'doctors', component: DoctorsComponent,
+        canActivate: [adminGuard],
+        data: { expectedRoles: ["admin"] }
+      },
       { 
         path: 'appointments', 
         component: AppointmentsComponent,
@@ -27,11 +31,22 @@ const routes: Routes = [
           { path: 'confirmed', component: ConfirmedAppointmentsComponent},
           { path: 'completed', component: CompletedAppointmentsComponent},
 
-        ]
+        ],
+        canActivate: [adminGuard],
+        data: { expectedRoles: ["doctor"] }
       },
-      { path: 'medical', component: MedicalComponent},
-      { path: 'request-doctor', component: RequestDoctorComponent},
-      { path: 'my-clinic', component: MyClinicComponent}
+      { path: 'medical', component: MedicalComponent,
+        canActivate: [adminGuard],
+        data: { expectedRoles: ["admin"] }
+      },
+      { path: 'request-doctor', component: RequestDoctorComponent,
+        canActivate: [adminGuard],
+        data: { expectedRoles: ["admin"] }
+      },
+      { path: 'my-clinic', component: MyClinicComponent,
+        canActivate: [adminGuard],
+        data: { expectedRoles: ["doctor"] }
+      }
     ]
   }
 ];

@@ -31,8 +31,12 @@ const routes: Routes = [
   },
   { path: 'doctors', component: DoctorsComponent},
   { path: 'doctors/:doctorId', component: DoctorDetailComponent},
+  { path: 'medical-field/:medicalId', component: MedicalFieldComponent},
   { path: 'medical-field', component: MedicalFieldComponent},
-  { path: 'request-doctor', component: RequestDoctorComponent},
+  { path: 'request-doctor', component: RequestDoctorComponent,     
+    canActivate: [authGuard]
+},
+  
   {
     path: 'admin',
     loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule),

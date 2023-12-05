@@ -27,22 +27,34 @@
 
     &:hover {
         transform: scale(1.05, 1.05);
+        
     }
 }
 
 [appSliderItem] {
     flex-shrink: 0;
     padding: 0 10px;
+    transition: 250ms all ease-in-out;
+    cursor: pointer;
+    transform: scale(0.9);
+
+    &:hover {
+        transform: scale(1.0, 1.0);
+    }
     
     img.medical-field-item {
         width: 100%;
         height: 250px;
         object-fit: cover;
+
+        
+
     }
 }
 
-.custom {
-    background-color: #4caf50; /* Màu nền */
-    color: #fff; /* Màu chữ */
-    /* Các thuộc tính CSS khác */
-  }
+.line {
+    height: 6px;
+    border-radius: 15px;
+    background-color: #0dcaf0;
+    width: 100%;
+}

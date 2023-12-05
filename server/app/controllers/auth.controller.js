@@ -13,6 +13,11 @@ class AuthController {
         try {
             const { username, password, email, birthday } = req.body
 
+            const existingUser = await User.findOne({ email });
+            if (existingUser) {
+                return res.status(400).json("Email đã tồn tại");
+            }
+
             const salt = await bcrypt.genSalt(10);
             const hashedPassword = await bcrypt.hash(password, salt);
 

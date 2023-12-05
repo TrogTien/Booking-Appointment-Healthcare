@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { NgToastService } from 'ng-angular-popup';
 import { Observable } from 'rxjs';
 import { AvailableTime, Doctor } from 'src/app/model/doctor.model';
 import { AuthService } from 'src/app/services/auth.service';
@@ -41,7 +42,9 @@ export class MyClinicComponent implements OnInit {
     private doctorService: DoctorService,
     private authService: AuthService,
     private medicalService: MedicalFieldService,
-    private timeService: TimeService
+    private timeService: TimeService,
+    private toast: NgToastService,
+
 
   ) {}
 
@@ -116,17 +119,18 @@ export class MyClinicComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.clinicForm.valid) {
+    if (this.clinicForm.valid && this.clinicForm.touched) {
       const data = {
         ... this.clinicForm.value,
         isActive: this.isActive
       }
       this.doctorService.patchDoctor(this.doctorId, data).subscribe(() => {
         console.log("Update Successfully");
+        this.showSuccess()
       })
       this.onSubmitImage();         //Upload Image
-    } else {
-      console.warn("Invalid")
+    } else if (this.clinicForm.invalid) {
+      this.showError()
     }
   }
 
@@ -214,6 +218,14 @@ export class MyClinicComponent implements OnInit {
 
   toggleIsActive() {
     this.isActive = !this.isActive
+  }
+
+  showSuccess() {
+    this.toast.success({ detail: "Thành công", summary: "Cập nhật thông tin thành công", duration: 2000})
+  }
+
+  showError() {
+    this.toast.error({ detail: "Lỗi", summary: "Một số ô nhập không hợp lệ", duration: 2000})
   }
 
 }

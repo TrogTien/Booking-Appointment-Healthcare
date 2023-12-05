@@ -52,18 +52,18 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     if (this.loginForm.valid) { 
       const { email, password } = this.loginForm.value;
-      this.authService.login(email!, password!).subscribe((res: HttpResponse<any>) => {
+      this.authService.login(email!, password!).subscribe({
+        next: (res: HttpResponse<any>) => {
           if (res.status === 200) {
             this.roleService.setRole();
             this.showSuccess();
             this.router.navigate(['/home']);
           }
-          console.log(res); // Them neu sai thì cảnh báo
         },
-        err => {
-          this.showError(err.error)
+        error: (err) => {
+          this.showError(err.error);
         }
-      )
+      })
     } else {
       console.warn('INVALID')
     }

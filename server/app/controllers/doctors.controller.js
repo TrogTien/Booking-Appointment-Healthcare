@@ -3,6 +3,8 @@ const { User } = require('../models/User.model');
 const { RequestDoctor } = require('../models/RequestDoctor.model');
 const { MedicalField } = require('../models/MedicalField.model');
 
+const { removeOldAvailableTimes } = require('../../util/autoRemoveTimes')
+
 
 // const doctorJson = require('../../config/json/doctors.json')
 
@@ -48,14 +50,17 @@ class DoctorsController {
     }
 
     // [GET] /api/doctors/:doctorId
-    readDoctor(req, res) {
-        Doctor.findOne({
-            _id: req.params.doctorId
-        }).then(doc => {
-            res.send(doc)
-        }).catch(err => {
+    readDoctor = async (req, res) => {
+        try {
+            const doctor = await Doctor.findOne({ _id: req.params.doctorId});
+            const newDoctor = await removeOldAvailableTimes(doctor);
+
+            res.status(200).send(newDoctor);
+        }
+        catch (err) {
             res.status(404).send(err)
-        })
+        }
+       
     }
 
     // [GET] /api/doctors/by-user/:userId
@@ -107,6 +112,9 @@ class DoctorsController {
             .then(() => {
                 res.send({ message: "Updated Doctor successfully"})
             })
+            .catch(err => {
+                res.status(500).send(err)
+            }) 
     }
 
     // [DELETE] /api/doctors/:doctorId

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { map } from 'rxjs';
 import { Doctor } from 'src/app/model/doctor.model';
 import { MedicalField } from 'src/app/model/medical_field.model';
 import { DoctorService } from 'src/app/services/doctor.service';
@@ -27,11 +29,26 @@ export class MedicalFieldComponent implements OnInit {
   constructor(
     private roleService: RoleService,
     private doctorService: DoctorService,
-    private medicalService: MedicalFieldService
+    private medicalService: MedicalFieldService,
+    private route: ActivatedRoute,
+    private router: Router
+
   ) {}
 
   ngOnInit(): void {
     // this.roleService.setRole();
+    this.route.paramMap.subscribe(params => {
+      const _medicalId = params.get('medicalId');
+      if (_medicalId) {
+        this.onChangeMedical(_medicalId);
+      }
+    })
+
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        window.scrollTo(0,0)
+      }
+    })
     
     this.medicalService.getAllMedical().subscribe((_medicals)=> {  // Get medical to select
       this.medicals = _medicals;
@@ -50,7 +67,11 @@ export class MedicalFieldComponent implements OnInit {
         this.medicalImage = "http://localhost:3000/uploads/medical.jpg"
       }
     })
-    this.doctorService.getDoctorMedical(_medicalId).subscribe(_doctors => {       // Show list doctors
+    this.doctorService.getDoctorMedical(_medicalId).pipe(
+      map(doctors => doctors.filter((doctor: Doctor) => {
+        return doctor.isActive === true
+      }))
+    ).subscribe(_doctors => {       // Show list doctors
       this.doctors = _doctors
     })
   }

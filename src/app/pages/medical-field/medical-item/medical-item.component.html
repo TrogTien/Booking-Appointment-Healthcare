@@ -1,4 +1,4 @@
-<mat-card class="example-card">
+<mat-card class="example-card" [routerLink]="['/doctors', doctorItem?._id]">
     <mat-card-header>
         <div mat-card-avatar  class="example-header-image"
             [ngStyle]="{'background-image': 'url(' + imageUrl + ')'}"
@@ -13,8 +13,8 @@
                 <mat-card-subtitle *ngFor="let specialty of doctorItem?.medicalSpecialty">{{specialty}}</mat-card-subtitle>
             </div>
             <div class="col-6">
-                <p>Giá: {{doctorItem?.price}}</p>
-                <p>Địa chỉ: {{doctorItem?.address}}</p>
+                <p class="price">Giá: {{doctorItem?.price | currency: "VND" : ''  }} VND</p>
+                <p class="address"> <b>Địa chỉ:</b>  {{doctorItem?.address}}</p>
             </div>
         </mat-card-title-group>
     </mat-card-header>

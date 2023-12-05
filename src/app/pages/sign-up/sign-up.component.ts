@@ -2,6 +2,7 @@ import { HttpResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NgToastService } from 'ng-angular-popup';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -15,7 +16,9 @@ export class SignUpComponent {
   constructor(
     private builder: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private toast: NgToastService,
+
   ) {}
 
   signupForm = this.builder.group({
@@ -27,11 +30,15 @@ export class SignUpComponent {
 
   onSignUp() {
     if (this.signupForm.valid) {
-      this.authService.register(this.signupForm.value).subscribe((res: HttpResponse<any>) => {
-        if (res.status === 200) {
-          this.router.navigate(['/home'])
+      this.authService.register(this.signupForm.value).subscribe({
+        next: (res: HttpResponse<any>) => {
+          if (res.status === 200) {
+            this.router.navigate(['/home'])
+          }
+        },
+        error: (err) => {
+          this.showError(err.error);
         }
-        console.log(res)
       })
     } else {
       console.warn('Invalid')
@@ -46,11 +53,16 @@ export class SignUpComponent {
 
     return formControl.hasError('email') ? 'Email không hợp lệ' : '';
 
-    
     // if (this.email.hasError('required')) {
     //   return 'Không được để trống';
     // }
 
     // return this.email.hasError('email') ? 'Email không hợp lệ' : '';
   }
+
+  showError(message: string) {
+    this.toast.error({ detail: "Lỗi", summary: message, duration: 2000 })
+  }
 }
+
+

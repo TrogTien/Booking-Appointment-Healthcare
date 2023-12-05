@@ -3,6 +3,7 @@ import { MedicalField } from 'src/app/model/medical_field.model';
 import { ApiService } from 'src/app/services/api.service';
 import { MedicalFieldService } from 'src/app/services/medical-field.service';
 import { NgToastService } from 'ng-angular-popup';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -15,7 +16,8 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private medicalService: MedicalFieldService,
-    private toast: NgToastService 
+    private toast: NgToastService,
+    private router: Router 
 
   ) {}
 
@@ -29,6 +31,8 @@ export class HomeComponent implements OnInit {
   showSuccess() {
     this.toast.success({detail:"SUCCESS",summary:'Your Success Message', duration:2000});
   }
+
+  
   
 
 }

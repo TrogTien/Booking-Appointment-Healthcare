@@ -18,5 +18,32 @@
 
 
 .mat-drawer-content {
-    min-height: 1000px;
+    min-height: 800px;
+}
+
+.empty {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    mat-icon {
+        font-size: 80px;
+        height: 80px;
+        width: 80px;
+    }
+   
+}
+
+.text-empty {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+
+
+.medical-not-doctors {
+    text-align: center;
+    margin-top: 100px;
+    font-size: 20px;
 }

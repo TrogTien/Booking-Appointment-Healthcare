@@ -10,7 +10,7 @@
                 <p>Giá cả phù hợp, Nhân viên tư vấn nhiệt tình</p>
             </div>
             <div>
-                <button (click)="showSuccess()" type="button" class="btn btn-info bg-opacity-50 bg-gradient ms-3 px-5 py-2" >Đặt lịch hẹn</button>
+                <button  type="button" class="btn btn-info bg-opacity-50 bg-gradient ms-3 px-5 py-2" >Đặt lịch hẹn</button>
             </div>
         </div>
         <div class="right-banner col-4">
@@ -46,14 +46,14 @@
                 <p>Tới phòng khám đúng như lịch hẹn với bác sĩ</p>
             </div>
         </div>
-    
+        <div class="line"></div>
         <div class="medical-field py-4">
             <p class="title2">Chuyên khoa phổ biến</p>
         
             <app-slider>
                 <ng-container *ngFor="let item of medicals">
                 
-                    <div appSliderItem class="col-4">
+                    <div appSliderItem class="col-4" [routerLink]="['/medical-field', item._id]">
                         <img *ngIf="item.image;" class="rounded medical-field-item " [src]="'http://localhost:3000/' + item.image " alt="" >
                         <img *ngIf="!item.image;" class="rounded medical-field-item " src="http://localhost:3000/uploads/medical.jpg" alt="" >
                         <h2 class="text-center">{{item.name}}</h2>
@@ -63,6 +63,7 @@
                 
             </app-slider>
         </div>
+        <div class="line"></div>
     
         <div class="doctors py-4">
             <p class="title2">Bác sĩ nổi bật</p>

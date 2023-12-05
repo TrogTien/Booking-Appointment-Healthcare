@@ -1,6 +1,6 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
-import { Observable, Subject, debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
+import { Observable, Subject, debounceTime, distinctUntilChanged, filter, map, switchMap } from 'rxjs';
 import { Doctor } from 'src/app/model/doctor.model';
 import { DoctorService } from 'src/app/services/doctor.service';
 import { RoleService } from 'src/app/services/role.service';
@@ -34,7 +34,12 @@ export class DoctorsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.doctorService.getAllDoctor().subscribe( _doctors => {
+    this.doctorService.getAllDoctor().pipe(
+      map(doctors => doctors.filter((doctor: Doctor) => {
+        return doctor.isActive === true
+      }))
+     
+    ).subscribe( _doctors => {
       this.doctors = _doctors;
     })
 
@@ -44,7 +49,9 @@ export class DoctorsComponent implements OnInit {
       debounceTime(300),
       distinctUntilChanged(),
       switchMap(term => {
-        return this.doctorService.getAllDoctor(term)
+        return this.doctorService.getAllDoctor(term).pipe(
+          map(doctors => doctors.filter((doctor: Doctor) => doctor.isActive === true))
+        )
       })
     ).subscribe(_doctors => {
       this.doctors = _doctors;

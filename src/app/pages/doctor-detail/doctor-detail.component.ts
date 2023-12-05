@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Observable, map, switchMap } from 'rxjs';
 import { AvailableTime, Doctor } from 'src/app/model/doctor.model';
 import { AuthService } from 'src/app/services/auth.service';
@@ -32,7 +32,8 @@ export class DoctorDetailComponent implements OnInit {
     private doctorService: DoctorService,
     private _route: ActivatedRoute,
     private timeService: TimeService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -40,6 +41,12 @@ export class DoctorDetailComponent implements OnInit {
       map((params) => params.get('doctorId')),
       switchMap((doctorId) => this.doctorService.getDoctor(doctorId!))
     )
+
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        window.scrollTo(0,0);
+      }
+    })
 
     this.passDataToTimeService();
 
