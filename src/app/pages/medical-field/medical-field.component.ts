@@ -13,7 +13,7 @@ import { RoleService } from 'src/app/services/role.service';
 export class MedicalFieldComponent implements OnInit {
   doctors: Doctor[] = [];
 
-  medicals: MedicalField[] = []; // get medical từ medical
+  medicals: MedicalField[] | undefined; // get medical từ medical
   medical: MedicalField | undefined;
 
   medicalImage: string = ''

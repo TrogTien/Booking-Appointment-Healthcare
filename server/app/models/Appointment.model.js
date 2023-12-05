@@ -34,11 +34,11 @@ const AppointmentSchema = new mongoose.Schema({
         required: true
     },
     doctorId: {
-        type: mongoose.Types.ObjectId,
+        type: mongoose.Types.ObjectId,              // _id của collection doctor
         required: true
     },
     userId: {
-        type: mongoose.Types.ObjectId,
+        type: mongoose.Types.ObjectId,              // _id của collection user
         required: true
     }
    

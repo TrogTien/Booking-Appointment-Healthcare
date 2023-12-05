@@ -4,6 +4,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AppointmentService } from 'src/app/services/appointment.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { DoctorService } from 'src/app/services/doctor.service';
+import { NgToastService } from 'ng-angular-popup';
+import { MatDialog } from '@angular/material/dialog';
+import { LoadingOverplayComponent } from 'src/app/components/loading-overplay/loading-overplay.component';
 
 @Component({
   selector: 'app-booking',
@@ -16,13 +19,18 @@ export class BookingComponent implements OnInit {
   hour: string = '';
   doctorName: string = '';
 
+  isLoading: boolean = false;
+
   constructor(
     private builder: FormBuilder,
     private route: ActivatedRoute,
     private appointmentService: AppointmentService,
     private authService: AuthService,
     private doctorService: DoctorService,
-    private router: Router
+    private router: Router,
+    private toast: NgToastService,
+    private dialog: MatDialog 
+
 
   ) {}
 
@@ -59,6 +67,7 @@ export class BookingComponent implements OnInit {
 
   onSubmit() {
     if(this.bookingForm.valid) {
+      this.showLoadingOverlay();
       const userId = this.authService.getUserId();
       const data = {
         ... this.bookingForm.value,
@@ -72,7 +81,8 @@ export class BookingComponent implements OnInit {
       }
 
       this.appointmentService.postAppointment(data).subscribe( data => {
-        alert('Đã gửi thông tin, chờ xác nhận');
+        this.dialog.closeAll();
+        this.showSuccess();
         this.router.navigate(['/home']);
       });
       
@@ -80,4 +90,13 @@ export class BookingComponent implements OnInit {
       console.warn('Invalid')
     }
   }
+
+  showSuccess() {
+    this.toast.success({detail:"SUCCESS",summary:'Đã gửi thông tin', duration:2000});
+  }
+
+  showLoadingOverlay() {
+    const dialogRef = this.dialog.open(LoadingOverplayComponent);
+  }
+
 }

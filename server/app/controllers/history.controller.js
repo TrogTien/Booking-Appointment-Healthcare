@@ -1,17 +1,21 @@
+const { Doctor } = require('../models/Doctor.model');
 const { History } = require('../models/History.model');
 
 
 class HistoryController {
 
     // [GET] /api/history
-    readAllHistories(req, res) {
-        History.find()
-            .then(docs => {
-                res.send(docs);
-            })
-            .catch(err => {
-                res.send(err);
-            })
+    readAllHistories = async (req, res) => {
+        try {
+            const _userId = req.user_id;
+            const doctor = await Doctor.findOne({ userId: _userId });
+            const histories = await History.find({ doctorId: doctor._id });
+
+            res.status(200).send(histories);
+        }
+        catch (err) {
+            res.status(500).send(err)
+        }
     }
     
     // [POST] /api/history

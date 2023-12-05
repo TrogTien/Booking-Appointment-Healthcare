@@ -32,7 +32,7 @@ export class AppointmentService {
 
   
   
-  geAllAppointments(): void {
+  getAllAppointments(): void {
     this.api.get('appointments').subscribe(data => {
       this.appointments = data;
     });

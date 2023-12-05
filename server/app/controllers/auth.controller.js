@@ -49,13 +49,13 @@ class AuthController {
             const user = await User.findOne({ email: email});
 
             if (!user) {
-                return res.status(404).json("Incorrect email")
+                return res.status(404).json("Email không chính xác")
             }
 
             const isValidPassword = await bcrypt.compare(password, user.password);
 
             if (!isValidPassword) {
-                return res.status(404).json("Incorrect password")
+                return res.status(404).json("Mật khẩu không chính xác")
             }
             
 

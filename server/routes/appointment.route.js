@@ -6,11 +6,11 @@ const appointmentsController = require('../app/controllers/appointments.controll
 const authMiddleware = require('../app/middleware/auth.middleware')
 
 
-router.get('/:appointmentId', appointmentsController.readAppointment)
+router.get('/:appointmentId', authMiddleware.authenticate, appointmentsController.readAppointment)
 router.patch('/:appointmentId', appointmentsController.updateAppointment)
-router.delete('/:appointmentId', appointmentsController.deleteAppointment)
+router.delete('/:appointmentId', authMiddleware.authenticate, appointmentsController.deleteAppointment)
 
-router.get('/', appointmentsController.readAllAppointment)
+router.get('/', authMiddleware.authenticate, appointmentsController.readAllAppointment)
 router.post('/', authMiddleware.authenticate, appointmentsController.createAppointment)
 
 

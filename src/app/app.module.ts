@@ -23,6 +23,13 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatSelectModule} from '@angular/material/select';
 import {MatRadioModule} from '@angular/material/radio';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatDialogModule} from '@angular/material/dialog';
+
+
+
+import { NgToastModule } from 'ng-angular-popup' // to be added
+
 
 
 
@@ -43,6 +50,8 @@ import { WebReqInterceptor } from './services/web-req-interceptor';
 import { RequestDoctorComponent } from './pages/request-doctor/request-doctor.component';
 import { DoctorItemComponent } from './pages/doctors/doctor-item/doctor-item.component';
 import { MedicalItemComponent } from './pages/medical-field/medical-item/medical-item.component';
+import { ToastMessageComponent } from './components/toast-message/toast-message.component';
+import { LoadingOverplayComponent } from './components/loading-overplay/loading-overplay.component';
 
 
 
@@ -63,7 +72,9 @@ import { MedicalItemComponent } from './pages/medical-field/medical-item/medical
     PageNotFoundComponent,
     RequestDoctorComponent,
     DoctorItemComponent,
-    MedicalItemComponent
+    MedicalItemComponent,
+    ToastMessageComponent,
+    LoadingOverplayComponent
   ],
   imports: [
     BrowserModule,
@@ -82,7 +93,10 @@ import { MedicalItemComponent } from './pages/medical-field/medical-item/medical
     MatDatepickerModule,
     MatNativeDateModule,
     MatSelectModule,
-    MatRadioModule
+    MatRadioModule,
+    NgToastModule,
+    MatProgressSpinnerModule,
+    MatDialogModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: WebReqInterceptor, multi: true }

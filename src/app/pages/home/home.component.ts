@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MedicalField } from 'src/app/model/medical_field.model';
 import { ApiService } from 'src/app/services/api.service';
 import { MedicalFieldService } from 'src/app/services/medical-field.service';
+import { NgToastService } from 'ng-angular-popup';
+
 
 @Component({
   selector: 'app-home',
@@ -12,7 +14,9 @@ export class HomeComponent implements OnInit {
   medicals: MedicalField[] = []
 
   constructor(
-    private medicalService: MedicalFieldService
+    private medicalService: MedicalFieldService,
+    private toast: NgToastService 
+
   ) {}
 
   ngOnInit(): void {
@@ -22,5 +26,9 @@ export class HomeComponent implements OnInit {
     })
   }
 
+  showSuccess() {
+    this.toast.success({detail:"SUCCESS",summary:'Your Success Message', duration:2000});
+  }
+  
 
 }

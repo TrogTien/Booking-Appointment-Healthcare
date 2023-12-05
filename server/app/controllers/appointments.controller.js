@@ -7,14 +7,17 @@ const nodemailer = require('nodemailer');
 class AppointmentsController {
 
     // [GET] /api/appointments
-    readAllAppointment(req, res) {
-        Appointment.find()
-            .then(docs => {
-                res.send(docs);
-            })
-            .catch(err => {
-                res.send(err);
-            })
+    readAllAppointment = async (req, res) => {
+        try {
+            const _userId = req.user_id;
+            const doctor = await Doctor.findOne({userId: _userId });
+
+            const appointments = await Appointment.find({ doctorId: doctor._id});
+            res.send(appointments)
+        }
+        catch (err) {
+            res.send(err);
+        }
     }
 
     // [GET] /api/appointments/:appointmentId

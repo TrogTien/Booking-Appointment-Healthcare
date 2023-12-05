@@ -164,6 +164,7 @@ export class MyClinicComponent implements OnInit {
       this.doctorService.patchHourDoctor(this.doctorId, data).subscribe(() => {
         console.log("Thêm giờ thành công")
         this.timeService.addHour(day, hour);
+        this.clearInput();
       })
 
     }

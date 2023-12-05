@@ -4,6 +4,8 @@ const router = express.Router()
 const multer = require('multer');
 
 const medicalFieldsController = require('../app/controllers/medicalFields.controller')
+const authMiddleware = require('../app/middleware/auth.middleware');
+
 
 // Upload image
 const storage = multer.diskStorage({
@@ -17,14 +19,14 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-router.post('/upload', upload.single("image"), medicalFieldsController.uploadImage)
+router.post('/upload', upload.single("image"), authMiddleware.authenticate, medicalFieldsController.uploadImage)
 
 router.get('/:medicalFieldId', medicalFieldsController.readMedicalField)
-router.patch('/:medicalFieldId', medicalFieldsController.updateMedicalField)
-router.delete('/:medicalFieldId', medicalFieldsController.deleteMedicalField)
+router.patch('/:medicalFieldId', authMiddleware.authenticate, medicalFieldsController.updateMedicalField)
+router.delete('/:medicalFieldId', authMiddleware.authenticate, medicalFieldsController.deleteMedicalField)
 
 router.get('/', medicalFieldsController.readAllMedicalField)
-router.post('/', upload.single("image"), medicalFieldsController.createMedicalField)
+router.post('/', upload.single("image"), authMiddleware.authenticate, medicalFieldsController.createMedicalField)
 
 
 module.exports = router

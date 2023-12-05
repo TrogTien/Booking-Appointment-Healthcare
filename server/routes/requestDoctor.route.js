@@ -6,11 +6,11 @@ const appointmentsController = require('../app/controllers/requestDoctor.control
 const authMiddleware = require('../app/middleware/auth.middleware')
 
 
-router.get('/:requestDoctorId', appointmentsController.readRequestDoctor)
-router.delete('/:requestDoctorId', appointmentsController.deleteRequestDoctor)
+router.get('/:requestDoctorId', authMiddleware.authenticate, appointmentsController.readRequestDoctor)
+router.delete('/:requestDoctorId', authMiddleware.authenticate, appointmentsController.deleteRequestDoctor)
 
-router.get('/', appointmentsController.readAllRequestDoctor)
-router.post('/', appointmentsController.createRequestDoctor)
+router.get('/', authMiddleware.authenticate, appointmentsController.readAllRequestDoctor)
+router.post('/', authMiddleware.authenticate, appointmentsController.createRequestDoctor)
 
 
 module.exports = router

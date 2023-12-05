@@ -22,7 +22,7 @@ const HistorySchema = new mongoose.Schema({
         required: true
     },
     doctorId: {
-        type: mongoose.Types.ObjectId,
+        type: mongoose.Types.ObjectId,              //_id của collection doctor
         required: true
     },
     userId: {

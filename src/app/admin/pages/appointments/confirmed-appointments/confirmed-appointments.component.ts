@@ -29,7 +29,7 @@ export class ConfirmedAppointmentsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.appointmentService.geAllAppointments();
+    this.appointmentService.getAllAppointments();
     this.appointments$ = this.appointmentService.appointments$.pipe(
       map(items => {
           return items.filter(item => {

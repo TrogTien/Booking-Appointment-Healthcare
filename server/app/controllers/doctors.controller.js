@@ -28,7 +28,7 @@ class DoctorsController {
     }
 
     // [GET] /api/doctors/medical/:medicalId
-    readDoctorsMedical = async (req, res) => {
+    readDoctorsByMedicalId = async (req, res) => {
         try {
             const  medicalId  = req.params.medicalId;
 

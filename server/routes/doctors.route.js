@@ -23,19 +23,19 @@ const upload = multer({ storage: storage });
 
 
 router.patch('/deleteHour/:doctorId', doctorsController.removeHourDoctor);
-router.patch('/addHour/:doctorId', doctorsController.addHourDoctor);
+router.patch('/addHour/:doctorId', authMiddleware.authenticate, doctorsController.addHourDoctor);
 
-router.get('/by-user/:userId', doctorsController.readDoctorByUserId);
-router.get('/medical/:medicalId', doctorsController.readDoctorsMedical);
+router.get('/by-user/:userId', authMiddleware.authenticate, doctorsController.readDoctorByUserId);
+router.get('/medical/:medicalId', doctorsController.readDoctorsByMedicalId);
 
-router.post('/upload/', upload.single("image"), doctorsController.uploadImage);
+router.post('/upload/', upload.single("image"), authMiddleware.authenticate, doctorsController.uploadImage);
 
 router.get('/:doctorId', doctorsController.readDoctor);
-router.patch('/:doctorId', doctorsController.updateDoctor);
-router.delete('/:doctorId', doctorsController.deleteDoctor);
+router.patch('/:doctorId', authMiddleware.authenticate, doctorsController.updateDoctor);
+router.delete('/:doctorId', authMiddleware.authenticate, doctorsController.deleteDoctor);
 
 router.get('/', doctorsController.readAllDoctor);
-router.post('/', doctorsController.createDoctor);
+router.post('/', authMiddleware.authenticate,  doctorsController.createDoctor);
 
 
 module.exports = router;
