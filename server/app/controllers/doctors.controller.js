@@ -10,17 +10,61 @@ const { removeOldAvailableTimes } = require('../../util/autoRemoveTimes')
 
 class DoctorsController {
 
-    // [GET] /api/doctors?search=Tien&page=3&limit=6
-    readAllDoctor = async (req, res) => {
+    // [GET] /api/doctors/allDocuments  phan trang
+    readAllDoctorDocuments = async (req, res) => {
         try {
+            const page = parseInt(req.query.page) || 1;
+            const limit = parseInt(req.query.limit) || 8;
+            const skip = (page - 1) * limit;
+
+            const doctors = await Doctor.find().skip(skip).limit(limit);
+
+            const total = await Doctor.countDocuments();
+
+            const response = {
+                doctors,
+                total,
+                limit,
+                page
+            }
+
+            res.status(200).json(response);
+        }
+        catch (err) {   
+            res.send(err);
+        }
+     
+    }
+
+    // [GET] /api/doctors?search=Tien&page=3&limit=6    phan trang
+    readDoctors = async (req, res) => {
+        try {
+
             const search = req.query.search || "";
+            const page = parseInt(req.query.page) || 1;
+            const limit = parseInt(req.query.limit) || 8;
+            const skip = (page - 1) * limit;
 
-            const doctors = await Doctor.find({ name: {$regex: search, $options: "i"}})
-            
+            const doctors = await Doctor.find({ 
+                name: {$regex: search, $options: "i"},
+                isActive: true
+            })
+                .skip(skip)
+                .limit(limit);
 
-            
+            const total = await Doctor.countDocuments({ 
+                name: { $regex: search, $options: "i" },
+                isActive: true
+            });
 
-            res.status(200).json(doctors);
+            const response = {
+                total,
+                page, 
+                limit,
+                doctors
+            }
+
+            res.status(200).json(response);
 
         } 
         catch (err) {
@@ -29,7 +73,7 @@ class DoctorsController {
         }
     }
 
-    // [GET] /api/doctors/medical/:medicalId
+    // [GET] /api/doctors/medical/:medicalId    phan trang
     readDoctorsByMedicalId = async (req, res) => {
         try {
             const  medicalId  = req.params.medicalId;
@@ -40,9 +84,30 @@ class DoctorsController {
                 return res.status(404).json({err: "Medical field is not found"})
             }
 
-            const doctors = await Doctor.find({ medicalSpecialty: medicalField.name });
+            const page = parseInt(req.query.page) || 1;
+            const limit = parseInt(req.query.limit) || 8;
+            const skip = (page - 1) * limit;
 
-            res.status(200).json(doctors)
+            const doctors = await Doctor.find({ 
+                medicalSpecialty: medicalField.name,
+                isActive: true 
+            })
+                .skip(skip)
+                .limit(limit)
+            
+            const total = await Doctor.countDocuments({
+                medicalSpecialty: medicalField.name,
+                isActive: true
+            })
+
+            const response = {
+                total,
+                page, 
+                limit,
+                doctors
+            }
+
+            res.status(200).json(response)
         }
         catch (err) {
             res.status(500).send(err)

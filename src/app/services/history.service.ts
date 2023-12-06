@@ -14,7 +14,9 @@ export class HistoryService {
     return this.api.post('history', data);
   }
 
-  getAllHistories() {
-    return this.api.get('history');
+  getAllHistories(page?: number, limit?: number) {
+    page = page || 1;
+    limit = limit || 8;
+    return this.api.get(`history?page=${page}&limit=${limit}`);
   }
 }

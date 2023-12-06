@@ -25,6 +25,7 @@ export class MedicalFieldService {
   initState(): void {
     this.getAllMedical().subscribe(data => {
       this.medicals = data
+      console.log(data)
     })
   }
 

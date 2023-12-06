@@ -29,6 +29,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 
 
 import { NgToastModule } from 'ng-angular-popup' // to be added
+import { NgxPaginationModule } from 'ngx-pagination'; // <-- import the module
 
 
 
@@ -96,7 +97,8 @@ import { LoadingOverplayComponent } from './components/loading-overplay/loading-
     MatRadioModule,
     NgToastModule,
     MatProgressSpinnerModule,
-    MatDialogModule
+    MatDialogModule,
+    NgxPaginationModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: WebReqInterceptor, multi: true }

@@ -6,10 +6,13 @@
         <mat-icon matSuffix>search</mat-icon>
     </mat-form-field>
 
-    <div *ngFor="let doctor of doctors; trackBy: trackByFn" @hideAndShow>
-        <app-doctor-item [doctorItem]="doctor"></app-doctor-item>
+    <div *ngFor="let doctor of doctors | paginate: { itemsPerPage: limit, currentPage: page, totalItems: total }; trackBy: trackByFn" >
+        <app-doctor-item [doctorItem]="doctor" @hideAndShow></app-doctor-item>
 
     </div>
+
+    <pagination-controls previousLabel nextLabel (pageChange)="onPageChange($event)"></pagination-controls>
+
 
     <app-footer></app-footer>
 

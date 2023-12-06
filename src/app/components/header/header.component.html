@@ -6,10 +6,10 @@
     </div>
 
     <ul class="nav col-6  mb-2 justify-content-center mb-md-0">
-      <li><a [routerLink]="'/home'" class="nav-link px-2" routerLinkActive="link-info">Trang chủ</a></li>
-      <li><a [routerLink]="'/doctors'" class="nav-link px-2" routerLinkActive="link-info">Bác Sĩ</a></li>
-      <li><a [routerLink]="'/medical-field'" class="nav-link px-2" routerLinkActive="link-info">Chuyên khoa</a></li>
-      <li><a [routerLink]="'/request-doctor'" *ngIf=" isLoggedIn$ | async" class="nav-link px-2" routerLinkActive="link-info">Liên hệ hợp tác</a></li>
+      <li><a [routerLink]="'/home'" class="nav-link " routerLinkActive="header-active">Trang chủ</a></li>
+      <li><a [routerLink]="'/doctors'" class="nav-link " routerLinkActive="header-active">Bác Sĩ</a></li>
+      <li><a [routerLink]="'/medical-field'" class="nav-link " routerLinkActive="header-active">Chuyên khoa</a></li>
+      <li><a [routerLink]="'/request-doctor'" *ngIf=" isLoggedIn$ | async" class="nav-link " routerLinkActive="header-active">Liên hệ hợp tác</a></li>
     </ul>
 
     <div  class="col-md-3 text-end p-3">

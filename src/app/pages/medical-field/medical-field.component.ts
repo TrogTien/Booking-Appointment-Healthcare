@@ -1,3 +1,4 @@
+import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { map } from 'rxjs';
@@ -10,7 +11,16 @@ import { RoleService } from 'src/app/services/role.service';
 @Component({
   selector: 'app-medical-field',
   templateUrl: './medical-field.component.html',
-  styleUrls: ['./medical-field.component.scss']
+  styleUrls: ['./medical-field.component.scss'],
+  animations: [
+    trigger('hideAndShow', [
+      
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate(300, style({opacity: 1}))
+      ])
+    ]),
+  ]
 })
 export class MedicalFieldComponent implements OnInit {
   doctors: Doctor[] = [];
@@ -20,11 +30,10 @@ export class MedicalFieldComponent implements OnInit {
 
   medicalImage: string = ''
 
-
-  longText = `Trưởng khoa Khám bệnh, Bệnh viện Đa khoa Quốc tế Thu Cúc
-  Nguyên chủ nhiệm khoa thần kinh, Bệnh viện Hữu Nghị Việt Xô
-  Bác sĩ có 40 năm kinh nghiệm làm việc chuyên khoa Nhi
-  Bác sĩ khám cho người bệnh dưới 16 tuổi`;
+  // Pagination
+  page: number = 1;
+  total: number = 0;
+  limit: number = 2;
 
   constructor(
     private roleService: RoleService,
@@ -39,7 +48,7 @@ export class MedicalFieldComponent implements OnInit {
     // this.roleService.setRole();
     this.route.paramMap.subscribe(params => {
       const _medicalId = params.get('medicalId');
-      if (_medicalId) {
+      if (_medicalId) {                   // Home route -> medical with medicalId
         this.onChangeMedical(_medicalId);
       }
     })
@@ -58,7 +67,15 @@ export class MedicalFieldComponent implements OnInit {
     
   }
 
-  onChangeMedical(_medicalId: any) {
+  getDoctorsByMedicalId(medicalId: string) {
+    this.doctorService.getDoctorMedical(medicalId, this.page, this.limit).subscribe(res => {       // Show list doctors
+      this.doctors = res.doctors
+      this.total = res.total
+      this.limit = res.limit
+    })
+  }
+
+  onChangeMedical(_medicalId: string) {
     this.medicalService.getMedical(_medicalId).subscribe(medicalItem => {
       this.medical = medicalItem;                                                  // Show image medical
       if (this.medical?.image) {
@@ -67,13 +84,14 @@ export class MedicalFieldComponent implements OnInit {
         this.medicalImage = "http://localhost:3000/uploads/medical.jpg"
       }
     })
-    this.doctorService.getDoctorMedical(_medicalId).pipe(
-      map(doctors => doctors.filter((doctor: Doctor) => {
-        return doctor.isActive === true
-      }))
-    ).subscribe(_doctors => {       // Show list doctors
-      this.doctors = _doctors
-    })
+    
+    this.getDoctorsByMedicalId(_medicalId);
+  }
+
+  onPageChange(newPage: number) {
+    this.page = newPage;
+    this.getDoctorsByMedicalId(this.medical?._id!);
+
   }
 
   

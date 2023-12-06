@@ -1,8 +1,11 @@
-<div *ngFor="let item of doctors$ | async; trackBy: trackByFn" @hideAndShow>
+<div *ngFor="let item of doctors| paginate: { itemsPerPage: limit, currentPage: page, totalItems: total }  ; trackBy: trackByFn" >
 
-        <app-doctor-item
+        <app-doctor-item @hideAndShow
             [doctor]="item"
             (deleteDoctor)="onDeleteDoctor($event)"
         >
         </app-doctor-item>
 </div>
+<br>
+<pagination-controls previousLabel nextLabel (pageChange)="onPageChange($event)"></pagination-controls>
+

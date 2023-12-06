@@ -9,9 +9,7 @@ import { HistoryService } from 'src/app/services/history.service';
   styleUrls: ['./completed-appointments.component.scss'],
   animations: [
     trigger('hideAndShow', [
-      transition(':leave', [
-        animate(300, style({opacity: 0, height: 0}))
-      ]),
+      
       transition(':enter', [
         style({ opacity: 0 }),
         animate(300, style({opacity: 1}))
@@ -22,14 +20,31 @@ import { HistoryService } from 'src/app/services/history.service';
 export class CompletedAppointmentsComponent implements OnInit {
   histories: History[] = [];
 
+  // Pagination
+  page: number = 1;
+  total: number = 0;
+  limit: number = 2;
+
   constructor(
     private historyService: HistoryService
   ) {}
 
   ngOnInit(): void {
-    this.historyService.getAllHistories().subscribe(_histories => {
-      this.histories = _histories;
+    this.getHistories();
+  }
+
+  getHistories() {
+    this.historyService.getAllHistories(this.page, this.limit).subscribe(res => {
+      this.histories = res.histories;
+      this.total = res.total;
+      this.limit = res.limit;
     })
+  }
+
+  onPageChange(newPage: number) {
+    this.page = newPage;
+    this.getHistories();
+
   }
 
   trackByFn(index: number, history: History) {

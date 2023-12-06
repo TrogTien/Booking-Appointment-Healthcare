@@ -26,7 +26,7 @@ class AuthMiddleware {
         const refreshToken = req.headers['x-refresh-token'];
         const userId = req.headers['user-id'];
 
-        UserToken.findOne({ _userId: userId })
+        UserToken.findOne({ _userId: userId, refreshToken })
             .then(userToken => {
                 if (!userToken) {
                     return Promise.reject({

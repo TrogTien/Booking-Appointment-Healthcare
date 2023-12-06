@@ -8,21 +8,20 @@
 }
 
 .time-booking {
-    background-color: #fff8ae;
+    background: linear-gradient(to right, #BCD0E6 , #64e9ff);
+    border-radius: 50px;
+
     color: black;
     font-weight: 500;
-    padding: 10px 15px;
-    margin: 10px 10px 10px 0;
-    display: inline-block;
+    padding: 14px 16px;
+    margin: 10px;
     min-width: 80px;
     text-align: center;
+    display: inline-block;
+    transition: all ease-in-out 250ms;
     cursor: pointer;
 
-    &:hover {
-        box-shadow: 0px 0px 0px 2px #33B0E3 inset;
-        background-color: #f8ef88;
-
-    }
+    
 }
 
 .content-examination li {

@@ -30,11 +30,13 @@ router.get('/medical/:medicalId', doctorsController.readDoctorsByMedicalId);
 
 router.post('/upload/', upload.single("image"), authMiddleware.authenticate, doctorsController.uploadImage);
 
+router.get('/allDocuments', doctorsController.readAllDoctorDocuments);
+
 router.get('/:doctorId', doctorsController.readDoctor);
 router.patch('/:doctorId', authMiddleware.authenticate, doctorsController.updateDoctor);
 router.delete('/:doctorId', authMiddleware.authenticate, doctorsController.deleteDoctor);
 
-router.get('/', doctorsController.readAllDoctor);
+router.get('/', doctorsController.readDoctors);
 router.post('/', authMiddleware.authenticate,  doctorsController.createDoctor);
 
 

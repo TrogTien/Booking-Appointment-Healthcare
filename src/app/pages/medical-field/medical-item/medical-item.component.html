@@ -13,8 +13,8 @@
                 <mat-card-subtitle *ngFor="let specialty of doctorItem?.medicalSpecialty">{{specialty}}</mat-card-subtitle>
             </div>
             <div class="col-6">
-                <p class="price">Giá: {{doctorItem?.price | currency: "VND" : ''  }} VND</p>
-                <p class="address"> <b>Địa chỉ:</b>  {{doctorItem?.address}}</p>
+                <p class="price"><span class="text-secondary">Giá:</span> {{doctorItem?.price | currency: "VND" : ''  }} VND</p>
+                <p class="address"> <span class="text-secondary">Địa chỉ:</span>  {{doctorItem?.address}}</p>
             </div>
         </mat-card-title-group>
     </mat-card-header>

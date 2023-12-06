@@ -1,22 +1,34 @@
 .nav-link {
     color: black;
     font-weight: 500;
-    font-size: 24px;
-    transition: transform ease 50ms;
-    border-bottom: #fff solid 2px;
+    font-size: 20px;
+    padding: 8px 20px;
     cursor: pointer;
 
     &:hover {
-        border-bottom: #0dcaf0 solid 2px;
-        color: #0dcaf0;
+        color: black;
+        background: linear-gradient(to right, #BCD0E6 , #64e9ff);
+        border-radius: 50px;
+        box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+
     }
 }
 
 .logo {
     width: 70px;
     border-radius: 50%;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+    
 }
 
 li {
-    margin: 0 10px;
+    margin: 10px;
+}
+
+.header-active {
+    color: black;
+    background: linear-gradient(to right, #BCD0E6 , #64e9ff);
+    border-radius: 50px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+
 }

@@ -19,6 +19,7 @@ import {MatChipsModule} from '@angular/material/chips';
 import {MatSelectModule} from '@angular/material/select';
 import {MatTabsModule} from '@angular/material/tabs';
 
+import { NgxPaginationModule } from 'ngx-pagination'; // <-- import the module
 
 
 
@@ -83,7 +84,8 @@ import { CompletedItemComponent } from './pages/appointments/completed-appointme
     MatInputModule,
     MatChipsModule,
     MatSelectModule,
-    MatTabsModule
+    MatTabsModule,
+    NgxPaginationModule
   ],
 })
 export class AdminModule { }

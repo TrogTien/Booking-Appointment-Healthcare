@@ -23,8 +23,8 @@ export class DoctorService {
   }
 
   initState(): void {
-    this.getAllDoctor().subscribe(_doctors => {
-      this.doctors = _doctors
+    this.getAllDoctorDocuments().subscribe(res => {
+      this.doctors = res.doctors
     })
   }
 
@@ -40,12 +40,19 @@ export class DoctorService {
     return this.api.patch(`doctors/deleteHour/${doctorId}`, data);
   }
 
-  getAllDoctor(query?: string ): Observable<any> {
-    if (!query) {
-      return this.api.get(`doctors`);
+  getAllDoctor(query?: string, page?: number, limit?: number ): Observable<any> {
+    query = query || '';
+    page = page || 1;
+    limit = limit || 8;
+   
+    return this.api.get(`doctors?search=${query}&page=${page}&limit=${limit}`);
+  }
 
-    }
-    return this.api.get(`doctors?search=${query}`);
+  getAllDoctorDocuments(page?: number, limit?: number) {
+    page = page || 1;
+    limit = limit || 8;
+
+    return this.api.get(`doctors/allDocuments?page=${page}&limit=${limit}`)
   }
 
   getDoctorByUserId(userId: string): Observable<Doctor> {
@@ -56,8 +63,11 @@ export class DoctorService {
     return this.api.get(`doctors/${doctorId}`);
   }
 
-  getDoctorMedical(medicalId: string): Observable<any> {
-    return this.api.get(`doctors/medical/${medicalId}`)
+  getDoctorMedical(medicalId: string, page?: number, limit?: number): Observable<any> {
+    page = page || 1;
+    limit = limit || 8;
+
+    return this.api.get(`doctors/medical/${medicalId}?page=${page}&limit=${limit}`)
   }
 
   patchDoctor(doctorId: string, data: any) {

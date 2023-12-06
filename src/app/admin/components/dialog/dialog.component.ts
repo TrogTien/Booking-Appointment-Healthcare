@@ -25,6 +25,7 @@ export class DialogComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    console.log("OnInit ", this.editData)
     if(this.editData) {
       this.medicalId = this.editData._id;
       this.medicalForm.controls['name'].setValue(this.editData.name);

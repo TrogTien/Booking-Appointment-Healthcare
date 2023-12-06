@@ -1,10 +1,11 @@
-<ng-container  *ngFor="let item of histories; trackBy: trackByFn " >
-    <div @hideAndShow>
+<ng-container  *ngFor="let item of histories | paginate: { itemsPerPage: limit, currentPage: page, totalItems: total }; trackBy: trackByFn " >
 
-        <app-completed-item 
+        <app-completed-item @hideAndShow
             [history]="item"
         ></app-completed-item>
         <mat-divider ></mat-divider>
-    </div>
 
 </ng-container>
+<br>
+<pagination-controls previousLabel nextLabel (pageChange)="onPageChange($event)"></pagination-controls>
+

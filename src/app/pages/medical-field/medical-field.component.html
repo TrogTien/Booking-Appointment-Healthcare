@@ -29,10 +29,13 @@
             <!-- Có danh sách bác sĩ -->
             <div *ngIf="doctors.length > 0;" >
 
-                <ng-container *ngFor="let item of doctors;">
-                    <app-medical-item [doctorItem]="item"></app-medical-item>
+                <ng-container *ngFor="let item of doctors | paginate: { itemsPerPage: limit, currentPage: page, totalItems: total };">
+                    <app-medical-item [doctorItem]="item" @hideAndShow></app-medical-item>
         
                 </ng-container>
+
+                <pagination-controls previousLabel nextLabel (pageChange)="onPageChange($event)"></pagination-controls>
+
             </div>
             <!-- Nếu chưa chọn chuyên khoa-->
             <ng-container *ngIf="!medical">     

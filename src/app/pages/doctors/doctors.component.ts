@@ -11,9 +11,7 @@ import { RoleService } from 'src/app/services/role.service';
   styleUrls: ['./doctors.component.scss'],
   animations: [
     trigger('hideAndShow', [
-      transition(':leave', [
-        animate(300, style({opacity: 0, height: 0}))
-      ]),
+      
       transition(':enter', [
         style({ opacity: 0 }),
         animate(300, style({opacity: 1}))
@@ -26,6 +24,11 @@ export class DoctorsComponent implements OnInit {
   role$: Observable<string> | undefined; 
   searchTerm: string ='';
 
+  // Pagination
+  page: number = 1;
+  total: number = 0;
+  limit: number = 3;
+
   private searchTerm$ = new Subject<string>()
 
   constructor(
@@ -34,14 +37,7 @@ export class DoctorsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.doctorService.getAllDoctor().pipe(
-      map(doctors => doctors.filter((doctor: Doctor) => {
-        return doctor.isActive === true
-      }))
-     
-    ).subscribe( _doctors => {
-      this.doctors = _doctors;
-    })
+    this.getDoctors();
 
     this.role$ = this.roleService.role$
 
@@ -49,18 +45,37 @@ export class DoctorsComponent implements OnInit {
       debounceTime(300),
       distinctUntilChanged(),
       switchMap(term => {
-        return this.doctorService.getAllDoctor(term).pipe(
-          map(doctors => doctors.filter((doctor: Doctor) => doctor.isActive === true))
-        )
+        return this.doctorService.getAllDoctor(term, this.page, this.limit)
       })
-    ).subscribe(_doctors => {
-      this.doctors = _doctors;
+    ).subscribe(response => {
+      this.doctors = response.doctors;
+      this.total = response.total;
+      this.limit = response.limit;
+    })
+  }
+
+  getDoctors(query?: string) {
+    query = query || '';
+
+    this.doctorService.getAllDoctor(query, this.page, this.limit).subscribe( res => {
+      this.doctors = res.doctors;
+      this.total = res.total;
+      this.limit = res.limit;
     })
   }
 
   onSearch() {
     console.log(this.searchTerm)
     this.searchTerm$.next(this.searchTerm);
+  }
+
+  onPageChange(newPage: number) {
+    this.page = newPage;
+    if (!this.searchTerm) {
+      this.getDoctors();
+    } else {
+      this.getDoctors(this.searchTerm);
+    }
   }
 
   trackByFn(index: number, doctor: Doctor) {
