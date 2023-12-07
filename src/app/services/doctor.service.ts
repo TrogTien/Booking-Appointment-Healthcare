@@ -40,7 +40,7 @@ export class DoctorService {
     return this.api.patch(`doctors/deleteHour/${doctorId}`, data);
   }
 
-  getAllDoctor(query?: string, page?: number, limit?: number ): Observable<any> {
+  getAllDoctor(query?: string, page?: number, limit?: number ): Observable<any> { //isActive: true
     query = query || '';
     page = page || 1;
     limit = limit || 8;
@@ -48,7 +48,7 @@ export class DoctorService {
     return this.api.get(`doctors?search=${query}&page=${page}&limit=${limit}`);
   }
 
-  getAllDoctorDocuments(page?: number, limit?: number) {
+  getAllDoctorDocuments(page?: number, limit?: number) {  
     page = page || 1;
     limit = limit || 8;
 

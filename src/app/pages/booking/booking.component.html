@@ -8,7 +8,9 @@
             
                 <mat-card-header >
                         
-                    <div mat-card-avatar  class="example-header-image"></div>
+                    <div mat-card-avatar  class="example-header-image"
+                        [ngStyle]="{'background-image': 'url(' + imageUrl + ')'}"
+                    ></div>
                     <mat-card-title>Phó Giáo sư, Tiến sĩ, Bác sĩ {{doctorName}}</mat-card-title>
                     <mat-card-subtitle>Tiêu hóa</mat-card-subtitle>
                     <mat-card-subtitle>{{ hour }}, ngày {{ day | date: 'dd/MM/yyyy'}}</mat-card-subtitle>

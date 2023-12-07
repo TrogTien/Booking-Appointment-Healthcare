@@ -1,12 +1,12 @@
 <ng-container >
-    <mat-toolbar color="primary">
+    <mat-toolbar color="aqua">
         <button mat-icon-button class="example-icon" (click)="sidenav.toggle()">
         <mat-icon>menu</mat-icon>
         </button>
-        <span>Management</span>
+        <span>Quản lý</span>
         <span class="example-spacer"></span>
-        <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-        <mat-icon>favorite</mat-icon>
+        <button mat-mini-fab color="red" class="home-icon" [routerLink]="['/home']" aria-label="Example icon-button with heart icon">
+        <mat-icon>home</mat-icon>
         </button>
         
     </mat-toolbar>
@@ -34,7 +34,7 @@
 
                     <mat-list-item [routerLink]="'/admin/appointments'">
                         <mat-icon matListItemIcon>access_time</mat-icon>
-                        <div matListItemTitle>Appointments</div>
+                        <div matListItemTitle>Danh sách lịch khám</div>
     
                     </mat-list-item>
                     <mat-divider></mat-divider>
@@ -46,20 +46,20 @@
                 <ng-container *ngIf="(role$ | async) === 'admin'">
                     <mat-list-item [routerLink]="'/admin/doctors'">
                         <mat-icon matListItemIcon>recent_actors</mat-icon>
-                        <div matListItemTitle>Doctors</div>
+                        <div matListItemTitle>Danh sách bác sĩ</div>
     
                     </mat-list-item>
                     <mat-divider></mat-divider>
 
                     <mat-list-item [routerLink]="'/admin/medical'">
                         <mat-icon matListItemIcon>create</mat-icon>
-                        <div matListItemTitle>Medical Field</div>
+                        <div matListItemTitle>Danh sách chuyên khoa</div>
                     </mat-list-item>
                     <mat-divider></mat-divider>
                     
                     <mat-list-item [routerLink]="'/admin/request-doctor'">
                         <mat-icon matListItemIcon>message</mat-icon>
-                        <div matListItemTitle>Request Doctor</div>
+                        <div matListItemTitle>Yêu cầu hợp tác</div>
                     </mat-list-item>
                     <mat-divider></mat-divider>
 

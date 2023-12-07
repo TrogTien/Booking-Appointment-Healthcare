@@ -45,9 +45,10 @@ export class ConfirmedAppointmentsComponent implements OnInit {
   }
 
   onDeleteAppointment(appointmentId: string) {
+    this.appointmentService.appointments = this.appointmentService.appointments.filter(item => item._id !== appointmentId);
+    
     this.appointmentService.deleteAppointment(appointmentId).subscribe(() => {
      
-      this.appointmentService.appointments = this.appointmentService.appointments.filter(item => item._id !== appointmentId);
     })
   }
 }

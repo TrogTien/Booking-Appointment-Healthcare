@@ -8,6 +8,10 @@
 
 .example-card {
     margin-bottom: 10px;
+    // background: linear-gradient(to right, #BCD0E6 , #64e9ff);
+    background: linear-gradient(to right, rgba(188, 208, 230, 0.5), rgba(100, 233, 255, 0.5));
+
+
     cursor: pointer;
 
     .price {

@@ -4,6 +4,8 @@ import { ApiService } from 'src/app/services/api.service';
 import { MedicalFieldService } from 'src/app/services/medical-field.service';
 import { NgToastService } from 'ng-angular-popup';
 import { Router } from '@angular/router';
+import { DoctorService } from 'src/app/services/doctor.service';
+import { Doctor } from 'src/app/model/doctor.model';
 
 
 @Component({
@@ -12,12 +14,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  medicals: MedicalField[] = []
+  medicals: MedicalField[] = [];
+  doctors: Doctor[] = [];
 
   constructor(
     private medicalService: MedicalFieldService,
     private toast: NgToastService,
-    private router: Router 
+    private router: Router,
+    private doctorService: DoctorService 
 
   ) {}
 
@@ -26,11 +30,12 @@ export class HomeComponent implements OnInit {
       this.medicals = _medicals;
       console.log(this.medicals)
     })
+
+    this.doctorService.getAllDoctor('', 1, 8).subscribe(res => {
+      this.doctors = res.doctors;
+    })
   }
 
-  showSuccess() {
-    this.toast.success({detail:"SUCCESS",summary:'Your Success Message', duration:2000});
-  }
 
   
   

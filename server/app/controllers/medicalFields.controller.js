@@ -59,13 +59,37 @@ class MedicalFieldsController {
     // }
 
     // [PATCH] /api/medical_fields/:medicalFieldId
-    updateMedicalField(req, res) {
-        MedicalField.findOneAndUpdate({
-            _id: req.params.medicalFieldId
-        }, { $set: req.body })
-            .then(() => {
-                res.send({ message: "Updated Medical Field successfully"})
-            })
+    updateMedicalField = async (req, res) => {
+        try {
+            const { name, description } = req.body;
+
+            const updateFields = {
+                name,
+                description
+            };
+
+            if (req.file) {
+                const imagePath = 'uploads/' + req.file.filename;
+                updateFields.image = imagePath;
+            }
+
+            const updateMedical = await MedicalField.findOneAndUpdate(
+                { _id: req.params.medicalFieldId},
+                updateFields,
+                { new: true }
+            )
+
+            if (!updateFields) {
+                return res.status(404).json("Medical not found");
+            }
+
+            res.status(200).json(updateMedical)
+
+        }
+        catch (err) {
+            res.status(500).send(err)
+        }
+    
     }
 
     // [DELETE] /api/medical_fields/:medicalFieldId

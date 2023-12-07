@@ -35,6 +35,8 @@ export class UnconfirmedItemComponent implements OnInit {
   }
 
   changeStatus() {
+    this.appointmentService.appointments = this.appointmentService.appointments.filter(item => item._id !== this.appointment?._id)
+
     const newStatus = "đã xác nhận";
     this.isConfirmed = !this.isConfirmed
     if (this.appointment) {
@@ -45,7 +47,7 @@ export class UnconfirmedItemComponent implements OnInit {
 
 
       this.appointmentService.patchAppointment(this.appointment._id, { status: newStatus}).subscribe(() => {
-        this.appointmentService.appointments = this.appointmentService.appointments.filter(item => item._id !== this.appointment?._id)
+        console.log("Đã xác nhận")
       })
 
     }

@@ -51,11 +51,17 @@ export class MedicalFieldService {
   }
 
   updateMedical(id: string, data: any) {
-    this.api.patch(`medical_fields/${id}`, data).subscribe(() => {
+    this.api.patch(`medical_fields/${id}`, data).subscribe((updatedData) => {
+      console.log("data: ", updatedData)
       const index = this.medicals.findIndex(item => item._id == id);
-      this.medicals.splice(index, 1, data);
+      this.medicals.splice(index, 1, updatedData);
     })
   }
+
+  // .subscribe(() => {
+  //   const index = this.medicals.findIndex(item => item._id == id);
+  //   this.medicals.splice(index, 1, data);
+  // })
 
   uploadImage(formData: FormData) {
     return this.api.post("medical_fields/upload", formData);

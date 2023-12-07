@@ -2,13 +2,13 @@
     color: black;
     font-weight: 500;
     font-size: 20px;
-    padding: 8px 20px;
+    padding: 12px 20px;
     cursor: pointer;
 
     &:hover {
         color: black;
         background: linear-gradient(to right, #BCD0E6 , #64e9ff);
-        border-radius: 50px;
+        border-radius: 10px;
         box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
 
     }
@@ -22,13 +22,21 @@
 }
 
 li {
-    margin: 10px;
+    margin: 6px;
 }
 
 .header-active {
     color: black;
     background: linear-gradient(to right, #BCD0E6 , #64e9ff);
-    border-radius: 50px;
+    border-radius: 10px;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
 
+}
+
+.mat-mdc-fab.mat-aqua {
+    background: linear-gradient(to right, #BCD0E6 , #64e9ff);
+}
+
+.mat-mdc-fab.mat-red {
+    background: linear-gradient(to left, #ff4066 , #fff16a);
 }

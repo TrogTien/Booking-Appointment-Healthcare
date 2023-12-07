@@ -1,7 +1,7 @@
 <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
     <div class="col-md-3 mb-2 mb-md-0">
       <a [routerLink]="'/home'" class="d-inline-flex link-body-emphasis text-decoration-none p-3  ">
-        <img class="logo" src="assets/images/booking.png" alt="" >
+        <img class="logo" src="assets/images/logo2.png" alt="" >
       </a>
     </div>
 
@@ -9,13 +9,28 @@
       <li><a [routerLink]="'/home'" class="nav-link " routerLinkActive="header-active">Trang chủ</a></li>
       <li><a [routerLink]="'/doctors'" class="nav-link " routerLinkActive="header-active">Bác Sĩ</a></li>
       <li><a [routerLink]="'/medical-field'" class="nav-link " routerLinkActive="header-active">Chuyên khoa</a></li>
-      <li><a [routerLink]="'/request-doctor'" *ngIf=" isLoggedIn$ | async" class="nav-link " routerLinkActive="header-active">Liên hệ hợp tác</a></li>
+      <li><a [routerLink]="'/request-doctor'" *ngIf="(role$ | async) === 'user'" class="nav-link " routerLinkActive="header-active">Liên hệ hợp tác</a></li>
     </ul>
 
     <div  class="col-md-3 text-end p-3">
-      <button *ngIf=" isLoggedIn$ | async ; else loginBtn" (click)="onLogout()" type="button" class="btn btn-secondary">Đăng xuất</button>
+
+      <button *ngIf="(role$ | async) === 'doctor'" [routerLink]="'/admin'" mat-fab color="aqua" aria-label="Example icon button with a delete icon" class="me-3">
+        <mat-icon>account_circle</mat-icon>
+      </button>
+
+      <button *ngIf="(role$ | async) === 'admin'" [routerLink]="'/admin'" mat-fab color="aqua" aria-label="Example icon button with a delete icon" class="me-3">
+        <mat-icon>settings</mat-icon>
+      </button>
+
+      <button *ngIf=" isLoggedIn$ | async ; else loginBtn" (click)="onLogout()" mat-fab extended color="red">
+        <mat-icon>logout</mat-icon>
+        Đăng xuất
+      </button>
       <ng-template #loginBtn>
-        <button  [routerLink]="'/login'" type="button" class="btn btn-info">Đăng nhập</button>
+        <button [routerLink]="'/login'" mat-fab extended color="aqua">
+          <mat-icon>login</mat-icon>
+          Đăng nhập
+        </button>
       </ng-template>
     
 

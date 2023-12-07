@@ -1,12 +1,15 @@
 .example-header-image {
-    background-image: url('http://localhost:3000/uploads/avatarDoctor.jpg');
     background-size: cover;
     width: 100px;
     height: 100px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+
 }
 
 .mat-mdc-card {
     margin: 1%;
+    background: linear-gradient(to right, rgba(188, 208, 230, 0.5), rgba(100, 233, 255, 0.5));
+
 }
 
 .mat-mdc-form-field {

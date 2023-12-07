@@ -7,5 +7,18 @@
 
 </ng-container>
 <br>
-<pagination-controls previousLabel nextLabel (pageChange)="onPageChange($event)"></pagination-controls>
 
+<ng-container *ngIf="histories.length > 0">
+
+    <pagination-controls previousLabel nextLabel (pageChange)="onPageChange($event)"></pagination-controls>
+</ng-container>
+
+<ng-container *ngIf="histories.length === 0">     
+            
+    <div class="empty d-flex flex-column justify-content-center align-items-center">
+        <mat-icon>info</mat-icon>
+
+        <p class="mt-3 text-empty">Lịch sử trống</p>
+
+    </div>
+</ng-container>

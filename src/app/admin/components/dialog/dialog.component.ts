@@ -25,7 +25,6 @@ export class DialogComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log("OnInit ", this.editData)
     if(this.editData) {
       this.medicalId = this.editData._id;
       this.medicalForm.controls['name'].setValue(this.editData.name);
@@ -83,12 +82,18 @@ export class DialogComponent implements OnInit {
 
   updateMedical() {
     if (this.medicalForm.valid) {
-      const data = {
-        ... this.medicalForm.value,
-        _id: this.medicalId
+      const formData = new FormData();
+      formData.append("name", this.medicalForm.controls.name.value!);
+      formData.append("description", this.medicalForm.controls.description.value!);
+      formData.append("_id", this.medicalId);
+
+      if (this.imageFile) {
+        formData.append("image", this.imageFile);
+        
       }
+
       
-      this.medicalService.updateMedical(this.editData._id, data)
+      this.medicalService.updateMedical(this.editData._id, formData)
       this.dialogRef.close()
     } else {
       alert('Invalid')

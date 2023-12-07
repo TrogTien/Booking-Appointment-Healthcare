@@ -33,6 +33,7 @@ export class SignUpComponent {
       this.authService.register(this.signupForm.value).subscribe({
         next: (res: HttpResponse<any>) => {
           if (res.status === 200) {
+            this.showSuccess();
             this.router.navigate(['/home'])
           }
         },
@@ -62,6 +63,10 @@ export class SignUpComponent {
 
   showError(message: string) {
     this.toast.error({ detail: "Lỗi", summary: message, duration: 2000 })
+  }
+
+  showSuccess() {
+    this.toast.success({ detail: "Thành công", summary: "Đăng ký thành công", duration: 2000})
   }
 }
 

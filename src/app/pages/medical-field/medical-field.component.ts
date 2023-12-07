@@ -46,6 +46,8 @@ export class MedicalFieldComponent implements OnInit {
 
   ngOnInit(): void {
     // this.roleService.setRole();
+   
+
     this.route.paramMap.subscribe(params => {
       const _medicalId = params.get('medicalId');
       if (_medicalId) {                   // Home route -> medical with medicalId
@@ -53,11 +55,6 @@ export class MedicalFieldComponent implements OnInit {
       }
     })
 
-    this.router.events.subscribe(event => {
-      if (event instanceof NavigationEnd) {
-        window.scrollTo(0,0)
-      }
-    })
     
     this.medicalService.getAllMedical().subscribe((_medicals)=> {  // Get medical to select
       this.medicals = _medicals;
@@ -96,7 +93,7 @@ export class MedicalFieldComponent implements OnInit {
 
   
 
-  trackByFn(index: number, doctor: Doctor) {
-    return doctor._id;
+  trackByFn(index: number, medical: MedicalField) {
+    return medical._id;
   }
 }

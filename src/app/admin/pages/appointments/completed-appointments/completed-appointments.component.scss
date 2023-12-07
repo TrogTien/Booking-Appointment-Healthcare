@@ -4,7 +4,7 @@
         font-size: 20px;
 
         .current {
-            background: #3f51b5 !important;
+            background: linear-gradient(to right, #BCD0E6 , #64e9ff) !important;
             border-radius: 50%;
             padding: 4px 8px !important; 
         }
@@ -27,4 +27,23 @@
             margin-right: 0 !important; 
         }
     }
+}
+
+.empty {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    mat-icon {
+        font-size: 60px;
+        height: 60px;
+        width: 60px;
+    }
+   
+}
+
+.text-empty {
+    font-size: 20px;
+    font-weight: 500;
 }

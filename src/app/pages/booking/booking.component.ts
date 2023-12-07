@@ -19,6 +19,8 @@ export class BookingComponent implements OnInit {
   hour: string = '';
   doctorName: string = '';
 
+  imageUrl: string = '';
+
   isLoading: boolean = false;
 
   constructor(
@@ -46,6 +48,12 @@ export class BookingComponent implements OnInit {
 
     this.doctorService.getDoctor(this.doctorId).subscribe( doctor => {
       this.doctorName = doctor.name;
+
+      if (doctor.image) {
+        this.imageUrl = "http://localhost:3000/" + doctor.image;
+      } else {
+        this.imageUrl = "http://localhost:3000/uploads/avatarDoctor.jpg"
+      }
     })
 
   }
@@ -53,7 +61,7 @@ export class BookingComponent implements OnInit {
   bookingForm = this.builder.group({
     patientName: ['', Validators.required],
     gender: ['male', Validators.required],
-    birthday: [new Date(), Validators.required],
+    birthday: [new Date('1995-01-01'), Validators.required],
     phone: ['', Validators.required],
     address: ['', Validators.required],
     symptoms: ['']
@@ -92,11 +100,11 @@ export class BookingComponent implements OnInit {
   }
 
   showSuccess() {
-    this.toast.success({detail:"SUCCESS",summary:'Đã gửi thông tin', duration:2000});
+    this.toast.success({detail:"Thành công",summary:'Đã gửi thông tin', duration:2000});
   }
 
   showLoadingOverlay() {
-    const dialogRef = this.dialog.open(LoadingOverplayComponent);
+    this.dialog.open(LoadingOverplayComponent);
   }
 
 }

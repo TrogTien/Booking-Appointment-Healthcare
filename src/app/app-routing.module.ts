@@ -34,8 +34,9 @@ const routes: Routes = [
   { path: 'medical-field/:medicalId', component: MedicalFieldComponent},
   { path: 'medical-field', component: MedicalFieldComponent},
   { path: 'request-doctor', component: RequestDoctorComponent,     
-    canActivate: [authGuard]
-},
+    canActivate: [authGuard, adminGuard],
+    data: {  expectedRoles: ["user"] }
+  },
   
   {
     path: 'admin',
@@ -50,7 +51,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled'})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

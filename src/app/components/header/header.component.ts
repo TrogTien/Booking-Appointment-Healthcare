@@ -11,6 +11,7 @@ import { RoleService } from 'src/app/services/role.service';
 })
 export class HeaderComponent implements OnInit {
   isLoggedIn$: Observable<boolean> | undefined;
+  role$: Observable<string> | undefined; 
 
   constructor(
     public authService: AuthService,
@@ -19,7 +20,7 @@ export class HeaderComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-
+    this.role$ = this.roleService.role$;
     this.isLoggedIn$ = this.authService.isLoggedIn$
   }
 

@@ -1,5 +1,6 @@
 const { Appointment } = require('../models/Appointment.model');
 const { Doctor } = require('../models/Doctor.model');
+const { History } = require('../models/History.model');
 const { User } = require('../models/User.model');
 
 const nodemailer = require('nodemailer');
@@ -77,23 +78,113 @@ class AppointmentsController {
     }
 
     // [PATCH] /api/appointments/:appointmentId
-    updateAppointment(req, res) {
-        Appointment.findOneAndUpdate({
-            _id: req.params.appointmentId
-        }, { $set: req.body })
-            .then(() => {
-                res.send({ message: "Updated Appointment successfully"})
+    updateAppointment = async (req, res) => {
+        try {
+            const updateAppointment = await Appointment.findOneAndUpdate(
+                { _id: req.params.appointmentId},
+                { $set: req.body },
+                { new: true }
+            )
+
+            if (!updateAppointment) {
+                return res.status(404).json("Appointment not found");
+            }
+
+            const doctor = await Doctor.findById(updateAppointment.doctorId);
+            const user = await User.findById(updateAppointment.userId);
+
+            const day = updateAppointment.day.getDate();
+            const month = updateAppointment.day.getMonth() + 1;
+            const year = updateAppointment.day.getFullYear();
+
+
+            const transporter = nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                    user: 'trongtien372001@gmail.com',
+                    pass: process.env.GMAIL_PASSWORD
+                }
             })
+
+            const options = {
+                from: 'trongtien372001@gmail.com',
+                to: `${user.email}`,
+                subject: `Xác nhận đặt lịch khám bệnh`,
+                text: `Bác sĩ ${doctor.name} đã xác nhận lịch khám của bạn, vui lòng tới phòng khám vào lúc: ${updateAppointment.appointmentTime} - Ngày ${day}/${month}/${year} tại địa chỉ: ${doctor.address}`
+            }
+
+            transporter.sendMail(options, (err, info) => {
+                if (err) {
+                    console.log(err);
+                    res.status(500).send("Internal Server Error");
+                } else {
+                    console.log("Email sent " + info );
+                    res.status(200).send(updateAppointment);
+                }
+            })
+
+
+        }
+        catch (err) {
+            res.status(500).send(err)
+        }
+       
     }
 
     // [DELETE] /api/appointments/:appointmentId
-    deleteAppointment(req, res) {
-        Appointment.findOneAndRemove({
-            _id: req.params.appointmentId
-        })
-            .then(removedDoc => {
-                res.send(removedDoc)
-            }) 
+    deleteAppointment = async (req, res) => {
+        try {
+            const deleteAppointment = await Appointment.findOneAndRemove({_id: req.params.appointmentId});
+            if (!deleteAppointment) {
+                return res.status(404).json("Appointment not found")
+            }
+
+            const history = await History.find({
+                patientName: deleteAppointment.patientName,
+                day: deleteAppointment.day,
+                appointmentTime: deleteAppointment.appointmentTime,
+                doctorId: deleteAppointment.doctorId,
+                userId: deleteAppointment.userId
+            })
+
+            if (history.length > 0) {
+                console.log(history);
+                return res.status(400).json("Don't need to send email."); 
+            }
+
+            const doctor = await Doctor.findById(deleteAppointment.doctorId);
+            const user = await User.findById(deleteAppointment.userId);
+
+            const transporter = nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                    user: 'trongtien372001@gmail.com',
+                    pass: process.env.GMAIL_PASSWORD
+                }
+            })
+
+            const options = {
+                from: 'trongtien372001@gmail.com',
+                to: `${user.email}`,
+                subject: `Hủy lịch khám bệnh`,
+                text: `Lịch của bạn với Bác sĩ ${doctor.name} đã bị hủy. Xin lỗi vì đã làm phiền.`
+            }
+            
+            transporter.sendMail(options, (err, info) => {
+                if (err) {  
+                    console.log(err);
+                    res.status(500).send("Internal Server Error");
+                } else {
+                    console.log("Email sent " + info );
+                    res.status(200).send("Lịch đã bị hủy");
+                }
+            })
+        }
+        catch (err) {
+            res.status(500).send(err)
+        }
+
+       
     }
 
     

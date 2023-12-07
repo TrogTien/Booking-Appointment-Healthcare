@@ -11,7 +11,7 @@
                 ></div>
 
                 <mat-card-title>
-                    <mat-form-field>
+                    <mat-form-field class="name-doctor">
                         <mat-label>Họ tên</mat-label>
                         <input matInput formControlName="name" placeholder="Trọng Tiến">
         
@@ -58,7 +58,7 @@
                     <span matTextPrefix>VND&nbsp;</span>
                     <span matTextSuffix>đ</span>
                 </mat-form-field>
-                <mat-chip-option class="ms-5" [selected]="isActive"
+                <mat-chip-option  class="ms-5" [selected]="isActive"
                     (click)="toggleIsActive()"
                 >
                     {{ isActive ? "Đang Hiển Thị" : "Đang Ẩn"}}

@@ -5,7 +5,10 @@
         <mat-drawer mode="side" opened>
             
             <mat-selection-list #shoes [multiple]="false">
-                <mat-list-option *ngFor="let shoe of medicals" [value]="shoe" (click)="onChangeMedical(shoe._id)" >
+                <mat-list-option *ngFor="let shoe of medicals; trackBy: trackByFn" [value]="shoe" 
+                    [routerLink]="['/medical-field', shoe._id]" 
+                    [selected]="shoe._id === medical?._id"
+                >
                 {{shoe.name}}
                 </mat-list-option>
             </mat-selection-list>

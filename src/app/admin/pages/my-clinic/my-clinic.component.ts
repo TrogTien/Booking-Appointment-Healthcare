@@ -202,6 +202,7 @@ export class MyClinicComponent implements OnInit {
     const allowedTypeImage = ["image/png", "image/jpeg", "image/jpg"];
 
     if (this.imageFile && allowedTypeImage.includes(this.imageFile.type)) {
+      this.clinicForm.markAsTouched();
       const reader = new FileReader();
       reader.onload = () => {
         this.testImage = reader.result as string;

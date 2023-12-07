@@ -41,6 +41,8 @@ export class RequestDoctorComponent implements OnInit {
   }
 
   onCreateDoctor(requestDoctor: RequestDoctor) {
+    this.requestDoctors = this.requestDoctors.filter(request => request._id !== requestDoctor._id);
+
     const data = {
       name: requestDoctor.doctorName,
       address: requestDoctor.address,
@@ -48,8 +50,7 @@ export class RequestDoctorComponent implements OnInit {
     }
     this.doctorService.postDoctor(data).subscribe(data => {
       console.log("Tao Bac si thanh cong");
-      this.requestDoctors = this.requestDoctors.filter(request => request._id !== requestDoctor._id);
-
+      
     })
   }
 

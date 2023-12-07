@@ -4,6 +4,8 @@ const { RequestDoctor } = require('../models/RequestDoctor.model');
 const { MedicalField } = require('../models/MedicalField.model');
 
 const { removeOldAvailableTimes } = require('../../util/autoRemoveTimes')
+const nodemailer = require('nodemailer');
+
 
 
 // const doctorJson = require('../../config/json/doctors.json')
@@ -159,8 +161,33 @@ class DoctorsController {
             // xóa requestDoctor
             await RequestDoctor.deleteMany({ userId });
 
+            // Gửi mail
+            const transporter = nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                    user: 'trongtien372001@gmail.com',
+                    pass: process.env.GMAIL_PASSWORD
+                }
+            })
 
-            res.status(200).json("Doctor has been created")
+            const options = {
+                from: 'trongtien372001@gmail.com',
+                to: `${user.email}`,
+                subject: `Phản hồi yêu cầu hợp tác`,
+                text: `Yêu cầu hợp tác của bạn đã xác nhận, hãy đăng nhập và truy cập đường link sau: http://localhost:4200/admin/my-clinic để tạo thông tin phòng khám của bạn.`
+            }
+
+            transporter.sendMail(options, (err, info) => {
+                if (err) {
+                    console.log(err);
+                    res.status(500).send("Internal Server Error");
+                } else {
+                    console.log("Email sent " + info );
+                    res.status(200).json("Doctor has been created")
+                }
+            })
+
+            
 
         }
         catch (err) {

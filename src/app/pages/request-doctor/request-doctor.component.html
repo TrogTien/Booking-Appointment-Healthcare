@@ -50,8 +50,9 @@
 
                 <mat-form-field>
                     <mat-icon matPrefix>add_circle</mat-icon>
-                    <mat-label>Nội dung</mat-label>
+                    <mat-label>Nội dung phòng khám</mat-label>
                     <textarea matInput formControlName="content" style="height: 100px;" ></textarea>
+                    <mat-error *ngIf="requestDoctorForm.controls.content.invalid">{{getErrorMessage(requestDoctorForm.controls.content)}}</mat-error>
 
                 </mat-form-field>
 
