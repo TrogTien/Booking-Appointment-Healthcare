@@ -68,6 +68,12 @@ export class SignUpComponent {
   showSuccess() {
     this.toast.success({ detail: "Thành công", summary: "Đăng ký thành công", duration: 2000})
   }
+
+  onButtonClick(event: Event) {
+    event.preventDefault();
+
+    this.hide = !this.hide;
+  }
 }
 
 

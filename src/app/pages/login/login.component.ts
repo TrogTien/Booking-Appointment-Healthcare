@@ -76,4 +76,10 @@ export class LoginComponent implements OnInit {
   showSuccess() {
     this.toast.success({ detail: "Thành công", summary: "Đăng nhập thành công", duration: 2000})
   }
+
+  onButtonClick(event: Event) {
+    event.preventDefault();
+
+    this.hide = !this.hide;
+  }
 }

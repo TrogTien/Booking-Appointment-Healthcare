@@ -148,7 +148,6 @@ class AppointmentsController {
             })
 
             if (history.length > 0) {
-                console.log(history);
                 return res.status(400).json("Don't need to send email."); 
             }
 

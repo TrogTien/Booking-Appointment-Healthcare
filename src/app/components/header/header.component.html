@@ -14,11 +14,11 @@
 
     <div  class="col-md-3 text-end p-3">
 
-      <button *ngIf="(role$ | async) === 'doctor'" [routerLink]="'/admin'" mat-fab color="aqua" aria-label="Example icon button with a delete icon" class="me-3">
+      <button *ngIf="(role$ | async) === 'doctor'" [routerLink]="'/admin'" mat-fab color="primary" aria-label="Example icon button with a delete icon" class="me-3">
         <mat-icon>account_circle</mat-icon>
       </button>
 
-      <button *ngIf="(role$ | async) === 'admin'" [routerLink]="'/admin'" mat-fab color="aqua" aria-label="Example icon button with a delete icon" class="me-3">
+      <button *ngIf="(role$ | async) === 'admin'" [routerLink]="'/admin'" mat-fab color="primary" aria-label="Example icon button with a delete icon" class="me-3">
         <mat-icon>settings</mat-icon>
       </button>
 
