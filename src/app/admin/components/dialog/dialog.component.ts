@@ -4,6 +4,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { MedicalFieldService } from 'src/app/services/medical-field.service';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MedicalField } from 'src/app/model/medical_field.model';
+import { NgToastService } from 'ng-angular-popup';
 
 
 @Component({
@@ -20,6 +21,8 @@ export class DialogComponent implements OnInit {
     private builder: FormBuilder,
     private medicalService: MedicalFieldService,
     private dialogRef: MatDialogRef<DialogComponent>,
+    private toast: NgToastService,
+
     @Inject(MAT_DIALOG_DATA) public editData: MedicalField
 
   ) {}
@@ -73,10 +76,18 @@ export class DialogComponent implements OnInit {
       formData.append("name", this.medicalForm.controls.name.value!);
       formData.append("description", this.medicalForm.controls.description.value!);
       formData.append("image", this.imageFile);
-      this.medicalService.addMedical(formData)
-      this.dialogRef.close()
+      this.medicalService.addMedical(formData).subscribe({
+        next: (data) => {
+          this.medicalService.medicals.push(data);
+          this.showSuccess()
+          this.dialogRef.close();
+        },
+        error: (err) => {
+          this.showError(err.error);
+        }
+      })
     } else {
-      alert('Invalid');
+      this.showError("Invalid")
     }
   }
 
@@ -115,6 +126,14 @@ export class DialogComponent implements OnInit {
     } else {
       console.log("File không hợp lệ")
     }
+  }
+
+  showSuccess() {
+    this.toast.success({ detail: "Thành công", summary: "Chuyên khoa đã được tạo", duration: 2000})
+  }
+
+  showError(msg: string) {
+    this.toast.error({ detail: "Lỗi", summary: msg, duration: 2000})
   }
 
 }

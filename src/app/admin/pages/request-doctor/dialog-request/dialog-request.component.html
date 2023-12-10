@@ -2,8 +2,9 @@
 
 <mat-dialog-content>
     <p class="h5">Tên Bác sĩ: <span class="van-ban">{{ data.doctorName }}</span> </p>
+    <p class="h5">Ngày sinh: <span class="van-ban">{{ data.birthday | date: 'dd/MM/YYYY' }}</span> </p>
     <p class="h5">Điện thoại: <span class="van-ban">{{ data.phone }}</span> </p>
     <p class="h5">Nội dung: <span class="van-ban">{{ data.content }}</span></p>
-    <p class="h5">Địa chỉ: <span class="van-ban">{{ data.address }}</span></p>
+    <p class="h5">Địa chỉ phòng khám: <span class="van-ban">{{ data.address }}</span></p>
 
 </mat-dialog-content>

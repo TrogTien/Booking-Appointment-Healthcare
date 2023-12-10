@@ -19,4 +19,12 @@ export class HistoryService {
     limit = limit || 8;
     return this.api.get(`history?page=${page}&limit=${limit}`);
   }
+
+  getQuantityPatient() {
+    return this.api.get(`history/quantityPatient`);
+  }
+
+  getAllPatientByAdmin() {
+    return this.api.get(`history/allPatientByAdmin`);
+  }
 }

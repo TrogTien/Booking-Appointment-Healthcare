@@ -38,11 +38,12 @@ export class MedicalFieldService {
   }
 
   addMedical(data: any) {
-    this.api.post('medical_fields', data).subscribe((_data: MedicalField) => {
-      this.medicals.push(_data);
-    })
+    return this.api.post('medical_fields', data);
   }
-
+  
+  // this.api.post('medical_fields', data).subscribe((_data: MedicalField) => {
+  //   this.medicals.push(_data);
+  // })
   removeMedical(id: string) {
     this.api.delete(`medical_fields/${id}`).subscribe(() => {
       const index = this.medicals.findIndex(item => item._id == id);

@@ -14,7 +14,7 @@
                 <mat-card-subtitle>{{ doctor.medicalSpecialty }}</mat-card-subtitle>
                 
             </mat-card-header>
-            <mat-card-content >
+            <mat-card-content  class="fs-6">
                 {{ doctor.content }}
             </mat-card-content>
         </mat-card>
@@ -22,12 +22,12 @@
         <mat-form-field>
             <mat-label>Chọn ngày</mat-label>
             <mat-select [(value)]="selected">
-                <ng-container *ngFor="let item of sortTime; index as i">
+                <ng-container *ngFor="let day of weekDays; index as i">
     
                     <mat-option 
                         [value]="i"
-                        (click)="OnChangeDay(item.day)"
-                    >{{ item.day | date: 'dd/MM/yyyy' }}</mat-option>
+                        (click)="OnChangeDay(day)"
+                    >{{ day | date: 'dd/MM/yyyy' }}</mat-option>
                 </ng-container>
             </mat-select>
         </mat-form-field>
@@ -36,22 +36,29 @@
         <div class="row">
             <div class="col-8">
                 <ng-container *ngIf="availableTimes$ | async as availableTimes">
-                    <a class="time-booking" 
-                        *ngFor="let hour of availableTimes[0].hours"
-                        [routerLink]="['/booking', doctor._id]"
-                        [queryParams]="{ day: availableTimes[0].day , hour: hour }"
-                    >
-                        {{ hour }}
-                    </a>
+                
+                    <ng-container *ngIf=" availableTimes.length > 0; else noTime">
+                        <a class="time-booking" 
+                            *ngFor="let hour of availableTimes[0].hours"
+                            [routerLink]="['/booking', doctor._id]"
+                            [queryParams]="{ day: availableTimes[0].day , hour: hour }"
+                        >
+                            {{ hour }}
+                        </a>
+                    </ng-container>
+
+                    <ng-template #noTime>
+                        <p class="h6">Không có lịch khám</p>
+                    </ng-template>
                 </ng-container>
              
                 
             </div>
             <div class="col-4 ">
                 <ul class="address">
-                    <p class="h6">Địa chỉ khám</p>
+                    <p class="h6">Địa chỉ khám:</p>
                     <p>{{doctor.address}}</p>
-                    <p class="h6">Giá khám: {{doctor.price | currency: "VND"}}</p>
+                    <p class="h6">Giá khám: {{doctor.price | currency: "VND" : ''}} VND</p>
 
                 </ul>
             </div>

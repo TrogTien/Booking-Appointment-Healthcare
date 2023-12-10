@@ -218,6 +218,7 @@ export class MyClinicComponent implements OnInit {
   }
 
   toggleIsActive() {
+    this.clinicForm.markAsTouched();
     this.isActive = !this.isActive
   }
 

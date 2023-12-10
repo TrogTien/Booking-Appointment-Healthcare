@@ -18,6 +18,9 @@ const RequestDoctorSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    birthday: {
+        type: Date
+    },
     userId: {
         type: mongoose.Types.ObjectId,
         required: true

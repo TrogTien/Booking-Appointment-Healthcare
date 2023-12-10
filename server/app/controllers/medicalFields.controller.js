@@ -37,12 +37,23 @@ class MedicalFieldsController {
                 image: imagePath
             })
 
-            await newMedical.save();
+            newMedical.save()
+                .then(() => {
+                    res.status(200).send(newMedical);
 
-            res.status(200).send(newMedical);
+                })
+                .catch(err => {
+                    console.log(err);
+                    if (err.code === 11000) {
+                        res.status(500).json("Tên chuyên khoa đã tồn tại")
+                    } else {
+                        res.status(500).send(err)
+                    }
+                })
+
         }
         catch (err) {
-            res.status(500).send(err)
+            res.send(err)
         }
 
     }

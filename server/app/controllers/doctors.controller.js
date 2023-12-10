@@ -210,13 +210,29 @@ class DoctorsController {
     }
 
     // [DELETE] /api/doctors/:doctorId
-    deleteDoctor(req, res) {
-        Doctor.findOneAndRemove({
-            _id: req.params.doctorId
-        })
-            .then(removedDoc => {
-                res.send(removedDoc)
-            }) 
+    deleteDoctor = async (req, res) => {
+        try {
+            const removeDoctor = await Doctor.findOneAndRemove({ _id: req.params.doctorId });
+            if (!removeDoctor) {
+                return res.status(404).json("Doctor not found")
+            }
+
+            const userId = removeDoctor.userId;
+            const user = await User.findById(userId);
+
+            if (!user) {
+                return res.status(404).json("User not found")
+            }
+
+            user.role = "user";
+            await user.save();
+
+            res.status(200).send(removeDoctor)
+        }
+        catch (err) {
+            res.status(500).send(err)
+        }
+
     }
 
     // [PATCH] /api/doctors/addHour/:doctorId

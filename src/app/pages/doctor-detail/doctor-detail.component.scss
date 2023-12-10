@@ -17,13 +17,13 @@
     min-width: 80px;
     text-align: center;
     display: inline-block;
-    transition: all ease-in-out 250ms;
+    transition: all ease-in-out 200ms;
     cursor: pointer;
 
     &:hover {
         background: linear-gradient(to right, #418cd6 , #2ebed7);
         box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
-        
+        color: white;
         transform: scale(1.05, 1.05);
     }
 }

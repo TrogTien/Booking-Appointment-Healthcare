@@ -26,7 +26,7 @@ export class DoctorsComponent implements OnInit {
   // Pagination
   page: number = 1;
   total: number = 0;
-  limit: number = 2;
+  limit: number = 3;
 
   constructor(private doctorService: DoctorService) {}
 

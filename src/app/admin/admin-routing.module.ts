@@ -11,13 +11,19 @@ import { UnconfirmedAppointmentsComponent } from './pages/appointments/unconfirm
 import { ConfirmedAppointmentsComponent } from './pages/appointments/confirmed-appointments/confirmed-appointments.component';
 import { CompletedAppointmentsComponent } from './pages/appointments/completed-appointments/completed-appointments.component';
 import { adminGuard } from '../guards/admin.guard';
+import { DashboardDoctorComponent } from './pages/dashboard-doctor/dashboard-doctor.component';
 
 const routes: Routes = [
   { 
     path: '', 
     component: AdminLayoutComponent,
     children: [
-      { path: '', component: DashboardComponent},
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      { path: 'dashboard', component: DashboardComponent,
+        canActivate: [adminGuard],
+        data: { expectedRoles: ["admin"] }
+      },
+      { path: 'dashboard-doctor', component: DashboardDoctorComponent},
       { path: 'doctors', component: DoctorsComponent,
         canActivate: [adminGuard],
         data: { expectedRoles: ["admin"] }

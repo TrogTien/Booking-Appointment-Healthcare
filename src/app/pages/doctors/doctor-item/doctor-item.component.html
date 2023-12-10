@@ -1,6 +1,5 @@
 <mat-card class="mb-3" [routerLink]="['/doctors', doctorItem?._id]">
     <mat-card-header class="">
-        
         <div mat-card-avatar  class="example-header-image"
             [ngStyle]="{'background-image': 'url(' + imageUrl + ')'}"
         ></div>
@@ -10,8 +9,9 @@
 
         </div>
         <div >
-            <p>Giá khám: {{doctorItem?.price | currency:"VND"}}</p>
-            <p>Địa chỉ: {{doctorItem?.address}}</p>
+            <p class="price"><span class="text-secondary">Giá:</span> {{doctorItem?.price | currency: "VND" : ''}} VND</p>
+            <p class="address"><span class="text-secondary">Địa chỉ:</span>{{doctorItem?.address}}</p>
         </div>
     </mat-card-header>
+    
 </mat-card>

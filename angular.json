@@ -20,6 +20,9 @@
             "outputPath": "dist/bookingcare",
             "index": "src/index.html",
             "main": "src/main.ts",
+            "allowedCommonJsDependencies": [
+              "highcharts"
+            ],
             "polyfills": [
               "zone.js"
             ],

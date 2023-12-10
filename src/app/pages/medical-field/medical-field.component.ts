@@ -33,7 +33,7 @@ export class MedicalFieldComponent implements OnInit {
   // Pagination
   page: number = 1;
   total: number = 0;
-  limit: number = 2;
+  limit: number = 4;
 
   constructor(
     private roleService: RoleService,

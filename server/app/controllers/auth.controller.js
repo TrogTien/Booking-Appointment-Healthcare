@@ -43,7 +43,7 @@ class AuthController {
             }
 
         } catch(err) {
-            res.status(500).json(err)
+            res.status(500).send(err)
         }
     }
 
@@ -54,7 +54,7 @@ class AuthController {
             const user = await User.findOne({ email: email});
 
             if (!user) {
-                return res.status(404).json("Email không chính xác")
+                return res.status(404).json("Email không tồn tại")
             }
 
             const isValidPassword = await bcrypt.compare(password, user.password);

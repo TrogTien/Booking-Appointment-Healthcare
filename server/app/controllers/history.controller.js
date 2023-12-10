@@ -50,6 +50,69 @@ class HistoryController {
         }
     }
 
+    // [GET] /api/quantityPatient
+    countPatientByDoctor = async (req, res) => {
+        try {
+            const doctor = await Doctor.findOne({ userId: req.user_id });
+            const dataQuantityPatient = await History.aggregate([
+                {
+                    $match: { doctorId: doctor._id } // Thêm $match để lọc documents trước khi $group
+                },
+                {
+                    $group: {
+                        _id: {
+                            year: { $year: '$day' },
+                            month: { $month: '$day'}
+                        },
+                        count: { $sum:1 }
+                    },
+
+                },
+                {
+                    $sort: {
+                      '_id.year': 1,
+                      '_id.month': 1,
+                    },
+                },
+                
+            ]);
+            res.status(200).json(dataQuantityPatient);
+        }
+        catch (err) {
+            res.status(500).send(err)
+        }
+    }
+
+    // [GET] /api/allPatientByAdmin
+    countAllPatientByAdmin = async (req, res) => {
+        try {
+            const dataQuantityPatient = await History.aggregate([
+                {
+                    $group: {
+                        _id: {
+                            year: { $year: '$day' },
+                            month: { $month: '$day'}
+                        },
+                        count: { $sum:1 }
+                    },
+
+                },
+                {
+                    $sort: {
+                      '_id.year': 1,
+                      '_id.month': 1,
+                    },
+                },
+                
+            ]);
+
+            res.status(200).json(dataQuantityPatient);
+        }
+        catch (err) {
+            res.status(500).send(err)
+        }
+    }
+
 
     
 

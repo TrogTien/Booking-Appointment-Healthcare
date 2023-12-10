@@ -21,6 +21,7 @@ export class TimeService {
   }
 
   set availableTimes(val: AvailableTime[]) {
+    console.log("val: ",val);
     this._availableTimes.next(val);
   }
 

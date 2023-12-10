@@ -15,15 +15,17 @@
         <mat-sidenav #sidenav mode="side" opened class="example-sidenav">
             
             <mat-list>
-                <mat-list-item [routerLink]="'/admin'">
-                    <mat-icon matListItemIcon>folder</mat-icon>
-                    <div matListItemTitle>Dashboard</div>
-
-                </mat-list-item>
-                <mat-divider></mat-divider>
+                
 
                 
                 <ng-container *ngIf="(role$ | async) === 'doctor'">
+
+                    <mat-list-item [routerLink]="'/admin/dashboard-doctor'">
+                        <mat-icon matListItemIcon>folder</mat-icon>
+                        <div matListItemTitle>Thống kê phòng khám</div>
+    
+                    </mat-list-item>
+                    <mat-divider></mat-divider>
                     
                     <mat-list-item [routerLink]="'/admin/my-clinic'">
                         <mat-icon matListItemIcon>person_outline</mat-icon>
@@ -42,8 +44,15 @@
 
                 </ng-container>
 
-                
                 <ng-container *ngIf="(role$ | async) === 'admin'">
+
+                    <mat-list-item [routerLink]="'/admin'">
+                        <mat-icon matListItemIcon>folder</mat-icon>
+                        <div matListItemTitle>Thống kê</div>
+    
+                    </mat-list-item>
+                    <mat-divider></mat-divider>
+
                     <mat-list-item [routerLink]="'/admin/doctors'">
                         <mat-icon matListItemIcon>recent_actors</mat-icon>
                         <div matListItemTitle>Danh sách bác sĩ</div>

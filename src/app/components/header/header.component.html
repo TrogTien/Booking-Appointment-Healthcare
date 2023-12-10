@@ -1,4 +1,4 @@
-<header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+<header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom ">
     <div class="col-md-3 mb-2 mb-md-0">
       <a [routerLink]="'/home'" class="d-inline-flex link-body-emphasis text-decoration-none p-3  ">
         <img class="logo" src="assets/images/logo2.png" alt="" >
@@ -14,7 +14,7 @@
 
     <div  class="col-md-3 text-end p-3">
 
-      <button *ngIf="(role$ | async) === 'doctor'" [routerLink]="'/admin'" mat-fab color="primary" aria-label="Example icon button with a delete icon" class="me-3">
+      <button *ngIf="(role$ | async) === 'doctor'" [routerLink]="'/admin/dashboard-doctor'" mat-fab color="primary" aria-label="Example icon button with a delete icon" class="me-3">
         <mat-icon>account_circle</mat-icon>
       </button>
 

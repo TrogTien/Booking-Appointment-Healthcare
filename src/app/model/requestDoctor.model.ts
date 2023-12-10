@@ -5,6 +5,7 @@ export class RequestDoctor {
         public phone: string,
         public content: string,
         public address: string,
+        public birthday: Date,
         public userId: string
     ) {}
 }

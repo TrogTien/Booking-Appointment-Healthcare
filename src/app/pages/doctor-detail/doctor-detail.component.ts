@@ -20,6 +20,9 @@ export class DoctorDetailComponent implements OnInit {
 
   sortTime: AvailableTime[] = [];
 
+  weekDays: Date[] | undefined;
+
+
   longText = `The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog
   from Japan. A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was
   originally bred for hunting.The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog
@@ -37,6 +40,9 @@ export class DoctorDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.weekDays = this.getWeekDaysFromNow();  // Create 7 day from now to select
+    console.log(this.weekDays)
+
     this.doctor$ = this._route.paramMap.pipe(
       map((params) => params.get('doctorId')),
       switchMap((doctorId) => this.doctorService.getDoctor(doctorId!))
@@ -52,6 +58,8 @@ export class DoctorDetailComponent implements OnInit {
 
     this.availableTimes$ = this.timeService.availableTimes$;
     
+    
+    
   }
 
   passDataToTimeService(): void {
@@ -63,13 +71,18 @@ export class DoctorDetailComponent implements OnInit {
       }
       this.sortTime = this.sortAvailableTimes(doctor.availableTimes); // Sort
       this.timeService.fetchDayTime(doctor.availableTimes) ;
+
+      const date = new Date();
+      date.setHours(0, 0, 0, 0);
+      this.OnChangeDay(date);
+      
       console.log("OnInit: ",this.timeService.availableTimes)
 
     })
   }
 
   OnChangeDay(day: Date) {
-    this.timeService.changeDay(day);
+    this.timeService.changeDay(day.toISOString());
     console.log("change: ", day);
   }
 
@@ -88,6 +101,18 @@ export class DoctorDetailComponent implements OnInit {
       // So sánh ngày và trả về kết quả tăng dần
       return dateA.getTime() - dateB.getTime();
     });
+  }
+
+  getWeekDaysFromNow(): Date[] {
+    const weekDays = [];
+    for (let i = 0 ; i < 7; i++) {
+      const date = new Date();
+      date.setHours(0, 0, 0, 0);
+      date.setDate(date.getDate() + i);
+      weekDays.push(date);
+    }
+
+    return weekDays;
   }
 
 

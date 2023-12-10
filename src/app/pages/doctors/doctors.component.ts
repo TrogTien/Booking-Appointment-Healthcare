@@ -27,7 +27,7 @@ export class DoctorsComponent implements OnInit {
   // Pagination
   page: number = 1;
   total: number = 0;
-  limit: number = 3;
+  limit: number = 4;
 
   private searchTerm$ = new Subject<string>()
 

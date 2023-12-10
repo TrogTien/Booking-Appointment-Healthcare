@@ -20,6 +20,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatTabsModule} from '@angular/material/tabs';
 
 import { NgxPaginationModule } from 'ngx-pagination'; // <-- import the module
+import { ChartModule } from 'angular-highcharts';
 
 
 
@@ -43,6 +44,7 @@ import { CompletedAppointmentsComponent } from './pages/appointments/completed-a
 import { UnconfirmedItemComponent } from './pages/appointments/unconfirmed-appointments/unconfirmed-item/unconfirmed-item.component';
 import { ConfirmedItemComponent } from './pages/appointments/confirmed-appointments/confirmed-item/confirmed-item.component';
 import { CompletedItemComponent } from './pages/appointments/completed-appointments/completed-item/completed-item.component';
+import { DashboardDoctorComponent } from './pages/dashboard-doctor/dashboard-doctor.component';
 
 
 @NgModule({
@@ -65,7 +67,8 @@ import { CompletedItemComponent } from './pages/appointments/completed-appointme
     CompletedAppointmentsComponent,
     UnconfirmedItemComponent,
     ConfirmedItemComponent,
-    CompletedItemComponent
+    CompletedItemComponent,
+    DashboardDoctorComponent
   ],
   imports: [
     CommonModule,
@@ -85,7 +88,8 @@ import { CompletedItemComponent } from './pages/appointments/completed-appointme
     MatChipsModule,
     MatSelectModule,
     MatTabsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    ChartModule
   ],
 })
 export class AdminModule { }
