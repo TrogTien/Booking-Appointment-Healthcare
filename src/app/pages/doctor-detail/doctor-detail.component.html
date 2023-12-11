@@ -38,13 +38,15 @@
                 <ng-container *ngIf="availableTimes$ | async as availableTimes">
                 
                     <ng-container *ngIf=" availableTimes.length > 0; else noTime">
-                        <a class="time-booking" 
-                            *ngFor="let hour of availableTimes[0].hours"
-                            [routerLink]="['/booking', doctor._id]"
-                            [queryParams]="{ day: availableTimes[0].day , hour: hour }"
-                        >
-                            {{ hour }}
-                        </a>
+                        <ng-container *ngFor="let hour of availableTimes[0].hours">
+
+                        
+                            <app-item-hour
+                                [dayItem]="availableTimes[0].day"
+                                [hourItem]="hour"
+                                [doctorId]="doctor._id"
+                            ></app-item-hour>
+                        </ng-container>
                     </ng-container>
 
                     <ng-template #noTime>

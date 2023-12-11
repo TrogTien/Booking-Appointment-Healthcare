@@ -53,6 +53,7 @@ import { DoctorItemComponent } from './pages/doctors/doctor-item/doctor-item.com
 import { MedicalItemComponent } from './pages/medical-field/medical-item/medical-item.component';
 import { ToastMessageComponent } from './components/toast-message/toast-message.component';
 import { LoadingOverplayComponent } from './components/loading-overplay/loading-overplay.component';
+import { ItemHourComponent } from './pages/doctor-detail/item-hour/item-hour.component';
 
 
 
@@ -75,7 +76,8 @@ import { LoadingOverplayComponent } from './components/loading-overplay/loading-
     DoctorItemComponent,
     MedicalItemComponent,
     ToastMessageComponent,
-    LoadingOverplayComponent
+    LoadingOverplayComponent,
+    ItemHourComponent
   ],
   imports: [
     BrowserModule,

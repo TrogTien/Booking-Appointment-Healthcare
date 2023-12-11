@@ -105,7 +105,7 @@ class AppointmentsController {
             const duplicateAppointments = await Appointment.deleteMany({
                 day: updateAppointment.day,
                 appointmentTime: updateAppointment.appointmentTime,
-            
+                status: "chưa xác nhận"
             })
             
             
@@ -208,7 +208,51 @@ class AppointmentsController {
        
     }
 
+
+    // [GET] /api/appointments/checkIsConfirmed-time?day=...&appointmentTime=...&doctorId =....
+    checkIsConfirmed = async (req, res) => {
+        try {
+            const { day, appointmentTime, doctorId } = req.query;
+
+
+            const appointment = await Appointment.findOne({
+                day,
+                appointmentTime,
+                doctorId,
+                status: 'đã xác nhận',
+            });
+
+            if (appointment) {
+                return res.status(400).json("Thời gian đã có lịch");
+            }
+
+            res.status(200).json("Thời gian chưa được đặt")
+
+        }
+        catch (err) {
+            res.status(500).send(err);
+        }
+    }
     
+
+    // [GET] /api/appointments/countDocument
+    countDocument = async (req, res) => {
+        try {
+            const countDoctors = await Doctor.countDocuments();
+            const countUser = await User.countDocuments();
+            const countHistories = await History.countDocuments();
+
+            res.status(200).json({
+                countDoctors,
+                countUser,
+                countHistories
+            })
+        }
+        catch (err) {
+            res.status(500).send(err)
+        }
+    }
+
 
 }
 

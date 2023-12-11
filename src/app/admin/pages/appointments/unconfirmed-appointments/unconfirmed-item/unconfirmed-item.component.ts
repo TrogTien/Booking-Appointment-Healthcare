@@ -48,7 +48,7 @@ export class UnconfirmedItemComponent implements OnInit {
 
       this.appointmentService.patchAppointment(this.appointment._id, { status: newStatus}).subscribe(() => {
         console.log("Đã xác nhận");
-        this.appointmentService.getAllAppointments();
+        this.appointmentService.getAllAppointments();  
       })
 
     }

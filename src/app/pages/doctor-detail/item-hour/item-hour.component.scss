@@ -1,0 +1,27 @@
+.time-booking {
+    background: linear-gradient(to right, #BCD0E6 , #64e9ff);
+    border-radius: 50px;
+
+    color: black;
+    font-weight: 500;
+    padding: 14px 16px;
+    margin: 10px;
+    min-width: 80px;
+    text-align: center;
+    display: inline-block;
+    transition: all ease-in-out 200ms;
+    cursor: pointer;
+
+    &:not(.disabled-time):hover {
+        background: linear-gradient(to right, #418cd6 , #2ebed7);
+        box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+        color: white;
+        transform: scale(1.05, 1.05);
+    }
+}
+
+.disabled-time {
+    background: linear-gradient(to left, #acb0b4 , #829598);
+    color: white;
+    cursor: not-allowed;
+}

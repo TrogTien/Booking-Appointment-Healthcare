@@ -49,4 +49,12 @@ export class AppointmentService {
   deleteAppointment(id: string) {
     return this.api.delete(`appointments/${id}`);
   }
+
+  checkIsConfirmedAppointment(doctorId: string, day: Date, appointmentTime: string) {
+    return this.api.get(`appointments/checkIsConfirmed-time?day=${day}&appointmentTime=${appointmentTime}&doctorId=${doctorId}`);
+  }
+
+  getQuantityDocument() {
+    return this.api.get(`appointments/countDocument`);
+  }
 }

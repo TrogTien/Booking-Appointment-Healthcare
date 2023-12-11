@@ -1,0 +1,15 @@
+<div *ngIf="isDisabled; else show" class="time-booking" 
+    [ngClass]="{'disabled-time': isDisabled}"  
+    >
+    {{ hourItem }}
+</div>
+
+<ng-template  #show>
+    <div class="time-booking" 
+        [routerLink]="['/booking', doctorId]"
+        [queryParams]="{ day: dayItem , hour: hourItem }"
+        >
+        {{ hourItem }}
+    </div>
+
+</ng-template>

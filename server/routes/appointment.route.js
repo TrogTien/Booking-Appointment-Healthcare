@@ -6,6 +6,10 @@ const appointmentsController = require('../app/controllers/appointments.controll
 const authMiddleware = require('../app/middleware/auth.middleware')
 
 
+router.get('/countDocument', appointmentsController.countDocument)
+
+router.get('/checkIsConfirmed-time', appointmentsController.checkIsConfirmed)
+
 router.get('/:appointmentId', authMiddleware.authenticate, appointmentsController.readAppointment)
 router.patch('/:appointmentId', appointmentsController.updateAppointment)
 router.delete('/:appointmentId', authMiddleware.authenticate, appointmentsController.deleteAppointment)

@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { RoleService } from 'src/app/services/role.service';
 import { Chart } from 'angular-highcharts';
 import { HistoryService } from 'src/app/services/history.service';
+import { AppointmentService } from 'src/app/services/appointment.service';
 
 
 @Component({
@@ -31,15 +32,30 @@ export class DashboardComponent implements OnInit {
 
   totalRevenueChart = new Chart();
 
+  // count
+  quantityDoctors: number = 0;
+  quantityUsers: number = 0;
+  quantityHistories: number = 0;
+
+
 
 
   constructor(
     private roleService: RoleService,
-    private historyService: HistoryService
+    private historyService: HistoryService,
+    private appointmentService: AppointmentService
   ) {}
 
   ngOnInit(): void {
     this.role$ = this.roleService.role$;
+
+    this.appointmentService.getQuantityDocument().subscribe(data => {
+      this.quantityDoctors = data.countDoctors;
+      this.quantityUsers = data.countUser;
+      this.quantityHistories = data.countHistories;
+
+    })
+
     this.historyService.getAllPatientByAdmin().subscribe((data: any[]) => {
       var i = 1;
       this.year = data[0]._id.year;

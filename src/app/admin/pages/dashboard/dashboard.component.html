@@ -1,3 +1,30 @@
+    <div class='content'>
+        <div class='main-stats'>
+        <div class='stat-item'>
+            <i class='material-icons blue'>local_hospital</i>
+            <div class='counter'>
+            <div class='count'>{{quantityDoctors}}</div>
+            <div class='description mt-1'>Bác sĩ</div>
+            </div>
+        </div>
+      
+        <div class='stat-item'>
+            <i class='material-icons red'>account_circle</i>
+            <div class='counter'>
+            <div class='count'>{{quantityUsers}}</div>
+            <div class='description mt-1'>Người dùng</div>
+            </div>
+        </div>
+        <div class='stat-item'>
+            <i class='material-icons yellow'>schedule</i>
+            <div class='counter'>
+            <div class='count'>{{quantityHistories}}</div>
+            <div class='description mt-1'>Lịch khám đã hoàn thành</div>
+            </div>
+        </div>
+        </div>
+    </div>
+
 <p >{{ role$ | async }}</p>
 
 <div [chart]="totalRevenueChart"></div>
