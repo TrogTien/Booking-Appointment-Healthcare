@@ -36,9 +36,21 @@ class AppointmentsController {
     // [POST] /api/appointments
     createAppointment = async (req, res) => {
         try {
+
+            const { day, appointmentTime} = req.body;
+
+            const existingAppointment = await Appointment.findOne({
+                day: day,
+                appointmentTime: appointmentTime,
+                status: "đã xác nhận"
+            })
+
+            if (existingAppointment) {
+                return res.status(400).json("Lịch hẹn đã có người đặt");
+                // Bad Request
+            }
             
             const newAppointment = new Appointment( req.body );
-            
             const appointment = await newAppointment.save();
 
 
@@ -90,9 +102,19 @@ class AppointmentsController {
                 return res.status(404).json("Appointment not found");
             }
 
+            const duplicateAppointments = await Appointment.deleteMany({
+                day: updateAppointment.day,
+                appointmentTime: updateAppointment.appointmentTime,
+            
+            })
+            
+            
+            
+            //send mail
+            
             const doctor = await Doctor.findById(updateAppointment.doctorId);
             const user = await User.findById(updateAppointment.userId);
-
+            
             const day = updateAppointment.day.getDate();
             const month = updateAppointment.day.getMonth() + 1;
             const year = updateAppointment.day.getFullYear();

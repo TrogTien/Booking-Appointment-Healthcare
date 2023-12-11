@@ -26,8 +26,8 @@ export class SignUpComponent {
   signupForm = this.builder.group(
     {
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required],
-      username: ['', Validators.required],
+      password: ['',  [Validators.required, Validators.minLength(6)]],
+      username: ['', [Validators.required, Validators.minLength(6)]],
       birthday: [new Date('1990-01-01'), Validators.required],
     }
   )
@@ -58,6 +58,10 @@ export class SignUpComponent {
     if(formControl.hasError('required')) {
       return 'Không được để trống'
     } 
+
+    if (formControl.hasError('minlength')) {
+      return 'Tối thiểu 6 ký tự'
+    }
 
     return formControl.hasError('email') ? 'Email không hợp lệ' : '';
 

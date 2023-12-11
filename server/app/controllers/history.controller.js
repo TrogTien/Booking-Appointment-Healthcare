@@ -93,7 +93,7 @@ class HistoryController {
                             year: { $year: '$day' },
                             month: { $month: '$day'}
                         },
-                        count: { $sum:1 }
+                        count: { $sum:1 }   // Tổng số lương tài liệu
                     },
 
                 },
@@ -113,6 +113,69 @@ class HistoryController {
         }
     }
 
+    // [GET] /api/totalRevenue
+    getTotalRevenueByDoctor = async (req, res) => {
+        try {
+            const doctor = await Doctor.findOne({ userId: req.user_id });
+            const dataTotalRevenue = await History.aggregate([
+                {
+                    $match: { doctorId: doctor._id } // Thêm $match để lọc documents theo bác sĩ đag đăng nhập trước khi $group
+                },
+                {
+                    $group: {
+                        _id: {
+                            year: { $year: '$day' },
+                            month: { $month: '$day'}
+                        },
+                        total: { $sum: "$price" }
+                    },
+
+                },
+                {
+                    $sort: {
+                    '_id.year': 1,
+                    '_id.month': 1,
+                    },
+                },
+                
+            ]);
+
+            res.status(200).json(dataTotalRevenue);
+        }
+        catch (err) {
+            res.status(500).send(err)
+        }
+    }
+
+    // [GET] /api/totalRevenueByAdmin
+    getTotalRevenueByAdmin = async (req, res) => {
+        try {
+            const dataTotalRevenue = await History.aggregate([
+                {
+                    $group: {
+                        _id: {
+                            year: { $year: '$day' },
+                            month: { $month: '$day'}
+                        },
+                        total: { $sum: '$price' }   // Tổng số lương tài liệu
+                    },
+
+                },
+                {
+                    $sort: {
+                      '_id.year': 1,
+                      '_id.month': 1,
+                    },
+                },
+                
+            ]);
+
+            res.status(200).json(dataTotalRevenue);
+        }
+        catch (err) {
+            res.status(500).send(err)
+        }
+    }
 
     
 

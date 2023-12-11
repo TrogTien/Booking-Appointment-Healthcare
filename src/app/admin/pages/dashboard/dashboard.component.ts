@@ -22,6 +22,15 @@ export class DashboardComponent implements OnInit {
 
   chart = new Chart();
 
+  // total revenue
+  dataRevenue: number[] = [];
+  categoriesRevenue: string[] = [];
+
+  yearRevenue: number = 2020;
+
+
+  totalRevenueChart = new Chart();
+
 
 
   constructor(
@@ -51,6 +60,27 @@ export class DashboardComponent implements OnInit {
 
       this.drawChart()
     })
+
+    this.historyService.getTotalRevenueByAdmin().subscribe((data: any[]) => {
+      console.log("total ",data)
+      var i = 1;
+      this.yearRevenue = data[0]._id.year;
+
+      data.forEach(item => {
+        while (i !== item._id.month) {
+
+          this.dataRevenue.push(0);
+          this.categoriesRevenue.push('Tháng ' + i);
+          i = i + 1
+        }
+
+        this.dataRevenue.push(item.total);
+        this.categoriesRevenue.push('Tháng ' + item._id.month);
+        i = i + 1;
+      });
+
+      this.drawChartTotalRevenue()
+    })
   }
 
   drawChart() {
@@ -78,6 +108,36 @@ export class DashboardComponent implements OnInit {
         {
           name: 'Số lượng người khám',
           data: this.data,
+        } as any
+      ]
+    });
+  }
+
+  drawChartTotalRevenue() {
+
+    this.totalRevenueChart = new Chart({
+      chart: {
+        type: 'line'
+      },
+      title: {
+        text: `Biểu đồ doanh thu năm ${this.yearRevenue}`
+      },
+      credits: {
+        enabled: false
+      },
+      yAxis: {
+        allowDecimals: false,
+        title: {
+          text: "Tiền khám"
+        }
+      },
+      xAxis: {  // Cấu hình trục x
+        categories: this.categoriesRevenue // Đổi tên nhãn tại đây
+      },
+      series: [
+        {
+          name: 'Tổng tiền khám',
+          data: this.dataRevenue,
         } as any
       ]
     });

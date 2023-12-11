@@ -18,6 +18,7 @@ export class BookingComponent implements OnInit {
   day: string = '';
   hour: string = '';
   doctorName: string = '';
+  price: number = 0;
 
   imageUrl: string = '';
 
@@ -48,7 +49,7 @@ export class BookingComponent implements OnInit {
 
     this.doctorService.getDoctor(this.doctorId).subscribe( doctor => {
       this.doctorName = doctor.name;
-
+      this.price = doctor.price;
       if (doctor.image) {
         this.imageUrl = "http://localhost:3000/" + doctor.image;
       } else {
@@ -83,15 +84,22 @@ export class BookingComponent implements OnInit {
         day: this.day,
         appointmentTime: this.hour,
         doctorId: this.doctorId,
-        price: 50000,
+        price: this.price,
         status: "chưa xác nhận",
         userId
       }
 
-      this.appointmentService.postAppointment(data).subscribe( data => {
-        this.dialog.closeAll();
-        this.showSuccess();
-        this.router.navigate(['/home']);
+      this.appointmentService.postAppointment(data).subscribe({
+        next: (data) => {
+          this.dialog.closeAll();
+          this.showSuccess();
+          this.router.navigate(['/home']);
+        },
+        error: (err) => {
+          this.dialog.closeAll();
+          this.showError(err.error);
+          this.router.navigate(['/doctors', this.doctorId]);
+        }
       });
       
     } else {
@@ -101,6 +109,10 @@ export class BookingComponent implements OnInit {
 
   showSuccess() {
     this.toast.success({detail:"Thành công",summary:'Đã gửi thông tin', duration:2000});
+  }
+
+  showError(message: string) {
+    this.toast.error({ detail: "Lỗi", summary: message, duration: 2000 })
   }
 
   showLoadingOverlay() {

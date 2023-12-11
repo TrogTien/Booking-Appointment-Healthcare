@@ -27,4 +27,14 @@ export class HistoryService {
   getAllPatientByAdmin() {
     return this.api.get(`history/allPatientByAdmin`);
   }
+
+  // total revenue
+
+  getTotalRevenue() {
+    return this.api.get(`history/totalRevenue`);
+  }
+
+  getTotalRevenueByAdmin() {
+    return this.api.get(`history/totalRevenueByAdmin`);
+  }
 }
