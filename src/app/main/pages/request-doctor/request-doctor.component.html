@@ -1,0 +1,69 @@
+<div class="container">
+    
+    <div class="row justify-content-center">
+        <div class="col-8">
+            
+
+
+            <form [formGroup]="requestDoctorForm" (ngSubmit)="onSubmit()" >
+                
+
+                
+
+                <mat-form-field class="mat-50">
+                    <mat-icon matPrefix>account_circle</mat-icon>
+                    <mat-label>Họ tên</mat-label>
+                    <input matInput formControlName="doctorName" placeholder="Nguyễn Văn A">
+                    <mat-error *ngIf="requestDoctorForm.controls.doctorName.invalid">{{getErrorMessage(requestDoctorForm.controls.doctorName)}}</mat-error>
+                    
+                </mat-form-field>
+
+
+                
+
+                <mat-form-field class="mat-50">
+                    <mat-label>Ngày sinh</mat-label>
+                    <input matInput formControlName="birthday" [matDatepicker]="picker" placeholder="1/31/2001">
+                    <mat-hint>MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle matIconPrefix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    <mat-error *ngIf="requestDoctorForm.controls.birthday.invalid">{{getErrorMessage(requestDoctorForm.controls.birthday)}}</mat-error>
+
+                </mat-form-field>
+
+                <mat-form-field class="mat-50">
+                    <mat-icon matPrefix>phone</mat-icon>
+                    <mat-label>Số điện thoại</mat-label>
+                    <input matInput formControlName="phone" type="tel" >
+                    <mat-error *ngIf="requestDoctorForm.controls.phone.invalid">{{getErrorMessage(requestDoctorForm.controls.phone)}}</mat-error>
+
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-icon matPrefix>home</mat-icon>
+                    <mat-label>Địa chỉ phòng khám</mat-label>
+                    <input matInput formControlName="address" placeholder="Ấp 8, xã Tân An Luông, Vũng Liêm, Vĩnh Long">
+                    <mat-error *ngIf="requestDoctorForm.controls.address.invalid">{{getErrorMessage(requestDoctorForm.controls.address)}}</mat-error>
+
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-icon matPrefix>add_circle</mat-icon>
+                    <mat-label>Nội dung phòng khám</mat-label>
+                    <textarea matInput formControlName="content" style="height: 100px;" ></textarea>
+                    <mat-error *ngIf="requestDoctorForm.controls.content.invalid">{{getErrorMessage(requestDoctorForm.controls.content)}}</mat-error>
+
+                </mat-form-field>
+
+                <button mat-raised-button type="submit"  color="primary" 
+                    class="float-end btn-signup" 
+                >
+                    Gửi
+                </button>
+            </form>
+        </div>
+    </div>
+    
+
+</div>
+

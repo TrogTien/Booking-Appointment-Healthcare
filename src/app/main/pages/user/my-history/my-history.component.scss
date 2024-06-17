@@ -1,0 +1,7 @@
+.example-card {
+    cursor: pointer;
+
+    &:hover {
+        background: linear-gradient(to right, rgba(188, 208, 230, 0.5), rgba(100, 233, 255, 0.5));
+    }
+}

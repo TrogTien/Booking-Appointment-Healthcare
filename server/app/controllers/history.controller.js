@@ -70,7 +70,7 @@ class HistoryController {
                 },
                 {
                     $sort: {
-                      '_id.year': 1,
+                      '_id.year': 1,    // 1 tăng dần, -1 giảm dần
                       '_id.month': 1,
                     },
                 },

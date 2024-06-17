@@ -239,7 +239,7 @@ class AppointmentsController {
     countDocument = async (req, res) => {
         try {
             const countDoctors = await Doctor.countDocuments();
-            const countUser = await User.countDocuments();
+            const countUser = await User.countDocuments({ role: "user"});
             const countHistories = await History.countDocuments();
 
             res.status(200).json({

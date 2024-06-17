@@ -1,0 +1,66 @@
+<div class="container">
+
+    <mat-drawer-container class="" [autosize]="true">
+        <mat-drawer mode="side" opened>
+            
+            <mat-selection-list #shoes [multiple]="false">
+                <mat-list-option *ngFor="let shoe of medicals; trackBy: trackByFn" [value]="shoe" 
+                    [routerLink]="['/medical-field', shoe._id]" 
+                    [selected]="shoe._id === medical?._id"
+                >
+                {{shoe.name}}
+                </mat-list-option>
+            </mat-selection-list>
+        </mat-drawer>
+        <mat-drawer-content>
+            <ng-container *ngIf="medical">
+
+                <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                  <div class="col-6 p-4 d-flex flex-column position-static">
+                    <strong class="d-inline-block mb-4 text-primary-emphasis" style="font-size: 30px;">{{medical.name}}</strong>
+                    <p class="card-text mb-auto">
+                        {{medical.description}}
+                    </p>
+                    
+                  </div>
+                  <div class="col-6  ">
+                    <img class="img-medical" [src]="medicalImage" alt="">
+                  </div>
+                </div>
+            </ng-container>
+            <!-- Có danh sách bác sĩ -->
+            <div *ngIf="doctors.length > 0;" >
+
+                <ng-container *ngFor="let item of doctors | paginate: { itemsPerPage: limit, currentPage: page, totalItems: total };">
+                    <app-medical-item [doctorItem]="item" @hideAndShow></app-medical-item>
+        
+                </ng-container>
+
+                <pagination-controls previousLabel nextLabel (pageChange)="onPageChange($event)"></pagination-controls>
+
+            </div>
+            <!-- Nếu chưa chọn chuyên khoa-->
+            <ng-container *ngIf="!medical">     
+            
+                <div class="empty d-flex flex-column justify-content-center align-items-center">
+                    <mat-icon>info_outline</mat-icon>
+
+                    <p class="mt-3 text-empty">Vui lòng chọn chuyên khoa mà bạn muốn xem</p>
+
+                </div>
+            </ng-container>
+            <!-- Đã chọn chuyên khoa nhưng không có bác sĩ -->
+            <ng-container *ngIf="medical && doctors.length === 0">
+                <p class="medical-not-doctors">Chuyên khoa này hiện chưa có bác sĩ</p>
+
+            </ng-container>
+
+            
+
+            
+    
+        </mat-drawer-content>
+    </mat-drawer-container>
+    
+    
+</div>

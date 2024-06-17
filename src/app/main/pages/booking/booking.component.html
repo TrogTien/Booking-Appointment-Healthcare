@@ -1,0 +1,84 @@
+<div class="container">
+
+    <div class="row justify-content-center">
+        <div class="col-8">
+            
+            <mat-card >
+            
+                <mat-card-header >
+                        
+                    <div mat-card-avatar  class="example-header-image"
+                        [ngStyle]="{'background-image': 'url(' + imageUrl + ')'}"
+                    ></div>
+                    <mat-card-title>Phó Giáo sư, Tiến sĩ, Bác sĩ {{doctorName}}</mat-card-title>
+                    <mat-card-subtitle>Tiêu hóa</mat-card-subtitle>
+                    <mat-card-subtitle>{{ hour }}, ngày {{ day | date: 'dd/MM/yyyy'}}</mat-card-subtitle>
+                    
+                </mat-card-header>
+        
+            </mat-card>
+
+
+            <form [formGroup]="bookingForm" (ngSubmit)="onSubmit()" >
+                
+
+                
+
+                <mat-form-field class="mat-50">
+                    <mat-icon matPrefix>account_circle</mat-icon>
+                    <mat-label>Họ tên</mat-label>
+                    <input matInput formControlName="patientName" placeholder="Nguyễn Văn A">
+                    <mat-error *ngIf="bookingForm.controls.patientName.invalid">{{getErrorMessage(bookingForm.controls.patientName)}}</mat-error>
+                    
+                </mat-form-field>
+
+
+                <mat-radio-group aria-label="Select an option" formControlName="gender">
+                    <mat-radio-button value="male" checked>Nam</mat-radio-button>
+                    <mat-radio-button value="female">Nữ</mat-radio-button>
+                </mat-radio-group>
+
+                <mat-form-field class="mat-50">
+                    <mat-label>Ngày sinh</mat-label>
+                    <input matInput formControlName="birthday" [matDatepicker]="picker" placeholder="1/31/2001">
+                    <mat-hint>MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle matIconPrefix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    <mat-error *ngIf="bookingForm.controls.birthday.invalid">{{getErrorMessage(bookingForm.controls.birthday)}}</mat-error>
+
+                </mat-form-field>
+
+                <mat-form-field class="mat-50">
+                    <mat-icon matPrefix>phone</mat-icon>
+                    <mat-label>Số điện thoại</mat-label>
+                    <input matInput formControlName="phone" type="tel" >
+                    <mat-error *ngIf="bookingForm.controls.phone.invalid">{{getErrorMessage(bookingForm.controls.phone)}}</mat-error>
+
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-icon matPrefix>home</mat-icon>
+                    <mat-label>Địa chỉ</mat-label>
+                    <input matInput formControlName="address" placeholder="Ấp 8, xã Tân An Luông, Vũng Liêm, Vĩnh Long">
+                    <mat-error *ngIf="bookingForm.controls.address.invalid">{{getErrorMessage(bookingForm.controls.address)}}</mat-error>
+
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-icon matPrefix>add_circle</mat-icon>
+                    <mat-label>Lý do khám</mat-label>
+                    <textarea matInput formControlName="symptoms" ></textarea>
+
+                </mat-form-field>
+
+                <button mat-raised-button type="submit"  color="primary" 
+                    class="float-end btn-signup" 
+                >
+                    Gửi
+                </button>
+            </form>
+        </div>
+    </div>
+
+
+</div>

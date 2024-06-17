@@ -1,0 +1,72 @@
+<svg id="wave" style="transform:rotate(0deg); transition: 0.3s" viewBox="0 0 1440 480" version="1.1" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="sw-gradient-0" x1="0" x2="0" y1="1" y2="0"><stop stop-color="rgba(188, 208, 230, 1)" offset="0%"></stop><stop stop-color="rgba(100, 233, 255, 1)" offset="100%"></stop></linearGradient></defs><path style="transform:translate(0, 0px); opacity:1" fill="url(#sw-gradient-0)" d="M0,144L21.8,160C43.6,176,87,208,131,184C174.5,160,218,80,262,104C305.5,128,349,256,393,272C436.4,288,480,192,524,192C567.3,192,611,288,655,336C698.2,384,742,384,785,376C829.1,368,873,352,916,296C960,240,1004,144,1047,96C1090.9,48,1135,48,1178,40C1221.8,32,1265,16,1309,64C1352.7,112,1396,224,1440,224C1483.6,224,1527,112,1571,64C1614.5,16,1658,32,1702,56C1745.5,80,1789,112,1833,152C1876.4,192,1920,240,1964,224C2007.3,208,2051,128,2095,136C2138.2,144,2182,240,2225,240C2269.1,240,2313,144,2356,144C2400,144,2444,240,2487,272C2530.9,304,2575,272,2618,240C2661.8,208,2705,176,2749,136C2792.7,96,2836,48,2880,88C2923.6,128,2967,256,3011,320C3054.5,384,3098,384,3120,384L3141.8,384L3141.8,480L3120,480C3098.2,480,3055,480,3011,480C2967.3,480,2924,480,2880,480C2836.4,480,2793,480,2749,480C2705.5,480,2662,480,2618,480C2574.5,480,2531,480,2487,480C2443.6,480,2400,480,2356,480C2312.7,480,2269,480,2225,480C2181.8,480,2138,480,2095,480C2050.9,480,2007,480,1964,480C1920,480,1876,480,1833,480C1789.1,480,1745,480,1702,480C1658.2,480,1615,480,1571,480C1527.3,480,1484,480,1440,480C1396.4,480,1353,480,1309,480C1265.5,480,1222,480,1178,480C1134.5,480,1091,480,1047,480C1003.6,480,960,480,916,480C872.7,480,829,480,785,480C741.8,480,698,480,655,480C610.9,480,567,480,524,480C480,480,436,480,393,480C349.1,480,305,480,262,480C218.2,480,175,480,131,480C87.3,480,44,480,22,480L0,480Z"></path></svg>
+<button mat-fab color="primary" class="home-icon" [routerLink]="['/home']" aria-label="Example icon-button with heart icon">
+    <mat-icon>arrow_back</mat-icon>
+</button>
+
+<div class="row justify-content-center align-items-center">
+    
+    <div class="col-6">
+        <img class="img-login" src="assets/images/signup.svg" alt="">
+    </div>
+
+    <div class="col-4 background-form  ">
+        <div class=" p-0">
+            <h1 class="mb-4 text-center fw-bold">Đăng ký</h1>
+            
+            <form [formGroup]="signupForm" (ngSubmit)="onSignUp()" >
+                <mat-form-field class="mat-50">
+                    <mat-icon matPrefix>account_circle </mat-icon>
+                    <mat-label>Email</mat-label>
+                    <input matInput formControlName="email" placeholder="abc@gmai.com">
+                    <mat-error *ngIf="signupForm.controls.email.invalid">{{getErrorMessage(signupForm.controls.email)}}</mat-error>
+
+                </mat-form-field>
+
+                <mat-form-field class="mat-50">
+                    <mat-icon matPrefix>lock </mat-icon>
+                    <mat-label>Nhập mật khẩu</mat-label>
+                    <input matInput formControlName="password" [type]="hide ? 'password' : 'text'">
+                    <button mat-icon-button matSuffix (click)="onButtonClick($event)" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                    <mat-error *ngIf="signupForm.controls.password.invalid">{{getErrorMessage(signupForm.controls.password)}}</mat-error>
+
+                </mat-form-field>
+
+
+                <mat-form-field class="mat-50">
+                    <mat-icon matPrefix>person_outline </mat-icon>
+                    <mat-label>Họ tên</mat-label>
+                    <input matInput formControlName="username" placeholder="Nguyễn Văn A">
+                    <mat-error *ngIf="signupForm.controls.username.invalid">{{getErrorMessage(signupForm.controls.username)}}</mat-error>
+                    
+                </mat-form-field>
+
+                <mat-form-field class="mat-50">
+                    <mat-label>Ngày sinh</mat-label>
+                    <input matInput formControlName="birthday" [matDatepicker]="picker" placeholder="1/31/2001">
+                    <mat-hint>MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    <mat-error *ngIf="signupForm.controls.birthday.invalid">{{getErrorMessage(signupForm.controls.birthday)}}</mat-error>
+
+                </mat-form-field>
+
+
+                <button mat-raised-button type="submit"  color="primary" 
+                    class="w-100 btn-signup" 
+                >
+                    Gửi
+                </button>
+            </form>
+            <br>
+            <div class="text-center">
+                <p>
+                    Đã có tài khoản? <a routerLink="/auth/login" style="text-decoration: none;" >Đăng nhập</a>
+                </p>
+            </div>
+ 
+        </div>
+    </div>
+</div>
+

@@ -22,12 +22,31 @@
         <mat-icon>settings</mat-icon>
       </button>
 
-      <button *ngIf=" isLoggedIn$ | async ; else loginBtn" (click)="onLogout()" mat-fab extended color="red">
-        <mat-icon>logout</mat-icon>
-        Đăng xuất
+      <button mat-fab extended color="aqua" [matMenuTriggerFor]="beforeMenu"
+        *ngIf=" isLoggedIn$ | async ; else loginBtn"
+      >
+        <mat-icon>account_circle</mat-icon>
+        Trọng Tiến
       </button>
+      <mat-menu #beforeMenu="matMenu" xPosition="before">
+        <button mat-menu-item [routerLink]="'/user'" >
+          <mat-icon>assignment_ind</mat-icon>
+          <span>Thông tin cá nhân</span>
+        </button>
+        <button mat-menu-item [routerLink]="'/user/my-history'" >
+          <mat-icon>history</mat-icon>
+          <span>Lịch sử khám bệnh</span>
+        </button>
+        <button mat-menu-item (click)="onLogout()">
+          <mat-icon>logout</mat-icon>
+          <span>Đăng xuất</span>
+        </button>
+      </mat-menu>
+
+      
+
       <ng-template #loginBtn>
-        <button [routerLink]="'/login'" mat-fab extended color="aqua">
+        <button [routerLink]="'auth/login'" mat-fab extended color="aqua">
           <mat-icon>login</mat-icon>
           Đăng nhập
         </button>

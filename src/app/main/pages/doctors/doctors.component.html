@@ -1,0 +1,17 @@
+<div class="container">
+    <mat-form-field appearance="outline" >
+        <mat-label>Tìm kiếm Bác Sĩ</mat-label>
+        <input matInput placeholder="Tên Bác Sĩ" [(ngModel)]="searchTerm" (input)="onSearch()">
+        <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+
+    <div *ngFor="let doctor of doctors | paginate: { itemsPerPage: limit, currentPage: page, totalItems: total }; trackBy: trackByFn" >
+        <app-doctor-item [doctorItem]="doctor" @hideAndShow></app-doctor-item>
+
+    </div>
+
+    <pagination-controls previousLabel nextLabel (pageChange)="onPageChange($event)"></pagination-controls>
+
+
+
+</div>
